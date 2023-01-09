@@ -1,0 +1,20 @@
+
+#day_1:hover {
+  cursor: pointer;
+  background-color: aquamarine;
+}
+
+.disable_cell {
+  pointer-events: none;
+}
+
+.currentMonth {
+  position:relative;
+}
+
+.currentMonth:after {
+  content: '';
+  top: 0;
+  right: 0;
+  position: absolute;
+}

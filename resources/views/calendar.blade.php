@@ -23,7 +23,7 @@
 <div>
     <table class="table table-bordered">
         <thead>
-            <tr>{{ $currentMonth }}</tr>
+            <h2>現在時刻は{{ $now }}です</h2>
             <tr>
                 @foreach(['日', '月', '火', '水', '木', '金', '土'] as $dayOfWeek)
                 <th>{{ $dayOfWeek }}</th>

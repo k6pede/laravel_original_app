@@ -7,21 +7,27 @@ use Carbon\Carbon;
 
 class CalendarController extends Controller
 {
-    public function getCalendarDates($year,$month) {
-        $date_now = Carbon::now();
-        if(empty($year) || empty($month)){
-            $dateStr = sprintf($date_now->$today);
+    public function getCalendarDates(Request $request) {
+       $now = Carbon::now();
+       $year = $now->year;
+       $month = $request->month;
+        if(empty($month)){
+            $month = $now->month;
+        }
+        
+        if(empty($year) || empty($month)){    
+            $year = $now->year;
+            $day = $now->day;
+            $dateStr = sprintf('%04d-%02d-01d', $year, $month);
+            $date = new Carbon($dateStr);
         }
         else{
             $dateStr = sprintf('%04d-%02d-01', $year, $month);
+            $date = new Carbon($dateStr);
         }
-        // sprintf('文字列と型指定子を組み合わせたフォーマット','生成する文字列のもと')https://www.sejuku.net/blog/24090
-        // $dateStr = sprintf('%04d-%02d-01', $year, $month);
-        $date = new Carbon($dateStr);
-
+        
+        $addDay = ($date->copy()->endOfMonth()->isSunday());
         $date->subDay($date->dayOfWeek);
-        $currentMonth = $date->month;
-
         $count = 31 + $date->dayOfWeek;
         $count = ceil($count /7) * 7;
         $dates = [];
@@ -30,9 +36,18 @@ class CalendarController extends Controller
             $dates[] = $date->copy();
         }
 
+
+        //一ヶ月前
+        // $sub = Carbon::createFromDate($date->year,$date->month,$date->month,$date->day);
+        // $subMonth = $sub->subMonth();
+        // $subY = $subMonth->year;
+        // $subM = $subMonth->month;
+        return response()->json(['dates' => $dates]);
+
         return view('calendar')->with([
             "dates" => $dates,
-            "currentMonth" =>$currentMonth
+            "now" =>$now,
+            "dateStr" =>$dateStr
         ]);
     }
 }

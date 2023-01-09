@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\TopController::class, 'top'])->name('top');
 
-Route::get('/calendar/{year}/{month}', [App\Http\Controllers\CalendarController::class, 'getCalendarDates'])->name('getCalendarDates');
+Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'getCalendarDates'])->name('getCalendarDates');
 
 Auth::routes();
 

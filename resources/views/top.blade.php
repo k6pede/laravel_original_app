@@ -1,12 +1,21 @@
 @extends('layouts.layout')
+@section('pageCss')
+<link rel="stylesheet" href="/css/top.css">
+@endsection
+
 @section('content')
-{{-- <div id = "calendar">
+<div>
+    {{-- ここid="calendarにしたら別のカレンダーが出てきよる fullcalendar?" --}}
     <table class="table table-bordered">
+        <h1 class="m-0">{{ $month }}月</h1>
         <thead>
             <tr>
                 @foreach(['日', '月', '火', '水', '木', '金', '土'] as $dayOfWeek)
-                <th>{{ $dayOfWeek }}</th>
+                <th class="">
+                    {{ $dayOfWeek }}          
+                </th>
                 @endforeach
+
             </tr>
         </thead>
         <tbody>
@@ -15,8 +24,11 @@
                 <tr>
                 @endif
                     <td
-                        @if ($date->month != $currentMonth)
-                        class = "bg-secondary"
+                        @if ($date->month != $month)                      
+                        class = "bg-secondary disable_cell"
+                        @else
+                        id = "day_{{ $date->day }}"
+                        class = "currentMonth"
                         @endif
                     >
                     {{ $date->day }}
@@ -27,7 +39,7 @@
             @endforeach            
         </tbody>
     </table>
-</div> --}}
+</div>
 
 <div class="container">
   <h1>Laravel 8 Pagination Example - ItSolutionStuff.com</h1>
