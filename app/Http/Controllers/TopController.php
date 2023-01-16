@@ -27,30 +27,40 @@ class TopController extends Controller
         }
         
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
+        // $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow()->format("Y-m-d");
+        $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow();
+        $lastMonth = (new Carbon($dateStr))->subMonthsNoOverflow();
         
-        // sprintf('文字列と型指定子を組み合わせたフォーマット','生成する文字列のもと')https://www.sejuku.net/blog/24090
-        // $dateStr = sprintf('%04d-%02d-01', $year, $month);
         $date = new Carbon($dateStr);
-        // dd($month);
 
         $addDay = ($date->copy()->endOfMonth()->isSunday()) ? 7 : 0;
         $date->subDay($date->dayOfWeek);
         $currentMonth = $date->month;
 
+
+        //日数の計算
         $count = 31 + $addDay + $date->dayOfWeek;
         $count = ceil($count /7) * 7;
         $dates = [];
-
         for($i=0;$i<$count;$i++, $date->addDay()) {
             $dates[] = $date->copy();
         }
      
         return view('top')->with([
             "characters" => $characters,
+            "now" =>$now,
             "month" =>$month,
+            "day" =>$day,
+            "nextMonth" =>$nextMonth,
+            "lastMonth" =>$lastMonth,
             "dates" => $dates
         ]);
     }
+
+    // public function getData()
+    // {
+    //     return response()->json();
+    // }
 
     
     

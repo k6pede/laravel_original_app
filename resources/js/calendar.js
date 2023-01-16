@@ -1,16 +1,43 @@
+$(function () {
 
-import { Calendar } from "@fullcalendar/core";
-import dayGridPlugin from "@fullcalendar/daygrid";
+  
+  $('.lastmonthbtn').on('click',function(event) {
+    // event.preventDefault();
 
-var calendarEl = document.getElementById("calendar");
+    let form = document.forms["lastmonth"];
+    $.ajax( {
+      url: "/",
+      type: 'get',
+      datatype: "json",
+      data: $("#lastmonth").serialize(),
+      timeout: 10000,
+      
 
-let calendar = new Calendar(calendarEl, {
-    plugins: [dayGridPlugin],
-    initialView: "dayGridMonth",
-    headerToolbar: {
-        left: "prev,next today",
-        center: "title",
-        right: "",
+    }).done(function(data, textStatus, jqXHR){
+      console.log(jqXHR.status);
+      console.log('成功');
+      
+    }).fail(function(data) {
+      console.log('失敗');
+    })
+  })
+
+  $('.currentMonth').on({
+    'mouseenter': function() {
+
+      $(this).css("background-color", "skyblue");
+
     },
-});
-calendar.render();
+    'mouseleave': function() {
+
+      $(this).css("background-color", "white");
+
+    }
+})
+  
+  
+
+
+ 
+ 
+})

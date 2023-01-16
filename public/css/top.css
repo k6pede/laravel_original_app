@@ -1,15 +1,24 @@
-
-#day_1:hover {
-  cursor: pointer;
-  background-color: aquamarine;
+body {
+  margin: 0;
+  padding: 0;
 }
+
 
 .disable_cell {
   pointer-events: none;
+
+}
+.disable_cell .dayButton{
+
+  color: rgba(199, 199, 199 ,0.6);
 }
 
 .currentMonth {
   position:relative;
+
+}
+.currentMonth:hover {
+  cursor: pointer;
 }
 
 .currentMonth:after {
@@ -17,4 +26,75 @@
   top: 0;
   right: 0;
   position: absolute;
+}
+
+.dayButton {
+  border: none;
+  margin: auto;
+  padding: auto;
+}
+
+a {
+  text-decoration: none;
+  color:black;
+}
+
+
+/* --------------------------
+main
+--------------------------*/
+.main-bg {
+  height: 80px;
+  background-color: rgba(145, 145, 145, 0.6);
+}
+/* --------------------------
+contents
+--------------------------*/
+.wrapper {
+  display: inline-flex;
+  max-width: 1300px;
+  width: 100%;
+  padding: 5%;
+
+}
+.contents-left {
+  margin: 0 50px;
+}
+
+/* --------------------------
+calendar
+--------------------------*/
+.dayOfWeek {
+  background-color: rgb(237, 109, 31);
+}
+.dayOfWeekCell {
+
+}
+.month-form {
+  display: flex;
+  
+}
+.nextmonth ,
+.lastmonthbtn{
+  border: none;
+  background-color: transparent;
+}
+
+#calendar_table button {
+  background-color: transparent;
+}
+
+
+
+/* --------------------------
+character-index
+--------------------------*/
+
+
+/* --------------------------
+character-card
+--------------------------*/
+
+.character-card {
+
 }
