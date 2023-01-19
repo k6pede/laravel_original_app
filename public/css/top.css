@@ -9,7 +9,6 @@ body {
 
 }
 .disable_cell .dayButton{
-
   color: rgba(199, 199, 199 ,0.6);
 }
 
@@ -39,6 +38,61 @@ a {
   color:black;
 }
 
+td {
+  align-items: center;
+}
+
+
+
+/* --------------------------
+search-box
+--------------------------*/
+span {
+  border: solid 2px rgb(237, 109, 31);
+}
+#search-box {
+  position: relative;
+  border: solid 2px rgb(237, 109, 31);
+  border-radius: 0 10px 10px 10px;
+  margin-bottom: 2rem;
+}
+.input-text-box {
+  width: 86% ;
+  margin-left: 45px;
+  border: none;
+  border-radius: 10px;
+}
+.input-text-box:focus {
+  outline: 0;
+  background-color: rgba(237, 109, 31, 0.1);
+}
+
+
+input {
+  height:45px;
+}
+
+.wrap-tab {
+  margin-bottom: 0;
+}
+
+
+#gbox {
+  border-style: none;
+  border-radius: 0px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 30px;
+  padding: 0;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 55%;
+  left: 7%;
+  cursor: pointer;
+  width: 45px;
+  background-color: transparent;
+  
+}
 
 /* --------------------------
 main
@@ -50,16 +104,30 @@ main
 /* --------------------------
 contents
 --------------------------*/
+#contents {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
 .wrapper {
   display: inline-flex;
-  max-width: 1300px;
-  width: 100%;
-  padding: 5%;
+  align-content: center;
 
 }
 .contents-left {
   margin: 0 50px;
 }
+.top-title {
+  margin:  50px auto;
+  max-width: 1000px;
+  width: 100%;
+  border-radius: 50px;
+}
+
+h1 .border {
+  max-width: 1000px;
+}
+
 
 /* --------------------------
 calendar
@@ -67,17 +135,26 @@ calendar
 .dayOfWeek {
   background-color: rgb(237, 109, 31);
 }
-.dayOfWeekCell {
 
-}
 .month-form {
-  display: flex;
-  
+  display: flex; 
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 41px;
 }
+
+.today,
 .nextmonth ,
-.lastmonthbtn{
+.lastmonthbtn {
   border: none;
   background-color: transparent;
+}
+
+#calendar {
+  border: solid 2px rgb(237, 109, 31);
+  border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 #calendar_table button {
@@ -85,6 +162,15 @@ calendar
 }
 
 
+td form{
+  margin: 0;
+}
+
+.calendar-head {
+  padding:  10px;
+  margin: 0;
+  border-bottom: solid 2px black;
+}
 
 /* --------------------------
 character-index
@@ -95,6 +181,11 @@ character-index
 character-card
 --------------------------*/
 
-.character-card {
-
+.card-title {
+  padding: 0;
 }
+
+.card-footer a{
+  color:rgba(107, 107, 107, 0.9);
+}
+

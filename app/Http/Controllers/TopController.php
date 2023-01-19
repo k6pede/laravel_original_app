@@ -36,6 +36,7 @@ class TopController extends Controller
         $addDay = ($date->copy()->endOfMonth()->isSunday()) ? 7 : 0;
         $date->subDay($date->dayOfWeek);
         $currentMonth = $date->month;
+        
 
 
         //日数の計算
