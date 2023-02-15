@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Character extends Model
+class Title extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title_id',
         'title',
-        'month',
-        'day',
-        'blood',
-        'gender',
-        'ruby',
+        'title_ruby',
+        'authour',
+        'publicher',
+        'publication_magazine',
         'created_at',
         'updated_at'
+
+        
     ];
-
-
 }

@@ -1,3 +1,15 @@
+:root {
+    --font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+    font-family: var(--font-family-sans-serif);
+}
+
+
+
+
 body {
   margin: 0;
   padding: 0;
@@ -37,25 +49,100 @@ a {
   text-decoration: none;
   color:black;
 }
-
+h1 {
+  margin: 0;
+}
 td {
   align-items: center;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+  
+}
+
+/* --------------------------
+header
+--------------------------*/
+.header {
+  color: white;
+  background-color: black;
+}
+
+#header {
+  margin-bottom: 3em;
+}
 
 
+.navbar {
+  background-color: rgb(57, 57, 57);
+}
+/* --------------------------
+top
+--------------------------*/
+.top-month {
+  border: solid 2px rgb(237, 109, 31);
+  border-bottom: none;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.top-month > h1{
+  margin: 0 2rem;
+  font-size: 3em;
+}
+
+.top-day {
+  border: solid 2px rgb(237, 109, 31);
+  margin-bottom: 50px;
+  display: flex;
+  height: 50px;
+}
+.top-day .day{
+  border-radius: 0 50px 50px 0;
+  border-right: solid 2px rgb(237, 109, 31);
+  background-color: rgba(0, 188, 222, 0.6);
+  width: 20%;
+}
+.top-day .day-info{
+  
+  margin-bottom: 50px;
+  display: flex;
+}
 /* --------------------------
 search-box
 --------------------------*/
-span {
-  border: solid 2px rgb(237, 109, 31);
+#wrap-tab {
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-#search-box {
-  position: relative;
-  border: solid 2px rgb(237, 109, 31);
-  border-radius: 0 10px 10px 10px;
-  margin-bottom: 2rem;
+
+
+#wrap-tab span {
+  width: calc(100%/3);
+  text-align: center;
+  align-items: center;
+  padding-top: 0.3em;
+  height: 2rem;
+  display: inline;
+  /* border-top: solid 2px rgb(237, 109, 31);
+  border-right: solid 2px rgb(237, 109, 31); */
+
+
 }
+#wrap-tab span:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  letter-spacing: 0.2em;
+  font-size: 1.05em;
+  transition: .5s;
+}
+
+
 .input-text-box {
   width: 86% ;
   margin-left: 45px;
@@ -72,10 +159,24 @@ input {
   height:45px;
 }
 
-.wrap-tab {
+#wrap-tab {
   margin-bottom: 0;
 }
-
+.not-selected {
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: solid 2px rgb(237, 109, 31);
+}
+.selected {
+  border-top: solid 2px rgb(237, 109, 31);
+  border-right: solid 2px rgb(237, 109, 31);
+  border-left: solid 2px rgb(237, 109, 31);
+  background-color: antiquewhite;
+  border-bottom:transparent;
+  color: blue;
+}
 
 #gbox {
   border-style: none;
@@ -94,28 +195,36 @@ input {
   
 }
 
+
+
 /* --------------------------
 main
 --------------------------*/
 .main-bg {
   height: 80px;
   background-color: rgba(145, 145, 145, 0.6);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 /* --------------------------
 contents
 --------------------------*/
 #contents {
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   max-width: 1000px;
 }
 
 .wrapper {
   display: inline-flex;
   align-content: center;
-
+  width: 100%;
 }
 .contents-left {
-  margin: 0 50px;
+  margin: 0 50px 0 0;
+  width: 80%;
+}
+.contents-right {
+  width: 100%;
 }
 .top-title {
   margin:  50px auto;
@@ -130,11 +239,29 @@ h1 .border {
 
 
 /* --------------------------
+search-box
+--------------------------*/
+#search-box {
+  position: relative;
+  border: solid 2px rgb(237, 109, 31);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 2rem;
+}
+
+
+
+/* --------------------------
 calendar
 --------------------------*/
+
 .dayOfWeek {
-  background-color: rgb(237, 109, 31);
+  color: white;
+  font-size: 0.8em;
+  /* background-color: rgb(248, 182, 53); */
+  background-color: black;
 }
+
 
 .month-form {
   display: flex; 
@@ -152,9 +279,11 @@ calendar
 }
 
 #calendar {
-  border: solid 2px rgb(237, 109, 31);
-  border-radius: 10px;
+  /* border: solid 2px rgb(237, 109, 31); */
+  border: solid 2px black;
+  /* border-radius: 10px; */
   margin-bottom: 2rem;
+  min-width: 100%;
 }
 
 #calendar_table button {
@@ -171,21 +300,128 @@ td form{
   margin: 0;
   border-bottom: solid 2px black;
 }
+#pagination {
+  width: 100%;
+  margin: 0 auto;
+}
+#pagination {
+  margin-bottom: 2em;
+}
 
+.holidays {
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+.selectedDay {
+  background-color: rgba(0, 188, 222, 0.6);
+  color: white;
+}
 /* --------------------------
 character-index
 --------------------------*/
+.index-num {
+  color:rgba(255, 0, 0, 0.6)
+}
 
+.index-item a{}
+
+/* --------------------------
+pagination
+--------------------------*/
+.pagenation {
+  width: 100%;
+}
+
+.page-link {
+  color : black;
+}
+
+.active > .page-link {
+  color: rgb(237, 109, 31);
+  background-color: black;
+  border-color: black;
+}
 
 /* --------------------------
 character-card
 --------------------------*/
+.character-card {
+  width: 100%;
+}
+.card {
+  margin-bottom: 1rem;
+}
 
 .card-title {
   padding: 0;
+  max-width: 100%;
+}
+.card-title a{
+  font-size: 1.25rem;
 }
 
+.card-footer {
+  
+  background-color: rgba(248, 182, 53, 0.5);
+  padding: 0;
+}
 .card-footer a{
-  color:rgba(107, 107, 107, 0.9);
+  color:rgba(0, 0, 0, 0.9);
+  max-width: 100%;
+  font-size: 0.75em;
+  display: block;
+}
+.card-footer a:hover {
+  background-color: skyblue;
+}
+.pagination {
+  margin: 0 auto;
 }
 
+/* --------------------------
+footer
+--------------------------*/
+#footer {
+
+  background-color: rgb(57, 57, 57);
+  margin-bottom: 0;
+  
+  color: rgb(237, 109, 31);
+}
+#pageTop {
+  width: 30px;
+  height: 30px;
+  margin: 2em 0 0 auto;
+  border: 2px solid rgb(237, 109, 31);
+}
+
+.footer-contents {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding-top: 1rem;
+}
+
+.footer-item {
+  background-color: aliceblue;
+  width: 150px;
+  font-size: 1.05em;
+  text-align: center;
+  align-content: center;
+  padding: 0;
+  margin: 0;
+  border:2px solid rgb(237, 109, 31);
+}
+.footer-item a {
+  margin-bottom: 0;
+  display: block;
+}
+.fa-angle-up {
+  width: 45px;
+  font-size:2em;
+  color:rgb(237, 109, 31);
+}
+
+.copy-right {
+  margin: 0 auto;
+}

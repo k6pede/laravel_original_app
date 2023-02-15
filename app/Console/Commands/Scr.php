@@ -7,6 +7,8 @@ use Weidner\Goutte\GoutteFacade as GoutteFacade;
 use Goutte\Client; 
 use Illuminate\Http\Request;
 use App\Models\Character;
+use App\Models\Title;
+use Illuminate\Support\Facades\DB;
 class Scr extends Command
 {
     /**
@@ -30,112 +32,181 @@ class Scr extends Command
      */
     public function handle()
     {   
-        // $geturl = 'https://duckduckgo.com/html/?q=Laravel';
-        // $crawler = \Goutte::request('GET', $geturl);
-        // $crawler->filter('.result__title .result__a')->each(function ($node) {
-        // dump($node->text());
-        // });
-        //     return Command::SUCCESS;
+        ///urlを叩いてスクレイピング
+        // $title = DB::table('characters')->select('title')->distinct()->get();
+        // $count = intval(count($title));
+        $count = 1;
+        
+        
+   
+        
+        for ($j=0; $j < $count; $j++) { 
+            
+            // $title_str = $title[$j]->title;
+            $title_str = 'ゆるキャン△';
+            
+            $url = "https://days366.com/search.cgi?mode=search&word=$title_str";
+            $goutte = GoutteFacade::request('GET', $url);
+            $data = [];
+            $data_key = 0;
+            $tmp_data = null;
+
+            //作品ページへのurl
+            $titleUrl = $goutte->filter('#sub .bnr .list li a')->each(function($node,$key) use ($data, $data_key, $tmp_data) {
+                $href = $node->filter('a')->attr("href");
+                $href = strval($href);
+                return $href;
+            });
+            // print($titleUrl[0]);
+
+            $goutte = GoutteFacade::request('GET', $titleUrl[0]);
+            //作品の情報
+            
+            $data["title"] = $goutte->filter('#sub h2')->each(function($node,$key) use ($data, $data_key, $tmp_data) {
+                $text = $node->filter('h2')->text();
+                return $text;
+                
+                
+            });
+            print_r($data["title"][0]);
+            // $data["name"] = $goutte->filter('div h3 ruby')->each(function($node,$key) use ($data, $data_key, $tmp_data) {
+            //     $text = $node->filter('ruby')->text();
+            //     if($text == '-'){
+            //         return '-';
+            //     }
+            //     $text = explode("/", $text);
+            //     return $text[0];
+            // });
+
+            // $data["ruby"] = $goutte->filter('div h3 ruby rt')->each(function($node,$key) use ($data, $data_key, $tmp_data) {
+            //     $text = $node->filter('rt')->text();
+            //     if($text == '-'){
+            //         return '-';
+            //     }
+            //     return $text;
+            // });
+
+            // $data["gender"] = $goutte->filter('.col_two_one ul li h4')->each(function($node,$key) use ($data, $data_key, $tmp_data) {
+            //     $text = $node->filter('h4')->text();
+            //     if($text == '-'){
+            //         return '-';
+            //     }
+            //     if(strpos($text, "性別") !==false){
+
+            //         if(strpos($text, "男性") || strpos($text, "女性")) {
+                        
+            //             $text = explode(" ", $text);
+            //             return $text[1];
+            //         }
+            //         elseif(strpos($text, "性別不明")){
+            //             $text = explode(" ", $text);
+            //             return $text[1];
+            //         }
+            //         else{
+            //             return '-';
+            //         }
+            //     }
+                
+                
+            // });
+
+            // $data["blood"] = $goutte->filter('.col_two_one ul li h4')->each(function($node,$key) use ($data, $data_key, $tmp_data) {
+            //     $text = $node->filter('h4')->text();
+            //     if($text == '-'){
+            //         return '-';
+            //     }
+                
+            //     if (strpos($text, "血液型") !==false ) {
+            //         $text = explode(" ", $text);
+            //         if(empty($text[1]) ){
+            //             return 'O';
+            //         }else{
+            //             return $text[1];
+            //         }
+            //     }
+            // });
 
 
-        // for ($month=1; $month <= 12; $month++) { 
-        //     if ($month == 1 || $month == 3) {
-        //         $end_day = 31;
-        //     } else if ($month == 2) {
-        //         $end_day = 28;
-        //     } else {
-        //         $end_day = 30;
-        //     }
+            // $data["dob"] = array_filter($data["dob"]);
+            // $data["dob"] = str_replace('生', '', $data["dob"]);
 
-        //     for ($day=1; $day <= $end_day; $day++) { 
-        //         //テキストを取得
-        //         $goutte = GoutteFacade::request('GET', 'https://bd.fan-web.jp/sayhappy_sp.cgi?month='. $month. '&day='. $day);
-        //         $texts = array();
-        //         $goutte->filter('div center form .wrapper h6 font.ajax-iine')->each(function ($node) use (&$texts) {
-        //             dump($node);
+
+            // $data["gender"] = array_filter($data["gender"]);
+
+            // $data["blood"] = array_filter($data["blood"]);
+            
+            // $data["name"] = array_filter($data["name"]);
+            // $data["ruby"] = array_filter($data["ruby"]);
+
+            
+            // $dob_data = [];
+            // $i=0;
+            // foreach ($data["dob"] as $key => $value) {
+            //     if($value == '-'){
+            //         $dob_data[$i]['month'] = null;
+            //         $dob_data[$i]['day'] = null;
+            //     }else{
+            //         $devided_dob = explode('月',$value);
+            //         $dob_data[$i]['month'] = $devided_dob[0];
+            //         $devided_dob_day = explode('日',$devided_dob[1]);
+            //         $dob_data[$i]['day'] = $devided_dob_day[0];
+            //     }
+            //     $i++;
+            // }
+            // $i=0;
+            // $gender_data = [];
+            // foreach ($data["gender"] as $key => $value) {
+                
+            //     $gender_data[$i] = $value;
+                
+            //     $i++;
+            // }
+            // $blood_data = [];
+            // $i=0;
+            // foreach ($data["blood"] as $key => $value) {
+                
+            //     $blood_data[$i] = $value;
+                
+            //     $i++;
+            // }
+            
+            // // それぞれのデータを挿入
+            
+            for ($i=0; $i < count($data["name"]); $i++) { 
+                
+                print($data["title"][$i]);
+                echo "\n";
+                
+
+                
+                
+                Title::updateOrCreate(['title' => $data["title"][0]],[
+                        'title' => $data["title"][0],
+                        
                     
-        //             $texts[] = $node;
-        //         });
-
-        //         sleep(10);
-        //     }
-        // }
-        
-        // テキストを取得
-    
-        
-        
-        for($month = 1;$month<12;$month++){
-            for($day = 1;$day <=31;$day++) {        
-                $goutte = GoutteFacade::request('GET', 'https://bd.fan-web.jp/sayhappy_sp.cgi?month='. $month. '&day='. $day);
-                $texts = array();
-                $data = $goutte->filter('b')->each(function($node,$key) {
-                        return array(
-                            'name' => $node->filter('b')->text(),
-         
-                        );
-                    });
-        
-                $title = $goutte->filter('.wrapper h6 a')->each(function($node,$key) {
-                        return array(           
-                            'title' => $node->text()
-                        );
-                    });
-                for($i=0; $i < count($data); $i++) {
-                    if (empty($data[$i]['name'] || empty($anime_data[$i]['title']))) {
-                        continue;
-                    }
-                    print_r($data[$i]['name']);
-                    print(": ");
-                    print_r($title[$i]['title']);
-                    print("\n");
-                    print("-------------------------------");
-                    print("\n");
-
-                    Character::create([
-                        'name' => $data[$i]["name"],
-                        'title' =>$title[$i]["title"],
-                        'month' =>$month,
-                        'day' =>$day
                     ]);
+                
+                
+                    
                 }
-                print($month . "月". $day . "日");
-                sleep(1);
+                
+                
+                
             }
             
+            sleep(1);
+
         }
-            // dump($anime_data);
-        // $array = array_merge_recursive($data,$anime_data);
-            // dump($array);
+       
+         
+        
 
-            // $head = [
-            //     'aaa','bbb'
-            // ];
-            // $f = fopen('text.csv', 'w');
-            // if ($f) {
-            //     // カラムの書き込み
-            //     mb_convert_variables('UTF-8', 'UTF-8', $head);
 
-            //     // データの書き込み
-            //     foreach ($anime_data as $d) {
-            //        mb_convert_variables('UTF-8', 'UTF-8', $d);
-            //        fputcsv($f, $d);
-            //     }
-            // }
-            // // ファイルを閉じる
-            // fclose($f);
-        // $goutte->filter("b")->each(function ($node,$key) use (&$texts) {
-        //     $t = $node->text();
-        //     $texts[$key]['name'] = $t;
-        //     if($key>10){
-        //         return false;
-        //     }
+        
             
-        //     // dump($texts);
-        // });
         
     }
 
     
 
-}
+

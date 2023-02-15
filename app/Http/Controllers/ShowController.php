@@ -11,7 +11,7 @@ class ShowController extends Controller
     public function show(Request $request){
         $name = $request->name;
         $title = $request->title;
-        $characters = Character::where('title',$title)->paginate(30);
+        $characters = Character::where('title',$title)->paginate(50);
   
 
         //キャラクター単体の紹介ページは作らず、作品と所属キャラクターを並べる形で良くね？
@@ -20,7 +20,7 @@ class ShowController extends Controller
         return view('show')->with([
             "name" => $name,
             "title" => $title,
-            "characters" =>$characters
+            "characters" =>$characters,
 
         ]);
     }

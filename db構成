@@ -1,22 +1,27 @@
-キャラテーブル belongsTo 作品
+// キャラテーブル belongsTo titles
 'id',
 'name',
+'ruby',
 'title',
 'month',
 'day',
 'gender',
-'furigana',
+'blood',
 'created_at',
 'updated_at'
 
 
-作品テーブル hasmany キャラ
-'id',
-'title',
+// 作品テーブル hasmany characters
+'id', 
+'title', 
 'author'
 'publisher',
 'publicationYear',
 'created_at',
 'updated_at'
 
-中間テーブルをどうするか？
+// 中間テーブルをどうするか⇨後でcharacters と titlesから作成すれば良いのではないだろうか
+
+'id',
+'character',
+'title'
