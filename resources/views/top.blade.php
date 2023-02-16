@@ -80,13 +80,22 @@
                 @if(!empty($characters) && $characters->count())
                     @foreach($characters as $key => $value)
                         <div class="card text-center">
-                            <div class="card-body">
-                                <p class="card-title mb-0">{{$value->ruby}}</p>             
-                                <h4 class="card-title mb-0">{{$value->name}}</h4>            
-                            </div>
-                            <div>
-                                <button type="button" class="addEventBtn" data-chara-month={{$value->month}} data-chara-day={{$value->day}}>addEvent</button>
-                            </div>
+                                <div class="card-body">
+                                    <p class="card-title mb-0">{{$value->ruby}}</p>             
+                                    <h4 class="card-title mb-0">{{$value->name}}</h4>            
+                                </div>
+                                @auth
+                                <div>
+                                    <button type="button" class="addEventBtn" 
+                                        data-chara-month={{$value->month}} 
+                                        data-chara-day={{$value->day}} 
+                                        data-chara-name={{ $value->name }}
+                                        data-chara-title={{ $value->title }}
+                                        data-user-id={{ $auths->id }}
+                                        >addEvent
+                                    </button>
+                                </div>
+                            @endauth
                             <div class="card-footer text-muted text-end">
                                 <a href="/show?title={{ $value->title }}">{{ $value->title }}</a> 
                             </div>

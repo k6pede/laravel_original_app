@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/top.css">
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('pageCss')
 </head>

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Yasumi\Yasumi;
 use DateTime;
 use JpCarbon\JpCarbon;
+use Illuminate\Support\Facades\Auth;
 
 class TopController extends Controller
 {
@@ -20,6 +21,7 @@ class TopController extends Controller
         $month = $request->month;
         $day = $request->day;
         $sort = $request->sort;
+        $auths = Auth::user();
         
             
         if(empty($month) || empty($day)){
@@ -85,6 +87,7 @@ class TopController extends Controller
             "holidaysInCurrentMonth" => $holidaysInCurrentmonth,
             "eto" => $eto,
             "dateStr" => $dateStr,
+            "auths" =>$auths,
         ]);
     }
 

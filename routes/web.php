@@ -25,4 +25,6 @@ Route::get('/show', [App\Http\Controllers\ShowController::class, 'show'])->name(
 
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
-Route::post('/event-add', [App\Http\Controllers\EventController::class ,'eventAdd'])->name('event-add');
+Route::post('/eventAdd', [App\Http\Controllers\EventController::class ,'eventAdd'])->name('event-add');
+
+Route::get('/apply', [App\Http\Controllers\ContactController::class ,'sendEmail'])->name('sendEmail');
