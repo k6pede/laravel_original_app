@@ -9,6 +9,10 @@ class Character extends Model
 {
     use HasFactory;
 
+    public function events() {
+        $this->hasMany(Event::class);
+    }
+
     protected $fillable = [
         'name',
         'title',

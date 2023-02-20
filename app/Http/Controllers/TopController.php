@@ -38,6 +38,7 @@ class TopController extends Controller
         
         
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
+        
         // $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow()->format("Y-m-d");
         $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow();
         $lastMonth = (new Carbon($dateStr))->subMonthsNoOverflow();

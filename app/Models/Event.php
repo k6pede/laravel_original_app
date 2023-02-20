@@ -9,6 +9,10 @@ class Event extends Model
 {
     use HasFactory;
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     protected $fillable = [
         'start_date',
         'end_date',

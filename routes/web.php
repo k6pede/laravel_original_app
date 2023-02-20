@@ -27,4 +27,11 @@ Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])-
 
 Route::post('/eventAdd', [App\Http\Controllers\EventController::class ,'eventAdd'])->name('event-add');
 
-Route::get('/apply', [App\Http\Controllers\ContactController::class ,'sendEmail'])->name('sendEmail');
+
+//contactフォームから新規登録メールを送信
+Route::get('/contact', [App\Http\Controllers\ContactController::class ,'contact'])->name('contact');
+Route::post('/contact/confirm', [App\Http\Controllers\ContactController::class ,'confirm'])->name('contact.confirm');
+Route::post('/apply', [App\Http\Controllers\ContactController::class ,'sendEmail'])->name('sendEmail');
+
+//開発用
+Route::get('/thanks', [App\Http\Controllers\ContactController::class ,'thanks']);

@@ -155,9 +155,9 @@ search-box
 }
 
 
-input {
+/* input {
   height:45px;
-}
+} */
 
 #wrap-tab {
   margin-bottom: 0;
@@ -212,6 +212,7 @@ contents
 #contents {
   margin: 0 auto 2rem;
   max-width: 1000px;
+  min-height: 80vh;
 }
 
 .wrapper {
@@ -326,6 +327,14 @@ character-index
 .index-item a{}
 
 /* --------------------------
+contact
+--------------------------*/
+
+dd {
+  padding: 2%;
+}
+
+/* --------------------------
 pagination
 --------------------------*/
 .pagenation {
@@ -424,4 +433,12 @@ footer
 
 .copy-right {
   margin: 0 auto;
+}
+
+.message {
+  border: 2px solid black;
+}
+.message-links {
+  display: flex;
+  justify-content: space-around;
 }

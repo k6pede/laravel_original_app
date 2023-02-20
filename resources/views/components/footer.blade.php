@@ -2,7 +2,7 @@
   <div class="container">
     <div class="footer-contents">
       <div class="footer-item">
-        <a href="#">新規・追加依頼</a>
+        <a href="/contact">新規登録依頼</a>
       </div>
       <div class="footer-item">
         

@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class ApplyMail extends Mailable
+class FormUserMail extends Mailable
 {
     use Queueable, SerializesModels;
    
@@ -39,7 +39,7 @@ class ApplyMail extends Mailable
     {
         
         $from    = new Address('admin@example.com', 'REmemo');
-        $subject = '【REmemo】お問合せがありました。';
+        $subject = '【REmemo】お問合せ有難うございます';
         return new Envelope(
         from: $from,
         subject: $subject,
@@ -56,7 +56,7 @@ class ApplyMail extends Mailable
         return new Content(
             //views.email.applycharacterに記述されたコードをメールのコンテンツ（text）として送信している
             // html: 'email.applycharacter',
-            text: 'email.applycharacter',
+            text: 'email.formusermail',
             // with: [
             //     'name' => $name,
             //     'title' => $title,
