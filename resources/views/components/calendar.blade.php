@@ -44,7 +44,7 @@
                       @elseif ($date->month == $month && $date->day == $day)
                       id = "day_{{ $date->day }}"
                       class = "currentMonth text-center selectedDay"
-                      style ="border :solid 2px red"
+                      style ="background-color: rgba(248, 182, 53, 0.5);"
                       @else
                       id = "day_{{ $date->day }}"
                       class = "currentMonth text-center"
@@ -55,7 +55,19 @@
                       <input type="hidden" name="month" value="{{$date->month}}">
                       <input type="hidden" name="day" value="{{$date->day}}">
                       <button type="submit" class="dayButton">{{ $date->day }}</button>
-                  </form>
+                    </form>
+                    @if(!empty($events))
+                        @foreach($events as $key => $value)
+                            @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day)
+                                {{-- モーダル呼び出しボタン --}}
+                                <div>                                   
+                                    <button type="button" class="eventbtn btn btn-primary" data-bs-toggle="modal" data-event="{{$value}}" data-bs-target="#exampleModal">
+                                        {{ Str::limit($value->title, 5, '...') }}
+                                    </button>                                    
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
                   </td>
               @if ($date->dayOfWeek == 6)
               </tr>
@@ -72,4 +84,14 @@
       <td>{{ $holiday->getName() }}</td><br>
       @endforeach
   </div>
+  @auth
+  <div class="events">
+  <th>&#9632;今月のスケジュール</th><br>
+    @if(!empty($events))
+        @foreach ($events as $key => $value)
+        <td>{{$value->title}}</td><br>
+        @endforeach
+    @endif
+    @endauth
+  </div> 
 </div>

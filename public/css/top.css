@@ -67,7 +67,7 @@ header
 --------------------------*/
 .header {
   color: white;
-  background-color: black;
+  /* background-color: black; */
 }
 
 #header {
@@ -76,7 +76,8 @@ header
 
 
 .navbar {
-  background-color: rgb(57, 57, 57);
+  /* background-color: rgb(57, 57, 57); */
+  
 }
 /* --------------------------
 top
@@ -281,7 +282,7 @@ calendar
 
 #calendar {
   /* border: solid 2px rgb(237, 109, 31); */
-  border: solid 2px black;
+  border: solid 1px black;
   /* border-radius: 10px; */
   margin-bottom: 2rem;
   min-width: 100%;
@@ -309,12 +310,19 @@ td form{
   margin-bottom: 2em;
 }
 
-.holidays {
+.holidays ,.events{
   margin-left: 1em;
   margin-bottom: 1em;
 }
 .selectedDay {
   background-color: rgba(0, 188, 222, 0.6);
+  color: white;
+}
+
+.schedule {
+  background-color: brown;
+  margin-bottom: 0.1em;
+  font-size: small;
   color: white;
 }
 /* --------------------------
@@ -368,6 +376,21 @@ character-card
 .card-title a{
   font-size: 1.25rem;
 }
+.card-body {
+  align-items: center;
+  position: relative;
+}
+.addevent {
+  position: absolute;
+  right: 1em;
+  padding: 0.2em;
+  
+}
+.addEventBtn {
+  display: block;
+}
+
+
 
 .card-footer {
   
@@ -386,6 +409,10 @@ character-card
 .pagination {
   margin: 0 auto;
 }
+
+/* .addEventBtn {
+  width: 100%;
+} */
 
 /* --------------------------
 footer
@@ -435,10 +462,18 @@ footer
   margin: 0 auto;
 }
 
+/* --------------------------
+contact messages
+--------------------------*/
+
 .message {
   border: 2px solid black;
 }
 .message-links {
   display: flex;
   justify-content: space-around;
+}
+
+.error-message {
+  color:rgb(231, 119, 119);
 }

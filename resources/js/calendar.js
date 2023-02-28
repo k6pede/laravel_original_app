@@ -27,11 +27,13 @@ $(function () {
     'mouseenter': function() {
 
       $(this).css("background-color", "skyblue");
+      // $(this).addClass("selectedDay");
 
     },
     'mouseleave': function() {
 
       $(this).css("background-color", "transparent");
+      // $(this).removeClass("background-color", "transparent");
 
     }
 })

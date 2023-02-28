@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Character;
+use App\Models\Event;
 use Carbon\Carbon;
 use Yasumi\Yasumi;
 use DateTime;
@@ -22,6 +23,7 @@ class TopController extends Controller
         $day = $request->day;
         $sort = $request->sort;
         $auths = Auth::user();
+        $user_id = Auth::id();
         
             
         if(empty($month) || empty($day)){
@@ -76,6 +78,14 @@ class TopController extends Controller
         //干支判定
         $eto = JpCarbon::createFromDate($year)->eto; 
 
+        //当月の登録されたイベントコレクション
+        $events = Event::where('user_id' , $user_id)
+                        ->whereBetween('start_at',[$FirstDayOfMonth, $LastDayOfMonth])
+                        ->get();
+        
+        
+
+       
         return view('top')->with([
             "characters" => $characters,
             "now" => $now,
@@ -89,6 +99,7 @@ class TopController extends Controller
             "eto" => $eto,
             "dateStr" => $dateStr,
             "auths" =>$auths,
+            "events" => $events,
         ]);
     }
 

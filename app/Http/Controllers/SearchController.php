@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Character;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -34,4 +35,6 @@ class SearchController extends Controller
             "characters"=> $characters
         ]);
     }
+
+
 }

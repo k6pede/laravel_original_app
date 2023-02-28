@@ -14,44 +14,102 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     //
-    public function eventAdd(Request $request){
+    public function addEvent(Request $request){
 
-        // $request->validate([
-        //     'start_date' =>'required|integer',
-        //     'end_date' => 'required|integer',
-        //     'event_name' => 'required|max:100',
-        // ]);
-        $user_id = Auth::id();
         
         $now = Carbon::now();
-
+    
         $year = $now->year;
         $month = $request->month;
         $day = $request->day;
-        $event_name = $request->eventName;
-
         
-        $start_date = Carbon::create($year, $month, $day, 0, 0, 0);
-        $end_date = Carbon::create($year, $month, $day, 24, 0, 0);
-
-        
+        $user_id = Auth::id();
+        if(!empty($request->character_id)){
+            $character_id = $request->character_id;
+        }else{
+            $character_id = null;
+        }
+        $start_at = Carbon::create($year, $month, $day, 0, 0, 0);
+        // $end_at = Carbon::create($year, $month, $day, 23, 59, 59);
+        $end_at = null;
+        $title = $request->eventName;
+        if($character_id !== null){
+            $description = $title . 'の誕生日です。';
+        }else{
+            $description = null;
+        }
 
         //登録処理
         Event::create([
             'user_id' => $user_id,
-            'start_date' => $start_date,
-            'end_date' => $end_date,
-            'event_name' => $event_name,
-        ]);
-        // $event = new Event;
-        // $event->start_date = date('Y-m-d', $request->input('start_date') / 1000);
-        // $event->end_date = date('Y-m-d', $request->input('end_date') / 1000);
-        // $event->event_name = $request->input('event_name');
-        // $event->save();
+            'character_id' => $character_id,
+            'start_at' => $start_at,
+            'end_at' => $end_at,
+            'title' => $title,
+            'description' => $description,
 
-        return;
+        ]);
+        
 
     }
 
+    public function editEvent(Request $request){
+
+        // $request->validate([
+        //     'start_at' =>'required',
+        //     'title' => 'required|max:100',
+        // ]);
+        $inputs = $request->all();
+        $event_id = $inputs['event_id'];
+        $user_id = Auth::id();
+        $title = $inputs['title'];
+        if(!empty($request->character_id)){
+            $character_id = $request->character_id;
+        }else{
+            $character_id = null;
+        }
+
+        $start_ymd = $inputs['start_at_ymd'];
+        $start_hm = $inputs['start_at_hm'];
+        if($start_hm == null){
+            $start_hm = 0000;
+        }
+        $start_at = Carbon::createFromFormat('Y-m-d H:i:s', $start_ymd.' '.$start_hm);
+
+        if(!empty($inputs['end_at_ymd'])){
+            $end_ymd = $inputs['end_at_ymd'];
+            if(!empty($inputs['end_at_hm'])){
+                $end_hm = $inputs['end_at_hm'];
+            }else{
+                $end_hm = '00:00:00';
+            }
+            $end_at = Carbon::createFromFormat('Y-m-d H:i:s', $end_ymd.' '.$end_hm);
+        }else{
+            $end_at = null;
+        }
+
+    
+        $description = $inputs['description'];
+
+        $event = Event::where('id',$event_id);
+        $event->update([
+
+            'character_id' => $character_id,
+            'start_at' => $start_at,
+            'end_at' => $end_at,
+            'title' => $title,
+            'description' => $description,
+
+        ]);
+      
+    }
+
+    public function deleteEvent(Request $request){
+        $event_id = $request->input('event_id');
+        $user_id = Auth::id();
+        
+        $event = Event::where('id',$event_id)->where('user_id',$user_id);
+        $event->delete();
+    }
 
 }

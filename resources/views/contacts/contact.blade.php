@@ -12,27 +12,15 @@
 @endphp
 
 <div class="box_con03">
-  <div class="infomation" style="border: 2px solid red">
-    <p>こちらは新規登録専用フォームです。</p>
-    <p>漫画、アニメ、ノベルス、ゲームなどに登場するキャラクターを対象としています。</p>
-    <p>既存キャラクターの登録情報修正のご依頼は<a href="" style="color:red">こちら</a>から。</p>
-    <p>下記の注意点を踏まえた上でご依頼ください。なお、登録を確約できかねる点についてはご留意ください。</p>
 
-    <div class="important-points">
-      <p>登録できないキャラクター</p>
-      <ul class="important-texts">
-        <li>公式の出典元が確認できないキャラクター</li>
-        <li>誕生日がない、あるいは366日以外のキャラクター</li>
-        <li>名前がないようなモブキャラクター</li>
-        <li>その他登録、掲載が適切でないと判断した作品、キャラクター</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <form method="POST" action="{{ route('contact.confirm') }}" id="myForm">
+  <form method="POST" action="{{ route('create') }}" id="myForm">
     @csrf
     <table class="formTable">
+      @if($errors->any())
+        <div class="mb-3">
+          <p class="error-message text-center">※入力内容に誤りがあります。</p>
+        </div>
+      @endif
       
       <tr>
         <th>出典作品名<span>必須</span></th>
@@ -44,7 +32,7 @@
       </tr>
       <tr>
         <th>キャラ名<span>必須</span></th>
-        <td><input size="20" type="text" class="wide" name="name" placeholder="山田☆ジーク・太郎"/>
+        <td><input size="20" type="text" class="wide" name="name" placeholder="山田☆ジーク・太郎"  value="{{old('name')}}"/>
           @if ($errors->has('name'))
           <p class="error-message">{{ $errors->first('name') }}</p>
         @endif</td>
@@ -52,7 +40,10 @@
       </tr>
       <tr>
         <th>ふりがな</th>
-        <td><input size="20" type="text" class="wide" name="ruby" placeholder="やまだじーくたろう"/></td>
+        <td><input size="20" type="text" class="wide" name="ruby" placeholder="やまだじーくたろう"  value="{{old('ruby')}}"/>
+          @if ($errors->has('ruby'))
+          <p class="error-message">{{ $errors->first('ruby') }}</p>
+        @endif</td>
       </tr>
       <tr>
         <th>誕生日（月・日）<span>必須</span></th>
@@ -110,7 +101,7 @@
       
       <tr>
         <th>出展情報<br/></th>
-        <td><textarea name="details" cols="50" rows="3"></textarea></td>
+        <td><textarea name="details" cols="50" rows="3"  value="{{old('details')}}"></textarea></td>
       </tr>
       <tr>
         <th>ご依頼者様のメールアドレス</th>

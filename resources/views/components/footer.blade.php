@@ -6,7 +6,7 @@
       </div>
       <div class="footer-item">
         
-        <a href="#">修正依頼</a>
+        <a href="/modify">修正依頼</a>
         
       </div>
     </div>
