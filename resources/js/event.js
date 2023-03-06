@@ -1,5 +1,11 @@
 
 $(function(){
+
+
+  $('#liveToastBtn').on('click', function(){
+    $('.toast').show();
+  })
+
   let addE = $('.addEventBtn');
   addE.on('click', function() {
 
@@ -67,14 +73,25 @@ $(function(){
     
   })
 
-  // let createE = $('.createEventBtn');
-  // createE.on('click', function() {
 
-  // })
+  // 新しい予定の作成用モーダルopen
+  $('.create-my-event-btn').on('click', function(){
+    
+    $('.modal-event-title').val('');
+    $('.event-id').val('');
+    $('.event-title').val('');
+    $('.event-start-ymd').val('');
+    $('.event-start-hm').val('');
+    $('.event-end-ymd').val('');
+    $('.event-end-hm').val('');
+    $('.event-description').val('');
 
-  $('#liveToastBtn').on('click', function(){
-    $('.toast').show();
+    
+    $('.modal-event-title').attr('placeholder', '新しい予定');
+    
   })
+
+
  
 
 
@@ -106,7 +123,50 @@ $(function(){
     
   })
 
-  $('#modalSubmitBtn').on('click', function(){
+  $('#modalCreateBtn').on('click', function(){
+    let title = $('#createModal .modal-title').val();
+    let start_at_ymd = $('#createModal .event-start-ymd').val();
+    let start_at_hm = $('#createModal .event-start-hm').val();
+    let end_at_ymd = $('#createModal .event-end-ymd').val();
+    let end_at_hm = $('#createModal .event-end-hm').val();
+    let description = $('#createModal .event-description').val();
+    console.log(start_at_ymd);
+    console.log(start_at_hm);
+    
+    
+    $.ajax({
+      headers: {
+        'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
+      },
+      url: '/createEvent',
+      type: 'post',
+      data: {
+        'title': title,
+        'start_at_ymd' : start_at_ymd,
+        'start_at_hm' : start_at_hm,
+        'end_at_ymd' : end_at_ymd,
+        'end_at_hm' : end_at_hm,
+        'description' : description,
+      }
+      
+    })
+  
+    .done(function (data) {
+      console.log('done');
+      $(".toast").removeClass('hide');
+      $(".toast").addClass('show');
+    })
+    .fail(function () {
+      console.log('fail');
+    });
+ 
+    $('#exampleModal').hide();
+    $("body").removeClass("modal-open");
+    $(".modal-backdrop").remove();
+  })
+
+
+  $('#modalEditBtn').on('click', function(){
     let title = $('.modal-title').val();
     let event_id = $('.event-id').val();
     let start_at_ymd = $('.event-start-ymd').val();
@@ -123,7 +183,7 @@ $(function(){
         'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
       },
       url: '/editEvent',
-      type: 'get',
+      type: 'post',
       data: {
         'title': title,
         'event_id': event_id,
@@ -133,18 +193,20 @@ $(function(){
         'end_at_hm' : end_at_hm,
         'description' : description,
         'character_id' : character_id,
-        '_method': 'UPDATE',
+        '_method' : 'put'
       }
       
     })
   
     .done(function (data) {
       console.log('done');
-      $("#myToast").show();
+      $(".toast").removeClass('hide');
+      $(".toast").addClass('show');
     })
     .fail(function () {
       console.log('fail');
     });
+
     $('#exampleModal').hide();
     $("body").removeClass("modal-open");
     $(".modal-backdrop").remove();

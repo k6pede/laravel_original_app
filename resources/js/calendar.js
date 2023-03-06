@@ -22,18 +22,18 @@ $(function () {
     })
   })
 
-  // カレンダーenterイベント
+
   $('.currentMonth').on({
     'mouseenter': function() {
 
-      $(this).css("background-color", "skyblue");
-      // $(this).addClass("selectedDay");
+      // $(this).css("background-color", "skyblue");
+      $(this).addClass("hovered-day");
 
     },
     'mouseleave': function() {
 
-      $(this).css("background-color", "transparent");
-      // $(this).removeClass("background-color", "transparent");
+      // $(this).css("background-color", "transparent");
+      $(this).removeClass("hovered-day");
 
     }
 })

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Character;
 use App\Models\Event;
+use App\Models\Admin;
 use Carbon\Carbon;
 use Yasumi\Yasumi;
 use DateTime;
@@ -15,10 +16,17 @@ class TopController extends Controller
 {
     //
     
+    
     public function top(Request $request) {
-
+        
         $now = Carbon::now();
+        if(empty($request->year)) {
+            $year = $now->year;
+        }else{
+            $year = $request->year;
+        }
         $year = $now->year;
+
         $month = $request->month;
         $day = $request->day;
         $sort = $request->sort;
@@ -89,6 +97,7 @@ class TopController extends Controller
         return view('top')->with([
             "characters" => $characters,
             "now" => $now,
+            "year" => $year,
             "month" => $month,
             "day" => $day,
             "nextMonth" => $nextMonth,

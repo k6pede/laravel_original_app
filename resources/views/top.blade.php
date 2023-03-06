@@ -2,15 +2,10 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('pageCss')
 <link rel="stylesheet" href="/css/top.css">
-
 @endsection
 
+
 @section('content')
-
-
-
-
-
 
 <div id="contents">
     {{-- モーダル --}}
@@ -21,25 +16,18 @@
     @component('components.toast')
     @endcomponent
     
-    <div>
-        @foreach($events as $key => $value)
-        <p>{{$value->title}}</p>
-        <p>{{$value->start_at}}</p>
-        <p>{{$value->end_at}}</p>
-        @endforeach
-    </div>
 
-    {{-- @component('components.topform')
-    @endcomponent --}}
-   
+    
+
+    <div class="create-my-event">
+        <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
+            <i class="fa-regular fa-calendar-plus"></i>
+        </a>
+    </div>
     <div class="wrapper">
         <div class="contents-left">
-            {{-- 検索欄 --}}
-            @component('components.searchForm')
-            @endcomponent
-            
 
-
+           
             {{-- カレンダー --}}
             @component('components.calendar',[
                 'month'                  => $month,
@@ -60,18 +48,43 @@
             
            
         </div>
-        
-        {{-- キャラクターカード --}}
-        @component('components.card',[
-            'characters' => $characters,
-            'now' => $now,
-            'month' => $month,
-            'day' => $day,
-            'eto' => $eto,
-            'auths' => $auths,
-            'dateStr' => $dateStr,
-        ])
-        @endcomponent
+        <div class="contents-right">
+
+              {{-- 現在表示している年月日 --}}
+            <div class="top text-align-center">
+                <div class="top-month text-center">
+                    <h2>{{ $year }}</h2>                  
+                    <h2>{{ $eto }}</h2>
+                    <h2>{{ date('F',strtotime($dateStr))}}</h2>
+                </div>
+                <div class="top-day align-items-center">
+                    <div class="day">
+                        <h1 class="text-center">{{ $day }}</h1>
+                    </div>
+                    <div class="day-info">
+
+                    </div> 
+                </div>
+            </div>
+
+             {{-- 検索欄 --}}
+             @component('components.searchForm',[
+                'month' => $month,
+                'day' => $day,
+             ])
+             @endcomponent
+
+            {{-- キャラクターカード --}}
+            @component('components.card',[
+                'characters' => $characters,
+                'now' => $now,
+                'month' => $month,
+                'day' => $day,
+                'eto' => $eto,
+                'auths' => $auths,
+                'dateStr' => $dateStr,])
+            @endcomponent
+        </div>
         
     </div>
 </div>

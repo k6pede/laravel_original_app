@@ -55,8 +55,7 @@
                 <h5 class="card-title text-center">{{ $value->name }}</h5>
                 <td class="card-text birthday">誕生日</td>
                 <td class="card-text">{{ $value->month }}月{{ $value->day}}日</td><br>
-                <td class="card-text"></td>
-                <td class="card-text">{{ $value->gender }}</td><br>
+              
                 <td class="card-text gender">性別</td>
                 <td class="card-text">{{ $value->gender }}</td><br>
                 <td class="card-text gender">血液型</td>
@@ -64,9 +63,7 @@
                 
                 
               </div>
-              <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </div>
+              
             </div>
           </div>
         @endforeach

@@ -1,6 +1,7 @@
 {{-- ページネーション --}}
   <div id="pagination">
     
+    
     @if($characters->lastPage() > 1)
         <ul class="pagination">
             {{-- 最初へ --}}

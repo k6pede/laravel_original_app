@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Character;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SearchController extends Controller
 {
     public function search(Request $request) {
+
+        $now = Carbon::now();
+        $year = $now->year();
+        $month = $request->month;
+        $day = $request->day;
 
         if(!empty($_REQUEST['c'])){
             $searchWord = $_REQUEST['c'];
@@ -32,7 +38,11 @@ class SearchController extends Controller
         
         return view('search')->with([
             "result"=> $result,
-            "characters"=> $characters
+            "characters"=> $characters,
+            "month"=> $month,
+            "day"=> $day,
+            "now"=> $now,
+            "year"=> $year
         ]);
     }
 

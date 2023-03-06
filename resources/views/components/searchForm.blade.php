@@ -12,6 +12,8 @@
       <form action="/search" class="mb-0" method="GET" name="search">
           @csrf
           <input type="search" class="input-text-box" placeholder="検索" name="t">
+          <input type="hidden" name="month" value={{$month}}>
+          <input type="hidden" name="day" value={{$day}}>
           <input type="submit" class="search-box fas" id="gbox" value="&#xf002;">                        
       </form>
   </div>

@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm']);
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/register/admin', [App\Http\Controllers\Auth\RegisterController::class, 'showAdminRegisterForm']);
+
+Route::post('/login/admin', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin']);
+Route::post('/register/admin', [App\Http\Controllers\Auth\RegisterController::class, 'registerAdmin'])->name('admin-register');
+
+Route::view('/admin', 'admin')->middleware('auth:admin')->name('admin-home');
+
+
+
+
 Route::get('/', [App\Http\Controllers\TopController::class, 'top'])->name('top');
 
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'getCalendarDates'])->name('getCalendarDates');
@@ -28,8 +41,9 @@ Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])-
 
 //Autocomplete
 // Route::get('/autocomplete', [App\Http\Controllers\AutoCompleteController::class, 'autocomplete'])->name('autocomplete');
+Route::post('/createEvent', [App\Http\Controllers\EventController::class ,'createEvent'])->name('createevent');
 Route::get('/addEvent', [App\Http\Controllers\EventController::class ,'addEvent'])->name('addevent');
-Route::get('/editEvent', [App\Http\Controllers\EventController::class ,'editEvent'])->name('editevent');
+Route::put('/editEvent', [App\Http\Controllers\EventController::class ,'editEvent'])->name('editevent');
 Route::get('/deleteEvent', [App\Http\Controllers\EventController::class ,'deleteEvent'])->name('deleteevent');
 
 
@@ -45,6 +59,9 @@ Route::post('/applyModify', [App\Http\Controllers\ContactController::class ,'sen
 Route::get('/thanks', [App\Http\Controllers\ContactController::class ,'thanks']);
 
 //開発用
+// Route::group(['middleware' => ['auth', 'admin']], function () {
+//   // 管理者用のルート
+// });
 Route::get('/create/character', [App\Http\Controllers\CharacterController::class ,'create'])->name('create');
 Route::post('/store/character', [App\Http\Controllers\CharacterController::class ,'store'])->name('store');
 Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 'show']);

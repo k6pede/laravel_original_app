@@ -6,7 +6,7 @@
           <form action="#" method="GET" id="lastmonth" name="lastmonth" class="justiry-content-start">           
               <input type="hidden" name="month" value="{{ $lastMonth->month }}" class="lastmonth">
               <input type="hidden" name="day" value="{{ $day }}" class="lastday">
-              <button type="submit" class="lastmonthbtn"><i class="fa-solid fa-arrow-left"></i> Last</button>
+              <button type="submit" class="lastmonthbtn"><i class="fa-solid fa-angle-left"></i></button>
           </form>
           
               <form action="#" method="GET" id="today" name="today" class="today ms-auto">
@@ -18,7 +18,7 @@
           <form action="#" method="GET" id="nextmonth" class="ms-auto">           
               <input type="hidden" name="month" value="{{ $nextMonth->month }}">
               <input type="hidden" name="day" value="{{ $day }}">
-              <button type="submit" class="nextmonth">Next <i class="fa-solid fa-arrow-right"></i></button>
+              <button type="submit" class="nextmonth"><i class="fa-solid fa-angle-right"></i></button>
           </form>
       </div>
 
@@ -27,12 +27,37 @@
               
               @foreach(['日', '月', '火', '水', '木', '金', '土'] as $dayOfWeek)
               <th class="text-center">
-                  {{ $dayOfWeek }}   
+                {{ $dayOfWeek }}<br>
+                @if($dayOfWeek === '日')
+                <p class="mb-0">Sun</p>
+                @elseif($dayOfWeek === '月')
+                <p class="mb-0">Mon</p>
+                @elseif($dayOfWeek === '火')
+                <p class="mb-0">Tue</p>
+                @elseif($dayOfWeek === '水')
+                <p class="mb-0">Wed</p>
+                @elseif($dayOfWeek === '木')
+                <p class="mb-0">Thu</p>
+                @elseif($dayOfWeek === '金')
+                <p class="mb-0">Fri</p>
+                @elseif($dayOfWeek === '土')
+                <p class="mb-0">Sat</p>
+                @endif
               </th>
+              
               @endforeach
 
-          </tr>
-      </thead>
+            </tr>
+            {{-- <tr class="dayOfWeekCellEn" style="border-top:none;">
+                
+                @foreach(['Sun', 'Mon', 'Tue', 'Wed', 'Thi', 'Fri', 'Sat'] as $dayOfWeek)
+                <th class="text-center">
+                    {{ $dayOfWeek }}   
+                </th>
+                @endforeach
+    
+            </tr> --}}
+        </thead>
       <tbody>
           @foreach ($dates as $date)
               @if($date->dayOfWeek == 0)
@@ -42,8 +67,9 @@
                       @if ($date->month != $month)                      
                       class = "bg-secondary disable_cell text-center"
                       @elseif ($date->month == $month && $date->day == $day)
+                      {{-- 指定された日 --}}
                       id = "day_{{ $date->day }}"
-                      class = "currentMonth text-center selectedDay"
+                      class = "currentMonth text-center selecte-day"
                       style ="background-color: rgba(248, 182, 53, 0.5);"
                       @else
                       id = "day_{{ $date->day }}"
@@ -58,7 +84,8 @@
                     </form>
                     @if(!empty($events))
                         @foreach($events as $key => $value)
-                            @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day)
+                            {{-- 当月のイベントがある場合表示 --}}
+                            @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
                                 {{-- モーダル呼び出しボタン --}}
                                 <div>                                   
                                     <button type="button" class="eventbtn btn btn-primary" data-bs-toggle="modal" data-event="{{$value}}" data-bs-target="#exampleModal">
@@ -85,13 +112,13 @@
       @endforeach
   </div>
   @auth
-  <div class="events">
-  <th>&#9632;今月のスケジュール</th><br>
-    @if(!empty($events))
-        @foreach ($events as $key => $value)
-        <td>{{$value->title}}</td><br>
-        @endforeach
-    @endif
-    @endauth
-  </div> 
+    <div class="events">
+        <th>&#9632;今月のスケジュール</th><br>
+        @if(!empty($events))
+            @foreach ($events as $key => $value)
+            <td>{{$value->title}}</td><br>
+            @endforeach
+        @endif
+    </div> 
+  @endauth
 </div>

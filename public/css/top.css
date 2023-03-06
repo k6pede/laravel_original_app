@@ -4,13 +4,7 @@
 }
 
 body {
-    font-family: var(--font-family-sans-serif);
-}
-
-
-
-
-body {
+  font-family: var(--font-family-sans-serif);
   margin: 0;
   padding: 0;
 }
@@ -52,15 +46,23 @@ a {
 h1 {
   margin: 0;
 }
+p{
+  font-size: 0.75em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
 td {
   align-items: center;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 900px;
   
 }
+
 
 /* --------------------------
 header
@@ -70,9 +72,7 @@ header
   /* background-color: black; */
 }
 
-#header {
-  margin-bottom: 3em;
-}
+
 
 
 .navbar {
@@ -82,28 +82,28 @@ header
 /* --------------------------
 top
 --------------------------*/
+
+.top {
+  margin-bottom: 5em;
+}
 .top-month {
-  border: solid 2px rgb(237, 109, 31);
-  border-bottom: none;
+  border: solid 2px rgb(0, 0, 0);
   margin: 0 auto;
   display: flex;
   justify-content: center;
 }
-.top-month > h1{
+.top-month > h2{
   margin: 0 2rem;
-  font-size: 3em;
+  font-size: 1em;
 }
 
 .top-day {
-  border: solid 2px rgb(237, 109, 31);
-  margin-bottom: 50px;
+  border: solid 2px rgb(0, 0, 0);
+  border-top: none;
   display: flex;
   height: 50px;
 }
 .top-day .day{
-  border-radius: 0 50px 50px 0;
-  border-right: solid 2px rgb(237, 109, 31);
-  background-color: rgba(0, 188, 222, 0.6);
   width: 20%;
 }
 .top-day .day-info{
@@ -189,7 +189,7 @@ search-box
   position: absolute;
   transform: translate(-50%,-50%);
   top: 55%;
-  left: 7%;
+  left: 4%;
   cursor: pointer;
   width: 45px;
   background-color: transparent;
@@ -201,19 +201,15 @@ search-box
 /* --------------------------
 main
 --------------------------*/
-.main-bg {
-  height: 80px;
-  background-color: rgba(145, 145, 145, 0.6);
-  max-width: 1000px;
-  margin: 0 auto;
-}
+
 /* --------------------------
 contents
 --------------------------*/
 #contents {
   margin: 0 auto 2rem;
-  max-width: 1000px;
+  max-width: 900px;
   min-height: 80vh;
+  position: relative;
 }
 
 .wrapper {
@@ -223,23 +219,26 @@ contents
 }
 .contents-left {
   margin: 0 50px 0 0;
-  width: 80%;
+  max-width: 80%;
+  
 }
 .contents-right {
   width: 100%;
 }
 .top-title {
   margin:  50px auto;
-  max-width: 1000px;
+  max-width: 900px;
   width: 100%;
   border-radius: 50px;
 }
 
 h1 .border {
-  max-width: 1000px;
+  max-width: 900px;
 }
 
-
+.ruby {
+  color:rgb(136, 136, 136)
+}
 /* --------------------------
 search-box
 --------------------------*/
@@ -257,13 +256,30 @@ search-box
 calendar
 --------------------------*/
 
+
+.create-my-event {
+  height: 2em;
+  display: flex;
+  justify-content: end;
+}
+
+
+.create-my-event-btn {
+  padding-right: 1em;
+}
+
+
 .dayOfWeek {
   color: white;
   font-size: 0.8em;
   /* background-color: rgb(248, 182, 53); */
   background-color: black;
 }
-
+.dayOfWeekCellEn {
+  font-size: 0.75em;
+  border-top: none;
+  color: white;
+}
 
 .month-form {
   display: flex; 
@@ -293,6 +309,7 @@ calendar
 }
 
 
+
 td form{
   margin: 0;
 }
@@ -314,25 +331,38 @@ td form{
   margin-left: 1em;
   margin-bottom: 1em;
 }
-.selectedDay {
+.selected-day {
   background-color: rgba(0, 188, 222, 0.6);
   color: white;
 }
 
+
+.hovered-day {
+  background-color: skyblue !important;
+}
 .schedule {
   background-color: brown;
   margin-bottom: 0.1em;
   font-size: small;
   color: white;
 }
+
+.card-body {
+  padding: 0.5rem;
+}
+
+
+
 /* --------------------------
 character-index
 --------------------------*/
-.index-num {
-  color:rgba(255, 0, 0, 0.6)
+#character-index .card-header {
+  font-size: 0.75em;
 }
 
-.index-item a{}
+.index-item {
+  font-size: 0.75em;
+}
 
 /* --------------------------
 contact
@@ -476,4 +506,53 @@ contact messages
 
 .error-message {
   color:rgb(231, 119, 119);
+}
+
+
+/* --------------------------
+responsive
+--------------------------*/
+
+@media screen and (max-width: 480px) {
+
+
+  .wrapper {
+    display: block;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  #character-index {
+    display: none;
+  }
+
+  .contents-left {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  .contents-right {
+    display: block;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  #pagination {
+    margin-bottom: 1em;
+    justify-content: center;
+    display: flex;
+  }
+
+  .character-info {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .top {
+    display: none;
+  }
+
+  
+
 }
