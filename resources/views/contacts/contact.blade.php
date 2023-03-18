@@ -13,6 +13,16 @@
 
 <div class="box_con03">
 
+  <div class="information mb-3" style="border: 2px solid rgb(237, 109, 31">
+    <div class="information-txt">
+      <p>こちらはキャラクターの新規登録の依頼用メールフォームです。</p>
+      <p>以下のフォームに情報を入力し、送信して下さい。</p>
+      <p>登録されたキャラクターについてはトップページにてお知らせいたします。</p>
+      <p>キャラクターの情報修正は<a href="/contact" style="color:red">こちら</a>から。</p>
+    </div>
+
+  </div>
+
   <form method="POST" action="{{ route('create') }}" id="myForm">
     @csrf
     <table class="formTable">
@@ -48,19 +58,25 @@
       <tr>
         <th>誕生日（月・日）<span>必須</span></th>
         <td>
-          <input type="number" class="short" name="birth" value='1'/>
-          <input type="number" class="short" name="day" min="1" max="31" value='1'/>
-          <div>
+          <div style="margin-bottom: 1em;">
+            <input type="number" class="short" name="birth" value='1'/>
             <label for="">月</label>
+            
+          </div>
+          <div class="birth-month-form">
             @foreach($months as $month)
-              <a href="#" class="birth-month" data-value="{{$month}}">{{ $month }}</a>
+              <button href="#" class="birth-month" data-value="{{$month}}">{{ $month }}</button>
             @endforeach
 
           </div>
-          <div>
+          <div style="margin-bottom: 1em;">
+            
+            <input type="number" class="short" name="day" min="1" max="31" value='1'/>
             <label for="">日</label>
+          </div>
+          <div class="birth-day-form">
             @foreach($days as $day)
-              <a href="#" class="birth-day" data-value="{{$day}}">{{ $day }}</a>
+              <button href="#" class="birth-day" data-value="{{$day}}">{{ $day }}</button>
             @endforeach
 
           </div>
@@ -128,7 +144,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="d-flex align-content-center">
       <p class="btn mx-auto">
           <span><input type="submit" value="送信" form="myForm"></span>
       </p>
@@ -136,55 +152,5 @@
   </form>
 </div>
 
-{{-- <div id="contents">
-  <div class="infomation" style="border: 2px solid red">
-    <p>こちらは新規登録専用フォームです。</p>
-    <p>漫画、アニメ、ノベルス、ゲームなどに登場するキャラクターを対象としています。</p>
-    <p>既存キャラクターの登録情報修正のご依頼は<a href="" style="color:red">こちら</a>から。</p>
-    <p>下記の注意点を踏まえた上でご依頼ください。なお、登録を確約できかねる点についてはご留意ください。</p>
-
-    <div class="important-points">
-      <p>登録できないキャラクター</p>
-      <ul>
-        <li>公式の出典元が確認できないキャラクター</li>
-        <li>誕生日がない、あるいは366日以外のキャラクター</li>
-        <li>名前がないようなモブキャラクター</li>
-        <li>その他登録、掲載が適切でないと判断した作品、キャラクター</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="form-contents">
-    <dl class="card mb-3">
-      <dt class="card-header">aaa</dt>
-      <dd class="mb-0">
-        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      </dd>
-    </dl>
-
-
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">お名前 (任意)</label>
-
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    </div>
-  
-  
-   
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-  
-    
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-  </div>
-
-
-</div> --}}
 
 @endsection

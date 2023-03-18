@@ -25,9 +25,7 @@ class ShowController extends Controller
         $auths = Auth::user();
         $user_id = Auth::id();
         
-            
-        
-        
+   
         
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
         
@@ -74,8 +72,9 @@ class ShowController extends Controller
                         ->get();
         $name = $request->name;
         $title = $request->title;
+        $result = $title;
+        
         $characters = Character::where('title',$title)->paginate(50);
-  
 
         
         return view('show')->with([
@@ -93,6 +92,7 @@ class ShowController extends Controller
             "auths" =>$auths,
             "events" => $events,
             "title" => $title,
+            "result" => $result,
         ]);
     }
 

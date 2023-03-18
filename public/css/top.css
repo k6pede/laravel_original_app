@@ -59,9 +59,13 @@ td {
 
 .container {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 1000px;
   
 }
+/* --------------------------
+button
+--------------------------*/
+
 
 
 /* --------------------------
@@ -126,9 +130,10 @@ search-box
   width: calc(100%/3);
   text-align: center;
   align-items: center;
-  padding-top: 0.3em;
-  height: 2rem;
+  /* padding-top: 0.3em;
+  height: 2rem; */
   display: inline;
+  font-size: 1rem;
   /* border-top: solid 2px rgb(237, 109, 31);
   border-right: solid 2px rgb(237, 109, 31); */
 
@@ -139,7 +144,6 @@ search-box
   color: white;
   background-color: black;
   letter-spacing: 0.2em;
-  font-size: 1.05em;
   transition: .5s;
 }
 
@@ -162,6 +166,7 @@ search-box
 
 #wrap-tab {
   margin-bottom: 0;
+  font-size: 1.1em;
 }
 .not-selected {
   background-color: transparent;
@@ -199,15 +204,11 @@ search-box
 
 
 /* --------------------------
-main
---------------------------*/
-
-/* --------------------------
 contents
 --------------------------*/
 #contents {
   margin: 0 auto 2rem;
-  max-width: 900px;
+  max-width: 1000px;
   min-height: 80vh;
   position: relative;
 }
@@ -218,27 +219,24 @@ contents
   width: 100%;
 }
 .contents-left {
-  margin: 0 50px 0 0;
-  max-width: 80%;
-  
+  margin: 0 2rem 0 0;
+  width: 41%;
 }
 .contents-right {
-  width: 100%;
+  width: 66%;
 }
 .top-title {
   margin:  50px auto;
-  max-width: 900px;
+  max-width: 1000px;
   width: 100%;
   border-radius: 50px;
 }
 
 h1 .border {
-  max-width: 900px;
+  max-width: 1000px;
 }
 
-.ruby {
-  color:rgb(136, 136, 136)
-}
+
 /* --------------------------
 search-box
 --------------------------*/
@@ -255,7 +253,9 @@ search-box
 /* --------------------------
 calendar
 --------------------------*/
-
+.table-bordered>:not(caption)>*>* {
+  border: none;
+}
 
 .create-my-event {
   height: 2em;
@@ -336,6 +336,22 @@ td form{
   color: white;
 }
 
+td.has-event {
+  position: relative;
+}
+
+td.has-event::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 12px 12px 0;
+  border-color: transparent #ff0000 transparent transparent;
+}
+
 
 .hovered-day {
   background-color: skyblue !important;
@@ -351,6 +367,9 @@ td form{
   padding: 0.5rem;
 }
 
+.clickable-div {
+  cursor: pointer;
+}
 
 
 /* --------------------------
@@ -382,7 +401,9 @@ pagination
 .page-link {
   color : black;
 }
-
+.page-item {
+  border-radius: none;
+}
 .active > .page-link {
   color: rgb(237, 109, 31);
   background-color: black;
@@ -396,6 +417,7 @@ character-card
   width: 100%;
 }
 .card {
+  /* margin: 0 5%; */
   margin-bottom: 1rem;
 }
 
@@ -409,6 +431,17 @@ character-card
 .card-body {
   align-items: center;
   position: relative;
+}
+.card-body-name {
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed rgba(0,0,0,.3);
+}
+.card-body-info {
+  width: 90%;
+  margin: auto;
+  border-bottom: 1px dashed rgba(0,0,0,.3);
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 .addevent {
   position: absolute;
@@ -440,9 +473,18 @@ character-card
   margin: 0 auto;
 }
 
-/* .addEventBtn {
-  width: 100%;
-} */
+.ruby {
+  color:rgb(158, 158, 158);
+  font-size: 0.75em;
+  
+}
+
+.character-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 
 /* --------------------------
 footer
@@ -512,7 +554,39 @@ contact messages
 /* --------------------------
 responsive
 --------------------------*/
+@media screen and (max-width: 800px) {
+  .wrapper {
+    display: block;
+    justify-content: center;
+    margin: 0 auto;
+  }
 
+  #character-index {
+    display: none;
+  }
+
+  .contents-left {
+    width: 90%;
+    margin: auto;
+  }
+  .contents-right {
+    display: block;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .top {
+    display: none;
+  }
+  #pagination {
+    margin-bottom: 1em;
+    justify-content: center;
+    display: flex;
+  }
+  .event-description {
+    
+  }
+}
 @media screen and (max-width: 480px) {
 
 

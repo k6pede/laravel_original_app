@@ -18,12 +18,14 @@
     
 
     
+    @auth
+        <div class="create-my-event">
+            <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
+                <i class="fa-regular fa-calendar-plus"></i>
+            </a>
+        </div>
+    @endauth
 
-    <div class="create-my-event">
-        <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
-            <i class="fa-regular fa-calendar-plus"></i>
-        </a>
-    </div>
     <div class="wrapper">
         <div class="contents-left">
 
@@ -73,6 +75,13 @@
                 'day' => $day,
              ])
              @endcomponent
+
+             <div class="character-info">
+                <h4>           
+                    {{ $month }}月{{ $day }}日が誕生日のキャラクター
+                </h4>
+                <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
+            </div>
 
             {{-- キャラクターカード --}}
             @component('components.card',[

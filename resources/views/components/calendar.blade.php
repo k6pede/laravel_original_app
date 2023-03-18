@@ -59,47 +59,59 @@
             </tr> --}}
         </thead>
       <tbody>
-          @foreach ($dates as $date)
+            @foreach ($dates as $date)
               @if($date->dayOfWeek == 0)
-              <tr class="sunday">
+              <tr>
               @endif
-                  <td
-                      @if ($date->month != $month)                      
-                      class = "bg-secondary disable_cell text-center"
-                      @elseif ($date->month == $month && $date->day == $day)
-                      {{-- 指定された日 --}}
-                      id = "day_{{ $date->day }}"
-                      class = "currentMonth text-center selecte-day"
-                      style ="background-color: rgba(248, 182, 53, 0.5);"
-                      @else
-                      id = "day_{{ $date->day }}"
-                      class = "currentMonth text-center"
-                          
-                      @endif
-                  >
-                  <form action="" method="GET">
+                <td
+                    @if ($date->month != $month)                      
+                    {{-- 今月以外 --}}
+                        class = "bg-secondary disable_cell text-center"
+     
+                    @else                   
+                    {{-- 今月の日付 --}}
+                        id = "day_{{ $date->day }}"
+                        {{-- class ="currentMonth text-center" --}}
+                        @if($date->day == $day)
+                        {{-- 選択中 --}}
+                            style ="background-color: rgba(248, 182, 53, 0.5);"
+                        @endif
+                        @if(!empty($events))
+                            @foreach($events as $key => $value)
+                                {{-- イベントがある場合 --}}
+                                @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
+                                class ="currentMonth text-center has-event"
+                                @endif
+                            @endforeach
+                        @endif
+                        class ="currentMonth text-center"
+                    @endif                
+                >
+
+                    <form action="" method="GET">
                       <input type="hidden" name="month" value="{{$date->month}}">
                       <input type="hidden" name="day" value="{{$date->day}}">
                       <button type="submit" class="dayButton">{{ $date->day }}</button>
                     </form>
-                    @if(!empty($events))
+                    
+                    {{-- 当月のイベントがある場合表示 --}}
+                    {{-- @if(!empty($events))
                         @foreach($events as $key => $value)
-                            {{-- 当月のイベントがある場合表示 --}}
                             @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
-                                {{-- モーダル呼び出しボタン --}}
                                 <div>                                   
-                                    <button type="button" class="eventbtn btn btn-primary" data-bs-toggle="modal" data-event="{{$value}}" data-bs-target="#exampleModal">
+                       
+                                    <button type="button" class="eventbtn btn btn-primary" data-bs-toggle="modal" data-event="{{$value}}" data-bs-target="#exampleModal" >
                                         {{ Str::limit($value->title, 5, '...') }}
                                     </button>                                    
                                 </div>
                             @endif
                         @endforeach
-                    @endif
-                  </td>
+                    @endif --}}
+                </td>
               @if ($date->dayOfWeek == 6)
               </tr>
               @endif
-          @endforeach            
+            @endforeach            
       </tbody>
   </table>
   {{-- 祝日 --}}

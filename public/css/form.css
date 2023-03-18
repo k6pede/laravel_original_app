@@ -48,9 +48,32 @@ i {
 
 /*デザインcss↓*/
 .box_con03 {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0  auto;
 }
+
+.information-txt {
+  padding: 2em;
+  font-size: 1.25em;
+}
+.birth-month {
+  width: 2em;
+  border: none;
+  background-color: #ddeef9;
+}
+.birth-month-form {
+  margin-bottom: 1em;
+}
+.birth-day {
+  width: 2em;
+  border: none;
+  margin-bottom: 0.5em;
+  background-color: #ddeef9;
+}
+.birth-day-form {
+  
+}
+
 @media only screen and (max-width: 768px) {
   .box_con03 {
     width: 95%;
@@ -157,7 +180,7 @@ i {
 }
 .box_con03 form table tr , .box_con03 form table tr textarea, .box_con03 form table tr .wide {
   width: 100%;
-  height: 3em;
+  /* height: 3em; */
   padding: .5em;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -266,7 +289,7 @@ i {
 
 .box_check {
   text-align: center;
-  margin: 40px auto;
+  margin: 2em auto;
 }
 .box_check label {
   display: inline-block;
@@ -298,7 +321,7 @@ i {
 
 
 
-.infomation {
+.information {
   margin-bottom: 2em;
 }
 .important-texts {

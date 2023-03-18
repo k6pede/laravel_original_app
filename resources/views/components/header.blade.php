@@ -172,7 +172,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @if(!Auth::check() && (!isset($authgroup) || !Auth::guard($authgroup)->check()))
+                        {{-- ログアウト時 --}}
+                       
+                        @if(!Auth::guard('admin')->check() && !Auth::check())
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     @isset($authgroup)
@@ -199,16 +201,16 @@
                             @endisset
                             @endif
                         @else
-                        
+                        {{-- ログイン時 --}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @isset($authgroup)
-                                        {{ Auth::guard($authgroup)->user()->name }}
+                                    @if(Auth::guard('admin')->check())
+                                        {{ Auth::guard('admin')->user()->name }}
                                 
                                     @else
                                         {{ Auth::user()->name }}
                                 
-                                    @endisset
+                                    @endif
                                 </a>
                                 {{-- <div class="" aria-labelledby="navbarDropdown"> --}}
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

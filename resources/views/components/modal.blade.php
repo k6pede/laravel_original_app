@@ -49,7 +49,7 @@
                   
                   <tr>
                       <th>詳細</th>
-                      <td><textarea row="5" col = '30' class="wide event-description" name="description" style="width: 100%;"></textarea>
+                      <td colspan="2"><textarea row="5" col = '30' class="wide event-description" name="description" style="width: 100%;"></textarea>
                         @if ($errors->has('description'))
                         <p class="error-message">{{ $errors->first('description') }}</p>
                       @endif</td>                
@@ -123,10 +123,11 @@
                   
                   <tr>
                       <th>詳細</th>
-                      <td><textarea row="5" col = '30' class="wide event-description" name="description" style="width: 100%;"></textarea>
+                      <td colspan="2"><textarea row="5" col = '30' class="event-description" name="description" style="width: 100%;" placeholder="新しい予定の詳細"></textarea>
                         @if ($errors->has('description'))
                         <p class="error-message">{{ $errors->first('description') }}</p>
-                      @endif</td>                
+                      @endif
+                      </td>                
                   </tr>
                 </table>
             

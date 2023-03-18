@@ -6,49 +6,42 @@
 @section('content')
 
 <div id="contents">
-    <div class="container">
-      <p>{{ $result }}</p>
-      <p>という文字列で検索されました</p>
-      <p>{{ $characters->total() }}</p>
-      @foreach($characters as $key => $value)
-        <div class="card text-center mb-1">
-            <div class="card-body">
-                <h4 class="card-title mb-0"><a href="/show?name={{ $value->name }}">{{$value->name}}</a></h4>             
-            </div>
-            <div class="card-footer text-muted text-end">
-            <a href="/show?title={{ $value->title }}">{{ $value->title }}</a> 
-            </div>
+    <div class="wrapper">
+
+        <div class="contents-left">
+            {{-- キャラクターインデックス --}}
+            @component('components.characterIndex',[
+                'characters' => $characters])
+            @endcomponent
         </div>
-      @endforeach
+        <div class="contents-right">
+
+             {{-- 検索欄 --}}
+             @component('components.searchForm',[
+                'month' => $month,
+                'day' => $day,
+             ])
+             @endcomponent
+
+             <div class="character-info">
+                <h4>           
+                    
+                    「{{ $result }}」で検索した結果
+                </h4>
+                <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
+            </div>
+
+            {{-- キャラクターカード --}}
+            @component('components.card',[
+                'characters' => $characters,
+                'now' => $now,
+                'month' => $month,
+                'day' => $day,
+                ])
+            @endcomponent
     
-      {{-- ページネート --}}
-        @if($characters->lastPage() > 1)
-                    <ul class="pagination">
-                        <li class="page-item {{ ($characters->currentPage() == 1) ? 'disabled' : ''}}">
-                            <a class="page-link" href="{{ $characters->url(1) }}">最初のページ</a>
-                        </li>
-                        <li class="page-item {{ ($characters->currentPage() == 1) ? 'disabled' : ''}}">
-                            <a class="page-link" href="{{ $characters->url(1) }}">
-                            <span aria-hidden="true">≪</span>
-                            {{-- previous --}}
-                            </a>
-                        </li>
-                        @for ($i = 1; $i <= $characters->currentPage()+5; $i++)
-                            <li class="page-item {{ ($characters->currentPage() == $i) ? ' active' : ''}}">
-                            <a class="page-link" href="{{ $characters->url($i) }}">{{ $i }}</a>
-                            </li>
-                        @endfor
-                        <li class="page=item {{ ($characters->currentPage() == $characters->lastPage()) ? 'disabled':''}}">
-                            <a class="page-link" href="{{ $characters->url($characters->currentPage()+1) }}">
-                            <span aria-hidden="true">≫</span>
-                            {{-- next --}}
-                            </a>
-                        </li>
-                        <li class="page-item {{ ($characters->currentPage() == $characters->lastPage()) ? 'disabled':''}}">
-                            <a class="page-link" href="{{ $characters->url($characters->lastPage())}}">最後のページ</a>
-                        </li>
-                    </ul>
-         @endif
+           
+        </div>
     </div>
 
 </div>

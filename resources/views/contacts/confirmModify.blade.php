@@ -9,7 +9,7 @@
 
 <div id="contents">
   <div class="box_con03">
-    <div class="infomation mb-3" style="border: 2px solid red">
+    <div class="information mb-3" style="border: 2px solid red">
       <p>こちらは情報修正依頼用フォームです。</p>
       <p>間違ったデータなど、何らかの問題がありましたらご報告いただけますと幸いです。</p>
       <p>修正後、トップページにてお知らせいたします。</p>

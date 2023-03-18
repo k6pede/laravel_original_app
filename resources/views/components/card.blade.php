@@ -1,14 +1,4 @@
 
-
-
-
-<div class="character-info">
-    <h4>           
-        {{ $month }}月{{ $day }}日が誕生日のキャラクター
-    </h4>
-    <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
-</div>
-
  {{-- ページネーション --}}
  @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day])
  @endcomponent
@@ -25,41 +15,55 @@
                          
                          {{-- ログイン済みユーザ用　スケジュール追加 --}}
                          @if(Auth::check())
-                            <div class="dropdown addevent">
+                            @if(isset($authgroup))                                
+                                <div class="dropdown addevent">
 
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item addEventBtn" href="#" data-chara-month={{$value->month}} 
-                                    data-chara-day={{$value->day}} 
-                                    data-chara-name={{ $value->name }}
-                                    data-chara-title={{ $value->title }}
-                                    data-user-id={{ $auths->id }}
-                                    data-character-id={{ $value->id }}                      
-                                >AddEvent</a>
-                                </li>
-                                 <li>
-                                    <form action="/show/character" method="GET">
-                                        @csrf
-                                        <input type="hidden" name="character_id" value={{ $value->id }}>
-                                        <button class="dropdown-item editCharaBtn" type="submit">
-                                            Edit
-                                        </a>
-                                    </form>
-                                </li>
-                                 <li class="pb-0">
-                                    <form action="/update/character" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="character_id" value={{ $value->id }}>
-                                        <button class="dropdown-item deleteCharaBtn" type="submit">
-                                            Delete
-                                        </a>
-                                    </form>
-                                </li>
-                              
-                            </ul>
-                          </div>
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-regular fa-calendar-plus"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item addEventBtn" href="#" data-chara-month={{$value->month}} 
+                                            data-chara-day={{$value->day}} 
+                                            data-chara-name={{ $value->name }}
+                                            data-chara-title={{ $value->title }}
+                                            data-user-id={{ $auths->id }}
+                                            data-character-id={{ $value->id }}                      
+                                        >AddEvent</a>
+                                        </li>
+                                        <li>
+                                            <form action="/show/character" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="character_id" value={{ $value->id }}>
+                                                <button class="dropdown-item editCharaBtn" type="submit">
+                                                    Edit
+                                                </a>
+                                            </form>
+                                        </li>
+                                        <li class="pb-0">
+                                            <form action="/update/character" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="character_id" value={{ $value->id }}>
+                                                <button class="dropdown-item deleteCharaBtn" type="submit">
+                                                    Delete
+                                                </a>
+                                            </form>
+                                        </li>
+                                    
+                                    </ul>
+                                </div>
+                            @else
+                                <div class="addevent">
+                                    <a class="addEventBtn" href="#" data-chara-month={{$value->month}} 
+                                        data-chara-day={{$value->day}} 
+                                        data-chara-name={{ $value->name }}
+                                        data-chara-title={{ $value->title }}
+                                        data-user-id={{ $auths->id }}
+                                        data-character-id={{ $value->id }}                      
+                                        ><i class="fa-regular fa-calendar-plus"></i>
+                                    </a>
+                                </div>
+                            @endif
+                            
                          @endif
                          {{-- @auth
                             <div class="dropdown addevent">
@@ -106,9 +110,9 @@
          @endforeach
      @else
      <div class="card">
-         <div class="card-body">
-         該当するキャラクターがいません...
-         </div>
+        <li class="list-group-item">
+            <p style="margin-bottom: 0;">該当するキャラクターがいません</p>
+          </li>
      </div>
      @endif
  </div>

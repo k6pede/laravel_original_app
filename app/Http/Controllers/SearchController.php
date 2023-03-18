@@ -28,14 +28,8 @@ class SearchController extends Controller
             $searchWord = $_REQUEST['v'];
         }
 
-    
-
         $result = $searchWord;
-      
-
-        
-        // $characters = Character::SELECT * From Characters WHERE name LIKE "%$result%" -> paginate(30);
-        
+     
         return view('search')->with([
             "result"=> $result,
             "characters"=> $characters,

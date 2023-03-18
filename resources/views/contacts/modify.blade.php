@@ -9,12 +9,13 @@
 
 
 <div class="box_con03">
-  <div class="infomation mb-3" style="border: 2px solid red">
-    <p>こちらは情報修正依頼用フォームです。</p>
-    <p>間違ったデータなど、何らかの問題がありましたらご報告いただけますと幸いです。</p>
-    <p>修正後、トップページにてお知らせいたします。</p>
-    <p>キャラクター新規登録のご依頼は<a href="/contact" style="color:red">こちら</a>から。</p>
-
+  <div class="information mb-3" style="border: 2px solid rgb(237, 109, 31">
+    <div class="information-txt">
+      <p>こちらは情報修正依頼用フォームです。</p>
+      <p>間違ったデータなど、何らかの問題がありましたらご報告いただけますと幸いです。</p>
+      <p>修正後、トップページにてお知らせいたします。</p>
+      <p>キャラクター新規登録のご依頼は<a href="/contact" style="color:red">こちら</a>から。</p>
+    </div>
   </div>
 
   <form method="POST" action="{{ route('confirmModify') }}" id="myForm">
@@ -76,7 +77,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="d-flex align-content-center">
       <p class="btn mx-auto">
           <span><input type="submit" value="入力内容の確認" form="myForm"></span>
       </p>

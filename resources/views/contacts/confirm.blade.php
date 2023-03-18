@@ -9,7 +9,7 @@
 
 <div id="contents">
   <div class="box_con03">
-    <div class="infomation" style="border: 2px solid red">
+    <div class="information" style="border: 2px solid red">
       <p>こちらは新規登録専用フォームです。</p>
       <p>漫画、アニメ、ノベルス、ゲームなどに登場するキャラクターを対象としています。</p>
       <p>既存キャラクターの登録情報修正のご依頼は<a href="" style="color:red">こちら</a>から。</p>

@@ -1,35 +1,61 @@
-// $(function(){
-  
-//   $.typeahead({
-//     input: "#title",
-//     hint: true,
-//     highlight: true,
-//     minLength: 2,
-//     source: {
-//       groupName: {
+$(function(){
 
-//         ajax: function(query) {
-//           return {
-//             type: "GET",
-//             url: "/autocomplete",
-//             data: {
-//               query: "{{query}}"
-//             },
-//             callback: {
-//               done: function(data) {
-//                 return data;
-//               }
-//             }
-//           }
-//         }
-//       }
-//     },
-//     display: 'title',
-//     template: {
+
+  //選択したタブによって検索先を変更
+  $('#tab_t').on({
+    'click': function() {
+      if(!$(this).hasClass('selected')){
+        $(this).removeClass('not-selected');
+        $(this).addClass('selected');
+      }
+      if($('#tab_c').hasClass('selected')){
+        $('#tab_c').removeClass('selected');
+        $('#tab_c').addClass('not-selected');
+      }
+      if($('#tab_v').hasClass('selected')){
+        $('#tab_v').removeClass('selected');
+        $('#tab_v').addClass('not-selected');
+      }
       
-//       suggestion: function(data) {
-//         return '<div>' + data.title + '</div>';
-//       }
-//     }
-//   });
-// })
+      $('.input-text-box').attr('name','t');
+      console.log('clicked t');
+    }
+  })
+  $('#tab_c').on({
+    'click': function() {
+      if(!$(this).hasClass('selected')){
+        $(this).removeClass('not-selected');
+        $(this).addClass('selected');
+      }
+      if($('#tab_t').hasClass('selected')){
+        $('#tab_t').removeClass('selected');
+        $('#tab_t').addClass('not-selected');
+      }
+      if($('#tab_v').hasClass('selected')){
+        $('#tab_v').removeClass('selected');
+        $('#tab_v').addClass('not-selected');
+      }
+      $('.input-text-box').attr('name','c');
+      console.log('clicked c');
+      
+    }
+  })
+  $('#tab_v').on({
+    'click': function() {
+      if(!$(this).hasClass('selected')){
+        $(this).removeClass('not-selected');
+        $(this).addClass('selected');
+      }
+      if($('#tab_t').hasClass('selected')){
+        $('#tab_t').removeClass('selected');
+        $('#tab_t').addClass('not-selected');
+      }
+      if($('#tab_c').hasClass('selected')){
+        $('#tab_c').removeClass('selected');
+        $('#tab_c').addClass('not-selected');
+      }
+      $('.input-text-box').attr('name','v');
+      console.log('clicked v');
+    }
+  })
+})

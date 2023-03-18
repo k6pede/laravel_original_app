@@ -5,13 +5,13 @@
 @endsection
 @section('content')
 
-<div id="contents" class="container">
+{{-- <div id="contents" class="container">
   <div style="margin: 2rem 0">
     <a href="/" style="text-decoration: blue">HOME</a>
   </div>
 
   {{-- 作品の情報 --}}
-  <div class="card mb-3 " style="max-width: 1300px">
+  {{-- <div class="card mb-3 " style="max-width: 1300px">
     <div class="card-header">
       <h1 class="text-center">{{ $title }}</h1>
     </div>
@@ -33,47 +33,58 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   
-  {{-- 作品に所属するキャラクターの情報 --}}
-  <div class="container">
-    <div>
-      <p class="text-center">この作品に登場する主なキャラクター</p>
-    </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4" id="character-card">
-      @if(!empty($characters) && $characters->count())
-          @foreach($characters as $key => $value)
-            
-          <div class="col">
-            <div class="card h-100">
-              <div class="card-header">
-                <p class="text-center mb-0">{{ $title }}</p>
-              </div>
-              <div class="card-body">
-                <p class="text-center ruby">{{ $value->ruby }}</p>
-                <h5 class="card-title text-center">{{ $value->name }}</h5>
-                <td class="card-text birthday">誕生日</td>
-                <td class="card-text">{{ $value->month }}月{{ $value->day}}日</td><br>
-              
-                <td class="card-text gender">性別</td>
-                <td class="card-text">{{ $value->gender }}</td><br>
-                <td class="card-text gender">血液型</td>
-                <td class="card-text">{{ $value->blood }}</td><br>
-                
-                
-              </div>
-              
+
+
+{{-- </div> --}} 
+
+<div id="contents">
+  <div class="wrapper">
+
+      <div class="contents-left">
+          {{-- キャラクターインデックス --}}
+          @component('components.characterIndex',[
+              'characters' => $characters])
+          @endcomponent
+      </div>
+      <div class="contents-right">
+
+           {{-- 検索欄 --}}
+           @component('components.searchForm',[
+              'month' => $month,
+              'day' => $day,
+           ])
+           @endcomponent
+
+           <div class="character-info">
+            <div clsss="d-flex">
+
+              <h4>           
+                  
+                  「{{ $result }}」で検索した結果
+              </h4>
+              <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
             </div>
           </div>
-        @endforeach
-        @else
-        <li colspan="10">該当するキャラクターがいません。</td>
-      @endif
-    </div>
+
+          {{-- キャラクターの情報 --}}
+          @component('components.information',[
+              'characters' => $characters,
+              'now' => $now,
+              'month' => $month,
+              'day' => $day,
+              'title' => $title,
+              ])
+          @endcomponent
+  
+         
+      </div>
   </div>
 
 </div>
+
 
 
 

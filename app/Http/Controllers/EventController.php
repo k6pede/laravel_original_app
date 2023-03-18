@@ -15,7 +15,6 @@ class EventController extends Controller
 {
 
 
-
     //ユーザオリジナルのイベント作成
     public function createEvent(Request $request){
 

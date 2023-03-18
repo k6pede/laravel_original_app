@@ -7,15 +7,15 @@
               @foreach($characters as $key => $value)
                   
                   <li class="list-group-item index-item">
-                      <td class="index-num" style="color:red">{{ $key +1}}</td>
-                      <a href="/show?name={{$value->title}}">{{ $value->name }}</a>                         
+                      <td class="index-num">{{ $key +1}}</td>
+                      <a>{{ $value->name }}</a>                       
+                      
                   </li>
               @endforeach
           @else
-              <tr>
-                  <td colspan="10">該当するキャラクターがいません...</td>
-                  
-              </tr>
+              <li class="list-group-item">
+                <p style="margin-bottom: 0;">該当するキャラクターがいません</p>
+              </li>
           @endif
   </ul>
 </div>
