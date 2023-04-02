@@ -84,6 +84,7 @@ class Scr extends Command
 
                     echo "\n";
                     print_r($data["name"][$i]);
+                    echo "\n";
                     print_r($data["title"][$i]);
                     echo "\n";
                     echo "-----------------------";
