@@ -35,6 +35,7 @@ class getDetailInfo extends Command
         
 
         //urlを叩いてスクレイピング
+        //charactersの内容を参照し、詳細情報の追加
         $title = DB::table('characters')->select('title')->distinct()->get();
         $count = intval(count($title));
         // $count = 1;
@@ -45,7 +46,7 @@ class getDetailInfo extends Command
         for ($j=0; $j < $count; $j++) { 
             
             $title_str = $title[$j]->title;
-            // $title_str = 'トリノライン';
+         
             for ($page=1; $page< 6; $page++){
                 $url = "https://days366.com/search.cgi?page={$page}&mode=search&sort=time_old&word={$title_str}&engine=pre&search_kt=&search_day=&use_str=&method=and";
                 $goutte = GoutteFacade::request('GET', $url);
