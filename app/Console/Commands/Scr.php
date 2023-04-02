@@ -77,11 +77,11 @@ class Scr extends Command
 
 
                     //テーブルに書き込み
-                    for ($i=0; $i < count($data["name"]); $i++) { 
-
                     print_r($m."月".$d."日");
                     echo "\n";
                     echo "-----------------------";
+                    for ($i=0; $i < count($data["name"]); $i++) { 
+
                     echo "\n";
                     print_r($data["name"][$i]);
                     print_r($data["title"][$i]);
