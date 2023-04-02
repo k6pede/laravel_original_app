@@ -58,26 +58,38 @@ class Scr extends Command
                         $text = $node->filter('a')->text();
                         return $text;
                     });
-                    print_r($m."月".$d."日");
-                    echo "\n";
-                    print_r($url);
-                    echo "\n";
-                    print_r($data["name"]);
-                    echo "\n";
+                    // print_r($m."月".$d."日");
+                    // echo "\n";
+                    // print_r($url);
+                    // echo "\n";
+                    // print_r($data["name"]);
+                    // echo "\n";
                     
-                    for($j=0;$j<count($data["name"]);$j++){
+                    // for($j=0;$j<count($data["name"]);$j++){
 
-                        print_r($data["title"][$j]);
-                        echo "\n";
-                    }
-                    echo "\n";
-                    echo "-----------------------";
-                    echo "\n";
+                    //     print_r($data["title"][$j]);
+                    //     echo "\n";
+                    // }
+                    // echo "\n";
+                    // echo "-----------------------";
+                    // echo "\n";
 
 
 
                     //テーブルに書き込み
                     for ($i=0; $i < count($data["name"]); $i++) { 
+
+                    print_r($m."月".$d."日");
+                    echo "\n";
+                    echo "-----------------------";
+                    echo "\n";
+                    print_r($data["name"][$i]);
+                    print_r($data["title"][$i]);
+                    echo "\n";
+                    echo "-----------------------";
+                    echo "\n";
+
+
                     Character::updateOrCreate(['name' => $data["name"][$i], 'title'=> $data["title"][$i]],[
                         'name' => $data["name"][$i],
                         'title' => $data["title"][$i],
