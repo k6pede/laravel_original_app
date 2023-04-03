@@ -6,17 +6,22 @@
         <ul class="pagination">
             {{-- 最初へ --}}
             <li class="page-item {{ ($characters->currentPage() == 1) ? 'disabled' : ''}}">
-                @if (!empty($month) && !empty($day))
-                <a class="page-link" href="{{ $characters->url(1) }}&month={{$month}}&day={{$day}}">≪</a>
-                
+                @if (!empty($month) && !empty($day) && empty($result))
+                    <a class="page-link" href="{{ $characters->url(1) }}&month={{$month}}&day={{$day}}">≪</a>
+                @elseif (!empty($result))
+                    <a class="page-link" href="{{ $characters->url(1) }}&search={{ $result }}&month={{$month}}&day={{$day}}">≪</a>
                 @else
                 <a class="page-link" href="{{ $characters->url(1) }}">≪</a>                            
                 @endif
             </li>
             {{-- 一つ前へ --}}
             <li class="page-item {{ ($characters->currentPage() == 1) ? 'disabled' : ''}}">
-                @if (!empty($month) && !empty($day))
+                @if (!empty($month) && !empty($day) && empty($result))
                     <a class="page-link" href="{{ $characters->url(1) }}&month={{$month}}&day={{$day}}">
+                        <span aria-hidden="true">＜</span>                        
+                    </a>
+                @elseif (!empty($result))
+                    <a class="page-link" href="{{ $characters->url(1) }}&search={{ $result }}">
                         <span aria-hidden="true">＜</span>                        
                     </a>
                 @else
@@ -25,8 +30,6 @@
                     </a>
                 @endif
             </li>
-
-
 
             {{-- 中間 --}}
             {{-- @for ($i = 1; $i <= $characters->lastPage(); $i++)
@@ -41,8 +44,10 @@
             @for ($i = 1; $i <= $characters->lastPage(); $i++)
                 @if($i==1 || $i ==$characters->lastPage() || ($i >= $characters->currentPage() -2 && $i <= $characters->currentPage() + 2))
                     <li class="page-item {{ ($characters->currentPage() == $i) ? ' active' : ''}}">
-                    @if (!empty($month) && !empty($day))
+                    @if (!empty($month) && !empty($day) && empty($result))
                     <a class="page-link" href="{{ $characters->url($i) }}&month={{$month}}&day={{$day}}">{{ $i }}</a>
+                    @elseif(!empty($result))
+                    <a class="page-link" href="{{ $characters->url($i) }}&search={{ $result }}">{{ $i }}</a>
                     @else
                     <a class="page-link" href="{{ $characters->url($i) }}">{{ $i }}</a>
                     @endif
@@ -58,9 +63,13 @@
 
             {{-- 次へ --}}
             <li class="page=item {{ ($characters->currentPage() == $characters->lastPage()) ? 'disabled':''}}">
-                @if (!empty($month) && !empty($day))
+                @if (!empty($month) && !empty($day) && empty($result))
                 <a class="page-link" href="{{ $characters->url($characters->currentPage()+1) }}&month={{$month}}&day={{$day}}">
                 <span aria-hidden="true">＞</span>
+                </a>
+                @elseif(!empty($result))
+                <a class="page-link" href="{{ $characters->url($characters->currentPage()+1) }}&search={{ $result }}&month={{$month}}&day={{$day}}">
+                    <span aria-hidden="true">＞</span>
                 </a>
                 @else
                 <a class="page-link" href="{{ $characters->url($characters->currentPage()+1) }}&month={{$month}}&day={{$day}}">
@@ -70,8 +79,10 @@
             </li>
             {{-- 最後へ --}}
             <li class="page-item {{ ($characters->currentPage() == $characters->lastPage()) ? 'disabled':''}}">
-                @if (!empty($month) && !empty($day))
+                @if (!empty($month) && !empty($day) && empty($result))
                 <a class="page-link" href="{{ $characters->url($characters->lastPage())}}&month={{$month}}&day={{$day}}">≫</a>
+                @elseif (!empty($result))
+                <a class="page-link" href="{{ $characters->url($characters->lastPage())}}&search={{ $result }}">≫</a>
                 @else
                 <a class="page-link" href="{{ $characters->url($characters->lastPage())}}">≫</a>
                 @endif

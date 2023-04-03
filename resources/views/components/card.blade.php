@@ -1,7 +1,12 @@
 
  {{-- ページネーション --}}
- @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day])
- @endcomponent
+ @if(!empty($result))
+     @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day, 'result' => $result])
+     @endcomponent
+ @else
+     @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day, ])
+     @endcomponent
+ @endif
  <div class="character-card">
      @if(!empty($characters) && $characters->count())
          @foreach($characters as $key => $value)
@@ -57,7 +62,7 @@
                                         data-chara-day={{$value->day}} 
                                         data-chara-name={{ $value->name }}
                                         data-chara-title={{ $value->title }}
-                                        data-user-id={{ $auths->id }}
+                                        {{-- data-user-id={{ $auths->id }} --}}
                                         data-character-id={{ $value->id }}                      
                                         ><i class="fa-regular fa-calendar-plus"></i>
                                     </a>
@@ -117,7 +122,12 @@
      @endif
  </div>
  {{-- ページネーション --}}
- @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day])
- @endcomponent
+ @if(!empty($result))
+     @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day, 'result' => $result])
+     @endcomponent
+ @else
+     @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day, ])
+     @endcomponent
+ @endif
  
  

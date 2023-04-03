@@ -27,6 +27,10 @@ class SearchController extends Controller
         if(!empty($_REQUEST['v'])){
             $searchWord = $_REQUEST['v'];
         }
+        if(!empty($request->search)){
+            $searchWord  = $request->search;
+            $characters = Character::where('title','LIKE','%'. $searchWord .'%')->paginate(30);
+        }
 
         $result = $searchWord;
      

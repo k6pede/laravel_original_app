@@ -38,17 +38,17 @@ $(function () {
     }
 })
   // キャラクターインデックスenterイベント
-  $('.list-group-item').on({
-    'mouseenter': function() {
-      $(this).css("background-color", "skyblue");
-    },
-    'mouseleave': function() {
+  // $('.list-group-item').on({
+  //   'mouseenter': function() {
+  //     $(this).css("background-color", "skyblue");
+  //   },
+  //   'mouseleave': function() {
 
-      $(this).css("background-color", "transparent");
+  //     $(this).css("background-color", "transparent");
 
-    }
+  //   }
 
-  })
+  // })
 
 
   //トップに戻るボタン

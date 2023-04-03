@@ -37,6 +37,7 @@
                 'now' => $now,
                 'month' => $month,
                 'day' => $day,
+                'result' => $result,
                 ])
             @endcomponent
     

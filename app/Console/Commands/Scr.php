@@ -37,13 +37,15 @@ class Scr extends Command
         //日付ごとのキャラクターの名前、作品名をそれぞれ取得し、charactersテーブルに保存する
 
 
-        for($m=1;$m<=12;$m++){
+        // for($m=1;$m<=12;$m++){
 
+            $m = 5;
             $days_in_month = date('t', mktime(0,0,0,$m,1));
             $data_key = 0;
             $tmp_data = null;
 
-            for($d=1;$d<=$days_in_month;$d++) {
+            // for($d=1;$d<=$days_in_month;$d++) {
+                $d = 21;
                 $url = "https://bd.fan-web.jp/sayhappy_sp.cgi?month=$m&day=$d";
                 
                     $goutte = GoutteFacade::request('GET',$url);
@@ -82,29 +84,29 @@ class Scr extends Command
                     echo "-----------------------";
                     for ($i=0; $i < count($data["name"]); $i++) { 
 
-                    echo "\n";
-                    print_r($data["name"][$i]);
-                    echo "\n";
-                    print_r($data["title"][$i]);
-                    echo "\n";
-                    echo "-----------------------";
-                    echo "\n";
+                        print_r($data["name"][$i]);
+                        echo "\n";
+                        print_r($data["title"][$i]);
+                        echo "\n";
+                        echo "-----------------------";
+                        echo "\n";
 
 
-                    Character::updateOrCreate(['name' => $data["name"][$i], 'title'=> $data["title"][$i]],[
-                        'name' => $data["name"][$i],
-                        'title' => $data["title"][$i],
-                        'month' => $m,
-                        'day' => $d,
-        
-                    ]);
+                        // Character::updateOrCreate(['name' => $data["name"][$i], 'title'=> $data["title"][$i]],[
+                        //     'name' => $data["name"][$i],
+                        //     'title' => $data["title"][$i],
+                        //     'month' => $m,
+                        //     'day' => $d,
+            
+                        // ]);
                     }
 
+
                     sleep(1);
-            }
+            //}
            
 
-        }
+        //}
 
     
     }
