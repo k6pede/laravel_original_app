@@ -47,6 +47,25 @@ class LoginController extends Controller
     }
 
 
+    //一般ログイン用
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            // 認証に成功した場合の処理
+            return redirect()->intended('/');
+        } else {
+            // 認証に失敗した場合の処理
+            return redirect()->back()->withErrors(['email' => 'メールアドレスかパスワードが間違っています。']);
+        }
+    }
+
+
     /**
      * 管理者ログイン用
      */
