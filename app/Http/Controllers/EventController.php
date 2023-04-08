@@ -16,7 +16,7 @@ class EventController extends Controller
 
 
     //ユーザオリジナルのイベント作成
-    public function createEvent(Request $request){
+    public function createUsersEvent(Request $request){
 
         $inputs = $request->all();
         $user_id = Auth::id();
@@ -58,7 +58,7 @@ class EventController extends Controller
     }
 
     //キャラクターの誕生日から追加
-    public function addEvent(Request $request){
+    public function addEventFromCharactersInfo(Request $request){
 
         
         $now = Carbon::now();
@@ -150,8 +150,7 @@ class EventController extends Controller
 
     public function deleteEvent(Request $request){
         $event_id = $request->input('event_id');
-        $user_id = Auth::id();
-        
+        $user_id = Auth::id();      
         $event = Event::where('id',$event_id)->where('user_id',$user_id);
         $event->delete();
     }

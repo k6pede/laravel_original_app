@@ -100,7 +100,7 @@ $(function(){
           headers: {
             'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
           },
-          url: '/addEvent',
+          url: '/addEventFromCharactersInfo',
           method: 'get',
           data: {
             'month': month,
@@ -201,7 +201,7 @@ $(function(){
       headers: {
         'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
       },
-      url: '/createEvent',
+      url: '/createUsersEvent',
       type: 'post',
       data: {
         'title': title,

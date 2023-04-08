@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Yasumi\Yasumi;
 use DateTime;
 
-class TopService
+class EventService
 {
     public static function getEvents($year, $month)
     {

@@ -93,7 +93,7 @@
           <div class="box_con03">
   
 
-              <form method="POST" action="{{ route('createevent') }}">
+              <form method="POST" action="{{ route('createusersevent') }}">
                 @csrf
               
                 <table class="formTable">
