@@ -15,6 +15,7 @@ App URL: http://ec2-52-193-41-210.ap-northeast-1.compute.amazonaws.com/
 You can test the app's features using the following test account:
 
 * Username: testuser
+* Email: testuser@examle.com
 * Password: testpass
 
 ## How to Use

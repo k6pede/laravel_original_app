@@ -205,6 +205,7 @@ $(function(){
       type: 'post',
       data: {
         'title': title,
+        '_token': $('meta[name="csrf-token"]').attr('content'),
         'start_at_ymd' : start_at_ymd,
         'start_at_hm' : start_at_hm,
         'end_at_ymd' : end_at_ymd,
