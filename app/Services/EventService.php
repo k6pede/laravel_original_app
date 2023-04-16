@@ -13,8 +13,16 @@ class EventService
 {
     public static function getEvents($year, $month)
     {
-      $events = EventRepository::getSpecifiedEvents($year,$month)->get();
-      return $events;
+      
+    $user_id = Auth::id();
+    $setYear = $year;
+    $setMonth = $month;
+    $FirstDayOfMonth = Carbon::create($setYear, $setMonth, 1)->firstOfMonth();
+    $LastDayOfMonth  = Carbon::create($setYear, $setMonth, 1)->lastOfMonth();
+
+
+    $events = EventRepository::getSpecifiedEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
+    return $events;
     }
 
     

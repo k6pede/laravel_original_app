@@ -9,20 +9,13 @@ use Carbon\Carbon;
 
 class EventRepository
 {
-  public static function getSpecifiedEvents($year,$month)
+  public static function getSpecifiedEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth)
   {
     //当月の登録されたイベントコレクション
-    $user_id = Auth::id();
-    $setYear = $year;
-    $setMonth = $month;
-
-    $FirstDayOfMonth = Carbon::create($setYear, $setMonth, 1)->firstOfMonth();
-    $LastDayOfMonth  = Carbon::create($setYear, $setMonth, 1)->lastOfMonth();
-
     $events = Event::where('user_id' , $user_id)
-    ->whereBetween('start_at',[$FirstDayOfMonth, $LastDayOfMonth]);
+                    ->whereBetween('start_at',[$FirstDayOfMonth, $LastDayOfMonth])
+                    ->get();
     
-
     return $events;
   }
 }

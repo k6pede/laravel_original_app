@@ -10,25 +10,24 @@ use Illuminate\Http\Request;
 
 class CharacterRepository
 {
-  //日付関連の命名
-  //getCharactersByDate
-  //get...
-  public static function getCharactersByDate(Request $request)
-  {
-    $now = Carbon::now();
-    
-    $month = $request->month;
-    $day = $request->day;
-    if(empty($month) || empty($day)){
-      $month = $now->month;
-      $day = $now->day;
-      $characters = Character::where('month', $month)->where('day', $day)->orderBy('ruby','asc')->paginate(30);            
-    }
-    else{            
-        $characters = Character::where('month', $month)->where('day', $day)->orderBy('ruby','asc')->paginate(30);                         
-    }
 
+  public static function getCharactersByDate($month, $day)
+  {
+
+    $characters = Character::where('month', $month)
+                              ->where('day', $day)
+                              ->orderBy('ruby','asc')
+                              ->paginate(30);            
+    
     return $characters;
 
   }
+
+  public static function getCharactersFromTitle($title)
+    {
+      $characters = Character::where('title',$title)
+                              ->paginate(50);
+      return $characters;
+    }
+  
 }

@@ -13,14 +13,22 @@ class CharacterService
 {
     public static function getCharactersByDate(Request $request)
     {
-      $characters = CharacterRepository::getCharactersByDate($request);
+      $now = Carbon::now();
+      $month = $request->month;
+      $day = $request->day;
+
+      if (empty($month) || empty($day)) {
+        $month = $now->month;
+        $day = $now->day;
+      }
+      $characters = CharacterRepository::getCharactersByDate($month, $day);
       return $characters;
     }
 
     public static function getCharactersFromTitle(Request $request)
     {
       $title = $request->title;
-      $characters = Character::where('title',$title)->paginate(50);
+      $characters = CharacterRepository::getCharactersFromTitle($title);
       return $characters;
     }
 

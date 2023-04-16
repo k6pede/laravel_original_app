@@ -21,22 +21,6 @@ class TopController extends Controller
     
     public function top(Request $request) {
         
-        // $now = Carbon::now();
-        // if(empty($request->year)) {
-        //     $year = $now->year;
-        // }else{
-        //     $year = $request->year;
-        // }
-        // $year = $now->year;
-        // $month = $request->month;
-        // $day = $request->day;
-        // if(empty($request->month)) {
-        //     $month = $now->month;
-        // }
-        // if(empty($request->day)){
-        //     $day = $now->day;
-        // }
-
 
         //日付を取得　指定された日付がなければ現在の日時
         list($now, $month, $year, $day) = DatesService::getDate($request);

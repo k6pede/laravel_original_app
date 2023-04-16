@@ -28,7 +28,7 @@ You can test the app's features using the following test account:
 
 * Laravel 9.43.0
 * PHP 8.2.0
-* MySQL 5.7.28
+* MySQL 8.0.28
 * HTML/CSS/JavaScript (Bootstrap 5.0)
 
 ## Features

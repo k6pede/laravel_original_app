@@ -25,6 +25,8 @@
             </a>
         </div>
     @endauth
+  
+
 
     <div class="wrapper">
         <div class="contents-left">
