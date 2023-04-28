@@ -68,7 +68,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
         <button type="button" class="btn btn-primary" id="modalDeleteBtn">削除</button>
-        <button type="button" class="btn btn-primary" id="modalEditBtn">保存</button>
+        <button type="button" class="btn btn-primary" id="tBtn">保存</button>
       </div>
     </div>
   </div>
@@ -81,7 +81,7 @@
       <div class="modal-header">
         <form action="#">
           @csrf
-          <input  size="30" type="text" class="modal-title modal-event-title event-title" id="exampleModalLabel" style="border:none; width:100%; ">
+          <input type="text" class="modal-title modal-event-title event-title" id="exampleModalLabel" style="border:none;">
         </form>
         @if ($errors->has('name'))
         <p class="error-message">{{ $errors->first('name') }}</p>

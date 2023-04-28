@@ -67,6 +67,14 @@ description
 --------------------------*/
 
 
+/* --------------------------
+modal
+--------------------------*/
+.modal-title {
+  width: 170%;
+}
+
+
 
 /* --------------------------
 header
@@ -84,8 +92,64 @@ header
   
 }
 /* --------------------------
+sidebar
+--------------------------*/
+.sidebar {
+  background-color: #333;
+  color: #fff;
+  height: 100vh;
+  width: 200px;
+  position: fixed;
+  top: 56px;
+  left: -200px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  border-bottom: 1px solid #555;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background-color: #555;
+}
+
+.sidebar .toggle-btn {
+  /* position: absolute; */
+  /* right: 0;
+  top: 10px; */
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* --------------------------
 top
 --------------------------*/
+
+
 
 .top {
   margin-bottom: 5em;

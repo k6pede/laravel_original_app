@@ -7,9 +7,38 @@
 
 @section('content')
 
+
+    <!-- サイドバーのトグルボタン -->
+	<button class="toggle-btn">
+		<i class="fas fa-bars"></i>
+	</button>
+    <!-- サイドバー -->
+    <div class="sidebar">
+        <div style="padding-top: 24px">
+            <button class="close-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul>
+                <li><a href="#">メニュー1</a></li>
+                <li><a href="#">メニュー2</a></li>
+                <li><a href="#">メニュー3</a></li>
+                <li><a href="#">メニュー4</a></li>
+                <li><a href="#">メニュー5</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {{-- アラート --}}
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <div id="contents">
     {{-- モーダル --}}
-    @component('components.modal')
+    @component('components.modals.modal')
+    @endcomponent
+    @component('components.modals.modalForCharacterEvents', ['now' => $now])
     @endcomponent
     
     {{-- トースト --}}
@@ -28,7 +57,10 @@
   
 
 
+
+
     <div class="wrapper">
+
         <div class="contents-left">
 
            

@@ -11,7 +11,6 @@ $(function(){
 
     
   //   let $this = $(this);
-  //   let info = $this.data();
   //   let user_id = $this.data('user-id');
   //   let character_id = $this.data('character-id');
   //   let month = $this.data('chara-month');
@@ -35,7 +34,7 @@ $(function(){
   //         headers: {
   //           'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
   //         },
-  //         url: '/addEvent',
+  //         url: '/addEventFromCharactersInfo',
   //         method: 'get',
   //         data: {
   //           'month': month,
@@ -72,74 +71,9 @@ $(function(){
   //   });
     
   // })
-  addE.on('click', function() {
-
-    
-    let $this = $(this);
-    let info = $this.data();
-    let user_id = $this.data('user-id');
-    let character_id = $this.data('character-id');
-    let month = $this.data('chara-month');
-    let day = $this.data('chara-day');
-    let title = $this.data('chara-title');
-    let name = $this.data('chara-name');
-    let eventName = name + '(' + title  +')';
-    
-    Swal.fire({
-      title: '確認',
-      text: 'キャラクターの誕生日をスケジュールに追加しますか？',
-      input: 'text',
-      icon: 'question',
-      showCancelButton: true,
-      showLoaderOnConfirm: true,
-      confirmButtonText: '追加',
-      cancelButtonText: 'キャンセル',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          headers: {
-            'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
-          },
-          url: '/addEventFromCharactersInfo',
-          method: 'get',
-          data: {
-            'month': month,
-            'day': day,
-            'eventName' : eventName,
-            'user_id' : user_id,
-            'character_id' : character_id,
-          },
-        })
-      
-        .done(function (data) {
-          Swal.fire({
-            icon: 'success',
-            position: 'top-end',
-            toast: true,
-            title: 'Event added successfully!',
-            text: 'Success!',
-          })
-          console.log('done');
-        })
-        .fail(function () {
-          Swal.fire({
-
-            icon: 'error',
-            position: 'top-end',
-            toast: true,
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          })
-          console.log('fail');
-        });
-        
-      }
-    });
-    
-  })
 
 
-  // 新しい予定の作成用モーダルopen
+  // イベント作成用モーダルopen
   $('.create-my-event-btn').on('click', function(){
     
     $('.modal-event-title').val('');
@@ -153,6 +87,7 @@ $(function(){
 
     
     $('.modal-event-title').attr('placeholder', '新しい予定');
+    $('.modal-event-title').attr('value', '新しい予定');
     
   })
 
@@ -193,8 +128,6 @@ $(function(){
     let end_at_ymd = $('#createModal .event-end-ymd').val();
     let end_at_hm = $('#createModal .event-end-hm').val();
     let description = $('#createModal .event-description').val();
-    console.log(start_at_ymd);
-    console.log(start_at_hm);
     
     
     $.ajax({
@@ -227,10 +160,13 @@ $(function(){
     $('#exampleModal').hide();
     $("body").removeClass("modal-open");
     $(".modal-backdrop").remove();
+    window.location.href = "/";
   })
 
 
-  $('#modalEditBtn').on('click', function(){
+  $('.modaleditbtn').on('click', function(){
+
+
     let title = $('.modal-title').val();
     let event_id = $('.event-id').val();
     let start_at_ymd = $('.event-start-ymd').val();
@@ -239,8 +175,7 @@ $(function(){
     let end_at_hm = $('.event-end-hm').val();
     let description = $('.event-description').val();
     let character_id = $('.character-id').val();
-    console.log(description);
-    
+
     
     $.ajax({
       headers: {

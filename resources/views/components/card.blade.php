@@ -18,7 +18,7 @@
                          </div>
 
                          
-                         {{-- ログイン済みユーザ用　スケジュール追加 --}}
+                         {{-- 管理ユーザ用　スケジュール追加 --}}
                          @if(Auth::check())
                             @if(isset($authgroup))                                
                                 <div class="dropdown addevent">
@@ -28,6 +28,7 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a class="dropdown-item addEventBtn" href="#" data-chara-month={{$value->month}} 
+                                            data-chara-month={{$value->month}} 
                                             data-chara-day={{$value->day}} 
                                             data-chara-name={{ $value->name }}
                                             data-chara-title={{ $value->title }}
@@ -58,12 +59,13 @@
                                 </div>
                             @else
                                 <div class="addevent">
-                                    <a class="addEventBtn" href="#" data-chara-month={{$value->month}} 
+                                    <a class="addEventBtn" data-bs-toggle="modal" data-bs-target="#addCharacterEventModal" href="#" 
+                                        data-chara-month={{$value->month}} 
                                         data-chara-day={{$value->day}} 
                                         data-chara-name={{ $value->name }}
                                         data-chara-title={{ $value->title }}
                                         {{-- data-user-id={{ $auths->id }} --}}
-                                        data-character-id={{ $value->id }}                      
+                                        data-character-id={{ $value->id }}                    
                                         ><i class="fa-regular fa-calendar-plus"></i>
                                     </a>
                                 </div>

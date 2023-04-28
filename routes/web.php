@@ -46,7 +46,7 @@ Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])-
 //Autocomplete
 // Route::get('/autocomplete', [App\Http\Controllers\AutoCompleteController::class, 'autocomplete'])->name('autocomplete');
 Route::post('/createUsersEvent', [App\Http\Controllers\EventController::class ,'createUsersEvent'])->name('createusersevent');
-Route::get('/addEventFromCharactersInfo', [App\Http\Controllers\EventController::class ,'addEventFromCharactersInfo'])->name('addevent');
+Route::post('/addEventFromCharactersInfo', [App\Http\Controllers\EventController::class ,'addEventFromCharactersInfo'])->name('addevent');
 Route::put('/editEvent', [App\Http\Controllers\EventController::class ,'editEvent'])->name('editevent');
 Route::get('/deleteEvent', [App\Http\Controllers\EventController::class ,'deleteEvent'])->name('deleteevent');
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Repositories\EventRepository;
+use App\Services\EventService;
 use Carbon\Carbon;
 use Yasumi\Yasumi;
 use DateTime;
@@ -60,40 +62,8 @@ class EventController extends Controller
     //キャラクターの誕生日から追加
     public function addEventFromCharactersInfo(Request $request){
 
-        
-        $now = Carbon::now();
-    
-        $year = $now->year;
-        $month = $request->month;
-        $day = $request->day;
-        
-        $user_id = Auth::id();
-        if(!empty($request->character_id)){
-            $character_id = $request->character_id;
-        }else{
-            $character_id = null;
-        }
-        $start_at = Carbon::create($year, $month, $day, 0, 0, 0);
-        // $end_at = Carbon::create($year, $month, $day, 23, 59, 59);
-        $end_at = null;
-        $title = $request->eventName;
-        if($character_id !== null){
-            $description = $title . 'の誕生日です。';
-        }else{
-            $description = null;
-        }
-
-        //登録処理
-        Event::create([
-            'user_id' => $user_id,
-            'character_id' => $character_id,
-            'start_at' => $start_at,
-            'end_at' => $end_at,
-            'title' => $title,
-            'description' => $description,
-
-        ]);
-        
+        EventService::addEventFromCharactersInfo($request);
+        return redirect('/')->with('success','登録しました。');
 
     }
 

@@ -128,7 +128,9 @@
         <th>&#9632;今月のスケジュール</th><br>
         @if(!empty($events))
             @foreach ($events as $key => $value)
-            <td>{{$value->title}}</td><br>
+            <a href="" class = "modal-edit-btn"
+
+            >{{$value->title}}</a><br>
             @endforeach
         @endif
     </div> 
