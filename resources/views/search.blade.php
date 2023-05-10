@@ -15,7 +15,6 @@
             @endcomponent
         </div>
         <div class="contents-right">
-
              {{-- 検索欄 --}}
              @component('components.searchForm',[
                 'month' => $month,

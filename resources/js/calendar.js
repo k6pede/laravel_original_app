@@ -36,7 +36,7 @@ $(function () {
       $(this).removeClass("hovered-day");
 
     }
-})
+  })
   // キャラクターインデックスenterイベント
   // $('.list-group-item').on({
   //   'mouseenter': function() {
@@ -49,6 +49,24 @@ $(function () {
   //   }
 
   // })
+
+  $('.nextmonth').on('click', function(){
+    $.ajax({
+      type: "GET",
+      url: "{{ route('updateContent') }}",
+      dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(data) {
+        
+      },
+      error: function (error) {
+        console.log("Error:", error);
+      }
+    })
+  })
+  
 
 
   //トップに戻るボタン

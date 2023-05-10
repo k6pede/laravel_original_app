@@ -9,7 +9,7 @@
 
 
     <!-- サイドバーのトグルボタン -->
-	<button class="toggle-btn">
+	{{-- <button class="toggle-btn">
 		<i class="fas fa-bars"></i>
 	</button>
     <!-- サイドバー -->
@@ -29,11 +29,15 @@
     </div>
 
     {{-- アラート --}}
-    @if (session('success'))
+    {{--@if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-@endif
+    @endif --}}
+<div class="main-visual">
+    <img src="{{ asset('images/mainvisual_08.png') }}" alt="Main Visual">
+    
+</div>
 <div id="contents">
     {{-- モーダル --}}
     @component('components.modals.modal')
@@ -56,7 +60,7 @@
     @endauth
   
 
-
+    
 
 
     <div class="wrapper">

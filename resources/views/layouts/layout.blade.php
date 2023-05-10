@@ -26,13 +26,16 @@
 <body>
     @component('components.header')
     @endcomponent
-    
-    <main class="py-4 pb-0">
-        @yield('content')
-    </main>
+    <div class="box bg_skew_dot">
+        
+        <main class="pb-0">
+            @yield('content')
+        </main>
 
-    @component('components.footer')
-    @endcomponent
+        @component('components.footer')
+        @endcomponent
+    </div>
+
   
 </body>
 </html>
