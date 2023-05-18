@@ -8,7 +8,7 @@ This is an application that allows you to search and manage the birthdays of you
 
 ## URL
 
-App URL: http://ec2-52-193-41-210.ap-northeast-1.compute.amazonaws.com/
+App URL: https://rememo-app.com
 
 ## Test Account
 

@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/top.css">
     <link rel="stylesheet" href="/css/form.css">

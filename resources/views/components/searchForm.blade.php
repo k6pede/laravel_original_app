@@ -2,7 +2,6 @@
   <div id="wrap-tab">
       <span id="tab_t" class="selected">作品</span>
       <span id="tab_c" class="not-selected">キャラクター</span>
-      <span id="tab_v" class="not-selected">声優</span>
       <script>
           //どのタブが選択されているかによって、inputのnameを変える
           //⇨ 検索方法を切り替える 初期値=t

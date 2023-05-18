@@ -34,10 +34,13 @@
         {{ session('success') }}
     </div>
     @endif --}}
-<div class="main-visual">
+{{-- <div class="main-visual">
     <img src="{{ asset('images/mainvisual_08.png') }}" alt="Main Visual">
-    
-</div>
+    <div class="description">
+    </div>
+</div> --}}
+
+
 <div id="contents">
     {{-- モーダル --}}
     @component('components.modals.modal')
@@ -48,18 +51,6 @@
     {{-- トースト --}}
     @component('components.toast')
     @endcomponent
-    
-
-    
-    @auth
-        <div class="create-my-event">
-            <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
-                <i class="fa-regular fa-calendar-plus"></i>
-            </a>
-        </div>
-    @endauth
-  
-
     
 
 
@@ -88,9 +79,17 @@
             
            
         </div>
+
         <div class="contents-right">
 
-              {{-- 現在表示している年月日 --}}
+            {{-- 検索欄 --}}
+            @component('components.searchForm',[
+                'month' => $month,
+                'day' => $day,
+             ])
+            @endcomponent
+
+            {{-- 現在表示している年月日 --}}
             <div class="top text-align-center">
                 <div class="top-month text-center">
                     <h2>{{ $year }}</h2>                  
@@ -107,30 +106,26 @@
                 </div>
             </div>
 
-             {{-- 検索欄 --}}
-             @component('components.searchForm',[
-                'month' => $month,
-                'day' => $day,
-             ])
-             @endcomponent
+            <div class="todays-character">
+                <div class="todays-character-head">
+                    <h4>           
+                        {{ $month }}月{{ $day }}日が誕生日のキャラクター
+                    </h4>
+                    <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
+                </div>
 
-             <div class="character-info">
-                <h4>           
-                    {{ $month }}月{{ $day }}日が誕生日のキャラクター
-                </h4>
-                <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
+                {{-- キャラクターカード --}}
+                @component('components.card',[
+                    'characters' => $characters,
+                    'now' => $now,
+                    'month' => $month,
+                    'day' => $day,
+                    'eto' => $eto,
+                    'auths' => $auths,
+                    'dateStr' => $dateStr,])
+                @endcomponent
             </div>
 
-            {{-- キャラクターカード --}}
-            @component('components.card',[
-                'characters' => $characters,
-                'now' => $now,
-                'month' => $month,
-                'day' => $day,
-                'eto' => $eto,
-                'auths' => $auths,
-                'dateStr' => $dateStr,])
-            @endcomponent
         </div>
         
     </div>

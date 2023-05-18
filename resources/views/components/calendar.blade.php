@@ -1,6 +1,33 @@
 <div id="calendar">
   <table class="table table-bordered table-striped " id="calendar_table">
-      <h2 class="text-center calendar-head">{{ $now->year }}年　{{ $month }}月</h2>
+        @auth
+        <div>
+            <div class="create-my-event">
+                <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
+                    <i class="fa-regular fa-calendar-plus"></i>
+                </a>
+            </div>
+        </div>
+        @endauth
+
+    {{-- 年送り --}}
+    <div  class="year-form d-flex justify-content-between">
+        <form action="#" method="GET" id="lastyear" name="lastyear" class="justiry-content-start">           
+            <input type="hidden" name="month" value="{{ $month }}">
+            <input type="hidden" name="day" value="{{ $day }}">
+            <button type="submit" class="lastyearbtn"><i class="fa-solid fa-angle-left"></i></button>
+        </form>
+        <div>
+
+            <h2 style="display: inline-block;" >{{ $now->year }}年　{{ $month }}月</h2>
+        </div>
+
+        <form action="#" method="GET" id="nextyear" class="ms-auto" name="nextyear">           
+            <input type="hidden" name="month" value="{{ $month }}">
+            <input type="hidden" name="day" value="{{ $day }}">
+            <button type="submit" class="nextyearbtn"><i class="fa-solid fa-angle-right"></i></button>
+        </form>
+    </div>
       {{-- 月送り --}}
       <div class="month-form">
           <form action="#" method="GET" id="lastmonth" name="lastmonth" class="justiry-content-start">           
@@ -18,7 +45,7 @@
           <form action="#" method="GET" id="nextmonth" class="ms-auto">           
               <input type="hidden" name="month" value="{{ $nextMonth->month }}">
               <input type="hidden" name="day" value="{{ $day }}">
-              <button type="submit" class="nextmonth"><i class="fa-solid fa-angle-right"></i></button>
+              <button type="submit" class="nextmonthbtn"><i class="fa-solid fa-angle-right"></i></button>
           </form>
       </div>
 
@@ -87,6 +114,14 @@
                         class ="currentMonth text-center"
                     @endif                
                 >
+                    @if(!empty($events))
+                        @foreach($events as $key => $value)
+                            {{-- イベントがある場合 --}}
+                            @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
+                                <button class="triangle-button"></button>                                
+                            @endif
+                        @endforeach
+                    @endif
 
                     <form action="" method="GET">
                       <input type="hidden" name="month" value="{{$date->month}}">
@@ -116,7 +151,7 @@
   </table>
   {{-- 祝日 --}}
   <div class="holidays">
-      <th>&#9632; {{ $now->year }}年　{{ $month }}月の祝日</th><br>
+      <h4>{{ $now->year }}年　{{ $month }}月の祝日</h4>
       @foreach($holidaysInCurrentMonth as $holiday)
 
       <td>{{ $holiday->format('j日') }}</td>
@@ -125,14 +160,16 @@
   </div>
   @auth
     <div class="events">
-        <th>&#9632;今月のスケジュール</th><br>
-        @if(!empty($events))
-            @foreach ($events as $key => $value)
-            <a href="" class = "modal-edit-btn"
-
-            >{{$value->title}}</a><br>
-            @endforeach
-        @endif
+        <h4>今月のスケジュール</h4>
+        <ul class="event-list">
+            @if(!empty($events))
+                @foreach ($events as $key => $value)
+                <li class="event-list-item">
+                    <a href="" class = "modal-edit-btn">{{$value->title}}</a>
+                </li>
+                @endforeach
+            @endif
+        </ul>
     </div> 
   @endauth
 </div>

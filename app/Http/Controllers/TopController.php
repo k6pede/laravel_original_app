@@ -32,7 +32,7 @@ class TopController extends Controller
         $characters = CharacterService::getCharactersByDate($request);
         
         //カレンダーの計算
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $currentMonth, $eto) = CalendarService::calcCalendar($year,$month);
+        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto) = CalendarService::calcCalendar($year,$month);
 
         //祝日判定
         $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);

@@ -8,19 +8,16 @@ body {
   margin: 0;
   padding: 0;
 }
+
+
+
+
+
+
+
 /* ----------------------------------------------
-背景
+メインビジュアル
 ---------------------------------------------- */
-
-
-
-/* ----------------------------------------------
----------------------------------------------- */
-
-.logo {
-  width: 100%;
-  height: 50px;
-}
 
 .main-visual {
   width: 100%;
@@ -34,6 +31,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  opacity: 0.6;
 }
 .main-visual::after {
   content: '';
@@ -45,6 +43,25 @@ body {
   background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
   pointer-events: none;
 }
+
+.description {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+  z-index: 1000;
+  /* font-family: "M PLUS Rounded 1c"; */
+  font-family: "游ゴシック体";
+  /* text-shadow: 1px 2px 10px #756648; */
+  
+}
+/* ----------------------------------------------
+---------------------------------------------- */
+
+.logo {
+  width: 100%;
+  height: 50px;
+}
+
 
 
 .disable_cell {
@@ -125,7 +142,7 @@ header
 
 
 .navbar {
-  background-color: 	rgb(233,209,150) !important;
+  background-color: 	rgba(233,209,150,0.6) !important;
 }
 /* --------------------------
 sidebar
@@ -186,9 +203,8 @@ top
 --------------------------*/
 
 
-
 .top {
-  margin-bottom: 5em;
+  margin-bottom: 2em;
 }
 .top-month {
   border: solid 2px rgb(0, 0, 0);
@@ -218,8 +234,15 @@ top
 /* --------------------------
 search-box
 --------------------------*/
+#search-box {
+  position: relative;
+  border: solid 2px rgb(237, 109, 31);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 2rem;
+}
+
 #wrap-tab {
-  
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -227,22 +250,18 @@ search-box
 
 
 #wrap-tab span {
-  width: calc(100%/3);
+  width: calc(100%/2);
   text-align: center;
   align-items: center;
-  /* padding-top: 0.3em;
-  height: 2rem; */
   display: inline;
   font-size: 1rem;
-  /* border-top: solid 2px rgb(237, 109, 31);
-  border-right: solid 2px rgb(237, 109, 31); */
-
 
 }
+
 #wrap-tab span:hover {
   cursor: pointer;
   color: white;
-  background-color: black;
+  background-color: rgb(79, 79, 79);
   letter-spacing: 0.2em;
   transition: .5s;
 }
@@ -258,11 +277,6 @@ search-box
   outline: 0;
   background-color: rgba(237, 109, 31, 0.1);
 }
-
-
-/* input {
-  height:45px;
-} */
 
 #wrap-tab {
   margin-bottom: 0;
@@ -321,10 +335,10 @@ contents
 }
 .contents-left {
   margin: 0 2rem 0 0;
-  width: 41%;
+  width: 45%;
 }
 .contents-right {
-  width: 66%;
+  width: 60%;
 }
 .top-title {
   margin:  50px auto;
@@ -338,16 +352,7 @@ h1 .border {
 }
 
 
-/* --------------------------
-search-box
---------------------------*/
-#search-box {
-  position: relative;
-  border: solid 2px rgb(237, 109, 31);
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 2rem;
-}
+
 
 
 
@@ -382,6 +387,17 @@ calendar
   color: white;
 }
 
+.year-form {
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 41px;
+  margin: 0;
+  border-bottom: solid 2px black;
+  display: flex;
+  justify-content: space-between;
+}
 .month-form {
   display: flex; 
   align-items: center;
@@ -391,18 +407,20 @@ calendar
 }
 
 .today,
-.nextmonth ,
-.lastmonthbtn {
+.nextmonthbtn ,
+.lastmonthbtn,
+.lastyearbtn,
+.nextyearbtn {
   border: none;
   background-color: transparent;
 }
 
 #calendar {
-  /* border: solid 2px rgb(237, 109, 31); */
-  border: solid 1px black;
-  /* border-radius: 10px; */
+  padding: 1em;
+  /* border: solid 1px black; */
   margin-bottom: 2rem;
   min-width: 100%;
+  box-shadow: 2px 5px 7px 1px #bca982;
 }
 
 #calendar_table button {
@@ -416,10 +434,9 @@ td form{
 }
 
 .calendar-head {
-  padding:  10px;
-  margin: 0;
-  border-bottom: solid 2px black;
+  
 }
+
 #pagination {
   width: 100%;
   margin: 0 auto;
@@ -428,10 +445,21 @@ td form{
   margin-bottom: 2em;
 }
 
-.holidays ,.events{
-  margin-left: 1em;
-  margin-bottom: 1em;
+.holidays , .events{
+  padding-bottom: 1em;
 }
+
+.holidays > h4,
+.events > h4 { 
+  background-color: rgba(242, 218, 156, 0.6);
+  padding-left: 1em;
+}
+.holidays > td,
+.events > li { 
+  padding-left: 1em;
+  color: #555;
+}
+
 .selected-day {
   background-color: rgba(0, 188, 222, 0.6);
   color: white;
@@ -440,8 +468,20 @@ td form{
 td.has-event {
   position: relative;
 }
+.triangle-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent rgba(242, 218, 156, 1) transparent transparent;
+  background: transparent;
+  cursor: pointer;
+}
 
-td.has-event::before {
+/* td.has-event::before {
   content: "";
   position: absolute;
   top: 0;
@@ -451,11 +491,11 @@ td.has-event::before {
   border-style: solid;
   border-width: 0 12px 12px 0;
   border-color: transparent #ff0000 transparent transparent;
-}
+} */
 
 
 .hovered-day {
-  background-color: skyblue !important;
+  background-color: rgb(235, 157, 135) !important;
 }
 .schedule {
   background-color: brown;
@@ -464,18 +504,46 @@ td.has-event::before {
   color: white;
 }
 
-.card-body {
-  padding: 0.5rem;
-}
 
 .clickable-div {
   cursor: pointer;
 }
 
+.event-list {
+  list-style:  none;  /* デフォルトのアイコンを消す */
+  margin:  0;         /* デフォルト指定上書き */
+  padding: 0;         /* デフォルト指定上書き */
+  align-content: center;
+}
+
+.event-list-item:before {
+  content:  "";     /* 空の要素作成 */
+  width: 10px;                /* 幅指定 */
+  height: 10px;               /* 高さ指定 */
+  display:  inline-block;     /* インラインブロックにする */
+  background-color: rgb(255, 255, 255) ;  /* 背景色指定 */
+  position:  relative;        /* 位置調整 */
+  top: 1px;                   /* 位置指定 */
+  border-radius:  50%;        /* 要素を丸くする */
+  margin-right: 5px;          /* 余白指定 */
+}
+
+.event-list-item {
+  padding-left: 10px;
+  background-color:  rgba(168, 168, 168, 0.5); /* 背景色指定 */
+  border-radius:  10px;       /* 角丸指定 */
+  margin-bottom: 5px;         /* 要素と要素の間指定 */
+  font-size: 0.75em;
+}
+
+
 
 /* --------------------------
 character-index
 --------------------------*/
+#character-index  {
+  box-shadow: 2px 5px 7px 1px #bca982;
+}
 #character-index .card-header {
   font-size: 0.75em;
 }
@@ -507,9 +575,10 @@ pagination
 }
 .active > .page-link {
   color: rgb(237, 109, 31);
-  background-color: black;
-  border-color: black;
+  background-color: black !important;
+  border-color: black !important;
 }
+
 
 .pagination {
   display: flex;
@@ -567,20 +636,22 @@ character-card
 }
 
 
-
 .card-footer {
   
-  background-color: rgba(248, 182, 53, 0.5);
+  background-color: rgba(242, 218, 156, 0.6) !important;
   padding: 0;
 }
 .card-footer a{
   color:rgba(0, 0, 0, 0.9);
   max-width: 100%;
-  font-size: 0.75em;
+  font-size: 0.5em;
   display: block;
+  padding: 0.25em;
+  padding-right:1em;
+
 }
 .card-footer a:hover {
-  background-color: skyblue;
+  background-color: rgb(235, 157, 135) !important;
 }
 .pagination {
   margin: 0 auto;
@@ -598,6 +669,20 @@ character-card
   flex-wrap: wrap;
 }
 
+.todays-character {
+  padding: 0.5em;
+  box-shadow: 2px 5px 7px 1px #bca982;
+}
+.todays-character > p{
+  margin-bottom: 0.5em !important;
+}
+.todays-character {
+  padding: 1em;
+}
+.todays-character-head > p{
+  border-bottom: 3px dotted rgba(242, 218, 156, 0.7);
+  padding-bottom: 1em;
+}
 
 /* --------------------------
 footer
@@ -696,9 +781,7 @@ responsive
     justify-content: center;
     display: flex;
   }
-  .event-description {
-    
-  }
+ 
 }
 @media screen and (max-width: 480px) {
 

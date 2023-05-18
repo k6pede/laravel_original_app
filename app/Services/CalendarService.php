@@ -24,7 +24,6 @@ class CalendarService{
 
         $addDay = ($date->copy()->endOfMonth()->isSunday()) ? 7 : 0;
         $date->subDay($date->dayOfWeek);
-        $currentMonth = $date->month;
             
         
 
@@ -40,7 +39,7 @@ class CalendarService{
         //干支判定
         $eto = JpCarbon::createFromDate($year)->eto;         
 
-        return [$dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $currentMonth, $eto];
+        return [$dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto];
     }
 
 
