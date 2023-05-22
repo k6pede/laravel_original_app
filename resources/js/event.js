@@ -163,7 +163,7 @@ $(function(){
     window.location.href = "/";
   })
 
-
+  //モーダル内　編集確定・削除
   $('.modaleditbtn').on('click', function(){
 
 
@@ -201,6 +201,7 @@ $(function(){
       console.log('done');
       $(".toast").removeClass('hide');
       $(".toast").addClass('show');
+      window.location.href = "/";
     })
     .fail(function () {
       console.log('fail');
@@ -229,6 +230,7 @@ $(function(){
   
     .done(function (data) {
       console.log('done');
+      window.location.href = "/";
     })
     .fail(function () {
       console.log('fail');
@@ -237,6 +239,7 @@ $(function(){
     $('#exampleModal').hide();
     $("body").removeClass("modal-open");
     $(".modal-backdrop").remove();
+    
     
   })
 

@@ -7,6 +7,15 @@
 
 
 <div id="contents">
+  {{-- モーダル --}}
+  @component('components.modals.modal')
+  @endcomponent
+  @component('components.modals.modalForCharacterEvents', ['now' => $now, 'year' => $year])
+  @endcomponent
+  
+  {{-- トースト --}}
+  @component('components.toast')
+  @endcomponent
   <div class="wrapper">
 
       <div class="contents-left">

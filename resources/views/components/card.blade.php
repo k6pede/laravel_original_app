@@ -119,7 +119,7 @@
      <div class="card">
         <li class="list-group-item">
             <p style="margin-bottom: 0;">該当するキャラクターがいません</p>
-          </li>
+        </li>
      </div>
      @endif
  </div>

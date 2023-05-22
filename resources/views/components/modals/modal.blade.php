@@ -6,7 +6,7 @@
       <div class="modal-header">
         <form action="#">
           @csrf
-          <input  size="30" type="text" class="modal-title modal-event-title event-title" id="exampleModalLabel" style="border:none; width:100%; ">
+          <input size="50" type="text" class="modal-title modal-event-title event-title" id="exampleModalLabel" style="border:none; width:100%; ">
         </form>
         @if ($errors->has('name'))
         <p class="error-message">{{ $errors->first('name') }}</p>

@@ -122,7 +122,11 @@
                         @foreach($events as $key => $value)
                             {{-- イベントがある場合 --}}
                             @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
-                                <button class="triangle-button"></button>                                
+                                <button class="triangle-button modal-edit-btn eventbtn"
+                                data-bs-toggle="modal" 
+                                data-event="{{ $value }}" 
+                                data-bs-target="#exampleModal">
+                                </button>                                
                             @endif
                         @endforeach
                     @endif
@@ -137,8 +141,7 @@
                     {{-- @if(!empty($events))
                         @foreach($events as $key => $value)
                             @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
-                                <div>                                   
-                       
+                                <div>                                                         
                                     <button type="button" class="eventbtn btn btn-primary" data-bs-toggle="modal" data-event="{{$value}}" data-bs-target="#exampleModal" >
                                         {{ Str::limit($value->title, 5, '...') }}
                                     </button>                                    
@@ -169,7 +172,12 @@
             @if(!empty($events))
                 @foreach ($events as $key => $value)
                 <li class="event-list-item">
-                    <a href="" class = "modal-edit-btn">{{$value->title}}</a>
+                    <a href="#" class = "modal-edit-btn eventbtn"
+                        data-bs-toggle="modal" 
+                        data-event="{{ $value }}" 
+                        data-bs-target="#exampleModal"
+                        >{{$value->title}}
+                    </a>
                 </li>
                 @endforeach
             @endif

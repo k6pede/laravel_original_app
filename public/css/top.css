@@ -139,7 +139,6 @@ header
 .header {
   margin-bottom: 2em;
 }
-
 .register-btn {
   margin-left: 70%;
 }
@@ -482,9 +481,12 @@ td.has-event {
   height: 0;
   border-style: solid;
   border-width: 0 20px 20px 0;
-  border-color: transparent rgba(242, 218, 156, 1) transparent transparent;
+  border-color: transparent rgba(237, 109, 31, 0.7) transparent transparent;
   background: transparent;
   cursor: pointer;
+}
+.triangle-button:hover {
+  border-color: transparent rgba(158, 237, 31, 0.7) transparent transparent;
 }
 
 /* td.has-event::before {
@@ -501,7 +503,7 @@ td.has-event {
 
 
 .hovered-day {
-  background-color: rgb(235, 157, 135) !important;
+  background-color: rgb(194, 198, 247) !important;
 }
 .schedule {
   background-color: brown;
@@ -611,7 +613,7 @@ character-card
   margin-bottom: 1rem;
 }
 .card-header {
-  background-color: rgba(242, 218, 156, 0.6);
+  background-color: rgba(242, 218, 156, 0.4);
 }
 .card-title {
   padding: 0;
@@ -648,7 +650,7 @@ character-card
 .card-body-info {
   width: 90%;
   margin: auto;
-  border-bottom: 3px dotted rgba(242, 218, 156, 0.7);
+  
   margin-bottom: 1rem;
   padding-bottom: 1rem;
 }
@@ -656,10 +658,14 @@ character-card
   position: absolute;
   right: 1em;
   padding: 0.2em;
-  
+}
+.addevent-show {
+  position: absolute;
+  bottom: .4em;
+  right: 1.2em;
+
 }
 .addEventBtn {
-  display: block;
 }
 
 
@@ -881,6 +887,10 @@ responsive -320px
 --------------------------*/
 @media screen and (max-width: 320px) {
 
+  .header {
+    margin-bottom: 0;
+  }
+
   .contents-left {
     width: 100%;
   }
@@ -939,6 +949,14 @@ responsive -320px
 
   .card-info {
     width: 100%;
+  }
+
+  /*--------------
+  calendar -320px
+  --------------*/
+  .triangle-button {
+    border-width: 0 10px 10px 0;
+    pointer-events: none;
   }
 
 

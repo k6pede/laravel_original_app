@@ -1,4 +1,6 @@
 
+
+
  {{-- ページネーション --}}
  {{-- @component('components.pagination',['characters' => $characters,'month' => $month,'day' => $day])
  @endcomponent --}}
@@ -12,6 +14,18 @@
                 <div class="card">
                     <div class="card-header">
                     <p class="text-center mb-0">{{ $title }}</p>
+                            @auth
+                                <div class="addevent-show">
+                                    <a class="addEventBtn" data-bs-toggle="modal" data-bs-target="#addCharacterEventModal" href="#" 
+                                        data-chara-month={{$value->month}} 
+                                        data-chara-day={{$value->day}} 
+                                        data-chara-name={{ $value->name }}
+                                        data-chara-title={{ $value->title }}
+                                        data-character-id={{ $value->id }}                    
+                                        ><i class="fa-regular fa-calendar-plus"></i>
+                                    </a>
+                                </div>
+                            @endauth
                     </div>
                     <div class="card-body">
                         <div class="card-body-name">
@@ -28,16 +42,19 @@
                             <td class="card-text gender">血液型</td>
                             <td class="card-text">{{ $value->blood }}</td><br>
                         </div>
-                        <div>
+                            
                             @auth
-                                <div class="create-my-event">
-                                    <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
-                                        <i class="fa-regular fa-calendar-plus"></i>
-                                    </a>
-                                </div>
+                            <div class="addevent-show">
+                                <a class="addEventBtn" data-bs-toggle="modal" data-bs-target="#addCharacterEventModal" href="#" 
+                                    data-chara-month={{$value->month}} 
+                                    data-chara-day={{$value->day}} 
+                                    data-chara-name={{ $value->name }}
+                                    data-chara-title={{ $value->title }}
+                                    data-character-id={{ $value->id }}                    
+                                    ><i class="fa-regular fa-calendar-plus"></i>
+                                </a>
+                            </div>
                             @endauth
-
-                        </div>
 
                     </div>               
                 </div>
