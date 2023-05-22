@@ -3,15 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Character;
-use App\Models\Event;
-use App\Models\Admin;
-use Carbon\Carbon;
-use Yasumi\Yasumi;
-use DateTime;
-use JpCarbon\JpCarbon;
 use Illuminate\Support\Facades\Auth;
-use App\Services\TopService;
+use App\Services\EventService;
 use App\Services\CalendarService;
 use App\Services\CharacterService;
 use App\Services\DatesService;
@@ -26,14 +19,35 @@ class ShowController extends Controller
         
         $title = $request->title;
         $characters = CharacterService::getCharactersFromTitle($request);
+
+        $auths = Auth::user();
+
+        //カレンダーの計算
+        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
+        //祝日判定
+        $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
+        //当月の登録されたイベントコレクション
+        $events = EventService::getEvents($year, $month);
         
         
         return view('show')->with([
-            "characters" => $characters,
             "title" => $title,
+            "characters" => $characters,
             "now" => $now,
+            "year" => $year,
             "month" => $month,
             "day" => $day,
+            "nextMonth" => $nextMonth,
+            "lastMonth" => $lastMonth,
+            "nextYear" => $nextYear,
+            "lastYear" => $lastYear,
+            "date" => $date,
+            "dates" => $dates,
+            "dateStr" => $dateStr,
+            "holidaysInCurrentMonth" => $holidaysInCurrentMonth,
+            "eto" => $eto,
+            "auths" =>$auths,
+            "events" => $events,
  
         ]);
     }

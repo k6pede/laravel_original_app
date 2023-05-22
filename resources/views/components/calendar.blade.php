@@ -11,18 +11,20 @@
         @endauth
 
     {{-- 年送り --}}
-    <div  class="year-form d-flex justify-content-between">
+    <div  class="year-form d-flex">
         <form action="#" method="GET" id="lastyear" name="lastyear" class="justiry-content-start">           
+            <input type="hidden" name="year" value="{{ $year-1 }}">
             <input type="hidden" name="month" value="{{ $month }}">
             <input type="hidden" name="day" value="{{ $day }}">
             <button type="submit" class="lastyearbtn"><i class="fa-solid fa-angle-left"></i></button>
         </form>
-        <div>
+        <div class="ms-auto">
 
-            <h2 style="display: inline-block;" >{{ $now->year }}年　{{ $month }}月</h2>
+            <h2 style="display: inline-block;" >{{ $year }}年　{{ $month }}月</h2>
         </div>
 
-        <form action="#" method="GET" id="nextyear" class="ms-auto" name="nextyear">           
+        <form action="#" method="GET" id="nextyear" name="nextyear" class="ms-auto">           
+            <input type="hidden" name="year" value="{{ $year+1 }}">
             <input type="hidden" name="month" value="{{ $month }}">
             <input type="hidden" name="day" value="{{ $day }}">
             <button type="submit" class="nextyearbtn"><i class="fa-solid fa-angle-right"></i></button>
@@ -30,7 +32,8 @@
     </div>
       {{-- 月送り --}}
       <div class="month-form">
-          <form action="#" method="GET" id="lastmonth" name="lastmonth" class="justiry-content-start">           
+          <form action="#" method="GET" id="lastmonth" name="lastmonth" class="justiry-content-start"> 
+              <input type="hidden" name="year" value="{{ $year}}">          
               <input type="hidden" name="month" value="{{ $lastMonth->month }}" class="lastmonth">
               <input type="hidden" name="day" value="{{ $day }}" class="lastday">
               <button type="submit" class="lastmonthbtn"><i class="fa-solid fa-angle-left"></i></button>
@@ -42,7 +45,8 @@
                   <button type="submit" class="today">Today</button>
               </form>
           
-          <form action="#" method="GET" id="nextmonth" class="ms-auto">           
+          <form action="#" method="GET" id="nextmonth" class="ms-auto">   
+              <input type="hidden" name="year" value="{{ $year}}">                  
               <input type="hidden" name="month" value="{{ $nextMonth->month }}">
               <input type="hidden" name="day" value="{{ $day }}">
               <button type="submit" class="nextmonthbtn"><i class="fa-solid fa-angle-right"></i></button>
@@ -53,7 +57,7 @@
           <tr class="dayOfWeekCell">
               
               @foreach(['日', '月', '火', '水', '木', '金', '土'] as $dayOfWeek)
-              <th class="text-center">
+              <th class="text-center cellOfDay">
                 {{ $dayOfWeek }}<br>
                 @if($dayOfWeek === '日')
                 <p class="mb-0">Sun</p>
@@ -151,7 +155,7 @@
   </table>
   {{-- 祝日 --}}
   <div class="holidays">
-      <h4>{{ $now->year }}年　{{ $month }}月の祝日</h4>
+      <h4>{{ $year }}年　{{ $month }}月の祝日</h4>
       @foreach($holidaysInCurrentMonth as $holiday)
 
       <td>{{ $holiday->format('j日') }}</td>

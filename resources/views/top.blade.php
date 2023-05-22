@@ -45,13 +45,12 @@
     {{-- モーダル --}}
     @component('components.modals.modal')
     @endcomponent
-    @component('components.modals.modalForCharacterEvents', ['now' => $now])
+    @component('components.modals.modalForCharacterEvents', ['now' => $now, 'year' => $year])
     @endcomponent
     
     {{-- トースト --}}
     @component('components.toast')
     @endcomponent
-    
 
 
     <div class="wrapper">
@@ -61,6 +60,7 @@
            
             {{-- カレンダー --}}
             @component('components.calendar',[
+                'year'                   => $year,
                 'month'                  => $month,
                 'day'                    => $day,
                 'holidaysInCurrentMonth' => $holidaysInCurrentMonth,
@@ -68,6 +68,8 @@
                 'dates'                  => $dates, 
                 'lastMonth'              => $lastMonth, 
                 'nextMonth'              => $nextMonth,
+                'lastYear'              => $lastYear, 
+                'nextYear'              => $nextYear,
                 'events'                 => $events])
             @endcomponent
             
@@ -84,6 +86,7 @@
 
             {{-- 検索欄 --}}
             @component('components.searchForm',[
+                'year'  => $year,
                 'month' => $month,
                 'day' => $day,
              ])

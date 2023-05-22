@@ -10,14 +10,14 @@ class DatesService
     public static function getDate(Request $request)
     {
       $now = Carbon::now();
+      $year = $request->year;
+      $month = $request->month;
+      $day = $request->day;
+
         if(empty($request->year)) {
-            $year = $now->year;
-        }else{
-            $year = $request->year;
+          $year = $now->year;
         }
-        $year = $now->year;
-        $month = $request->month;
-        $day = $request->day;
+
         if(empty($request->month)) {
             $month = $now->month;
         }

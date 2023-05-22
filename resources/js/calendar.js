@@ -37,18 +37,6 @@ $(function () {
 
     }
   })
-  // キャラクターインデックスenterイベント
-  // $('.list-group-item').on({
-  //   'mouseenter': function() {
-  //     $(this).css("background-color", "skyblue");
-  //   },
-  //   'mouseleave': function() {
-
-  //     $(this).css("background-color", "transparent");
-
-  //   }
-
-  // })
 
   $('.nextmonth').on('click', function(){
     $.ajax({
@@ -59,13 +47,36 @@ $(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       success: function(data) {
-        
+        console.log('nextmonth')
       },
       error: function (error) {
         console.log("Error:", error);
       }
     })
   })
+
+  $('.nextmonthbtn').on('click', function(e) {
+    // e.preventDefault();
+    
+    var month = $('input[name="month"]').val() + 1;
+    var day = $('input[name="day"]').val();
+    
+    $.ajax({
+        url: '/calcCalendar',
+        method: 'POST',
+        data: {
+            month: month,
+            day: day
+        },
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+          
+        }
+        
+    });
+});
   
 
 

@@ -16,9 +16,12 @@ class CalendarService{
     {
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
             
-        // $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow()->format("Y-m-d");
-        $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow();
+        $lastYear = (new Carbon($dateStr))->subYearsNoOverflow();
+        $nextYear = (new Carbon($dateStr))->addYearsNoOverflow();
+        
+
         $lastMonth = (new Carbon($dateStr))->subMonthsNoOverflow();
+        $nextMonth = (new Carbon($dateStr))->addMonthsNoOverflow();
             
         $date = new Carbon($dateStr);
 
@@ -39,7 +42,7 @@ class CalendarService{
         //干支判定
         $eto = JpCarbon::createFromDate($year)->eto;         
 
-        return [$dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto];
+        return [$dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $lastYear, $nextYear, $eto];
     }
 
 

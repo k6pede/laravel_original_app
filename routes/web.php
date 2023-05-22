@@ -34,7 +34,8 @@ Route::view('/admin', 'admin')->middleware('auth:admin')->name('admin-home');
 
 Route::get('/', [App\Http\Controllers\TopController::class, 'top'])->name('top');
 
-Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'getCalendarDates'])->name('getCalendarDates');
+Route::post('/calcCalendar', [App\Http\Controllers\CalendarController::class, 'calcCalendar'])->name('calcCalendar');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -42,9 +43,6 @@ Route::get('/show', [App\Http\Controllers\ShowController::class, 'show'])->name(
 
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
-
-//Autocomplete
-// Route::get('/autocomplete', [App\Http\Controllers\AutoCompleteController::class, 'autocomplete'])->name('autocomplete');
 Route::post('/createUsersEvent', [App\Http\Controllers\EventController::class ,'createUsersEvent'])->name('createusersevent');
 Route::post('/addEventFromCharactersInfo', [App\Http\Controllers\EventController::class ,'addEventFromCharactersInfo'])->name('addevent');
 Route::put('/editEvent', [App\Http\Controllers\EventController::class ,'editEvent'])->name('editevent');

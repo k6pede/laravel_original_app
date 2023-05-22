@@ -8,7 +8,7 @@
  
          @foreach($characters as $key => $value)
 
-             <div class="col-6">
+             <div class="card-info">
                 <div class="card">
                     <div class="card-header">
                     <p class="text-center mb-0">{{ $title }}</p>
@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="card-body-name">
                             <p class="text-center ruby mb-0">{{ $value->ruby }}</p>
-                            <h5 class="card-title text-center">{{ $value->name }}</h5>
+                            <h5 class="text-center">{{ $value->name }}</h5>
 
                         </div>
                         <div class="card-body-info">

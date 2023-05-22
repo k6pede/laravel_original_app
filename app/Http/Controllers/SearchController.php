@@ -4,43 +4,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Character;
+use App\Services\CharacterService;
+use App\Services\DatesService;
+use App\Services\EventService;
+use App\Services\CalendarService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class SearchController extends Controller
 {
     public function search(Request $request) {
 
-        $now = Carbon::now();
-        $year = $now->year();
-        $month = $request->month;
-        $day = $request->day;
+        //日付を取得　指定された日付がなければ現在の日時
+        list($now, $month, $year, $day) = DatesService::getDate($request);
 
-        if(!empty($_REQUEST['c'])){
-            $searchWord = $_REQUEST['c'];
-            $characters = Character::where('name','LIKE','%'. $searchWord .'%')->paginate(30);
-        }
-        if(!empty($_REQUEST['t'])){
-            $searchWord = $_REQUEST['t'];
-            $characters = Character::where('title','LIKE','%'. $searchWord .'%')->paginate(30);
-        }
-        if(!empty($_REQUEST['v'])){
-            $searchWord = $_REQUEST['v'];
-        }
-        if(!empty($request->search)){
-            $searchWord  = $request->search;
-            $characters = Character::where('title','LIKE','%'. $searchWord .'%')->paginate(30);
-        }
-
+        list($characters, $searchWord) = CharacterService::getCharactersBySearchWord($request);
         $result = $searchWord;
+
+        $auths = Auth::user();
+
+        //カレンダーの計算
+        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
+        //祝日判定
+        $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
+        //当月の登録されたイベントコレクション
+        $events = EventService::getEvents($year, $month);
      
         return view('search')->with([
             "result"=> $result,
             "characters"=> $characters,
+            "now" => $now,
+            "year"=> $year,
             "month"=> $month,
             "day"=> $day,
-            "now"=> $now,
-            "year"=> $year
+            "nextMonth" => $nextMonth,
+            "lastMonth" => $lastMonth,
+            "nextYear" => $nextYear,
+            "lastYear" => $lastYear,
+            "date" => $date,
+            "dates" => $dates,
+            "dateStr" => $dateStr,
+            "holidaysInCurrentMonth" => $holidaysInCurrentMonth,
+            "eto" => $eto,
+            "auths" =>$auths,
+            "events" => $events,
         ]);
     }
 

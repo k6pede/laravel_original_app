@@ -32,5 +32,21 @@ class CharacterService
       return $characters;
     }
 
+    public static function getCharactersBySearchWord(Request $request)
+    {
+      if(!empty($_REQUEST['c'])){
+        $searchWord = $_REQUEST['c'];
+      }
+      if(!empty($_REQUEST['t'])){
+          $searchWord = $_REQUEST['t'];
+      }
+      if(!empty($request->search)){
+          $searchWord  = $request->search;
+      }
+
+      $characters = CharacterRepository::getCharactersBySearchWord($searchWord);
+      return [$characters, $searchWord];
+    }
+
     
 }

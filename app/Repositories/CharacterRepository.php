@@ -2,9 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Event;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use App\Models\Character;
 use Illuminate\Http\Request;
 
@@ -24,10 +21,17 @@ class CharacterRepository
   }
 
   public static function getCharactersFromTitle($title)
-    {
-      $characters = Character::where('title',$title)
-                              ->paginate(50);
-      return $characters;
-    }
+  {
+    $characters = Character::where('title',$title)
+                            ->paginate(50);
+    return $characters;
+  }
   
+  public static function getCharactersBySearchWord($searchWord)
+  {
+    $characters = Character::where('title','LIKE','%'. $searchWord .'%')
+                            ->paginate(30);
+
+    return $characters;
+  }
 }

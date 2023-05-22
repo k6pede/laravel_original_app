@@ -6,8 +6,7 @@
       @csrf
     <div class="modal-content">
       <div class="modal-header text-center">
-
-            <p class="text-center" style="color: green; font-size: 1rem; margin-bottom: 0; margin-left: 0.5em;">カレンダーにこのイベントを追加しますか？</p>
+        <p class="text-center" style="color: green; font-size: 1rem; margin-bottom: 0; margin-left: 0.5em;">カレンダーにこのイベントを追加しますか？</p>
           {{-- <input  size="30" type="text" class="modal-title modal-event-title event-title" id="exampleModalLabel" style="border:none; "> --}}
         @if ($errors->has('name'))
         <p class="error-message">{{ $errors->first('name') }}</p>
@@ -24,7 +23,7 @@
                    
                   <tr>
                       <th class="short">日時</th>
-                      <td><input type="number" class="start_at_year event-date" name = "year" min="{{ $now->year }}" style="width: 7ch;" value="{{ $now->year }}"><span class="event-date"></span></td>
+                      <td><input type="number" class="start_at_year event-date" name = "year" min="{{ $now->year }}" style="width: 7ch;" value="{{ $year }}"><span class="event-date"></span></td>
                       <input type="hidden" class="start_at_month" name = "month" >                                             
                       <input type="hidden" class="start_at_day" name = "day" >
                   </tr>

@@ -2,19 +2,19 @@ const toggleBtn = document.querySelector('.toggle-btn');
 const closeBtn = document.querySelector('.close-btn');
 const sidebar = document.querySelector('.sidebar');
 
-toggleBtn.addEventListener('click', () => {
-  if (sidebar.style.left === '-200px') {
-    sidebar.style.left = '0';
-  } else {
-    sidebar.style.left = '-200px';
-  }
-});
+// toggleBtn.addEventListener('click', () => {
+//   if (sidebar.style.left === '-200px') {
+//     sidebar.style.left = '0';
+//   } else {
+//     sidebar.style.left = '-200px';
+//   }
+// });
 
-closeBtn.addEventListener('click', () => {
-  if (sidebar.style.left = '-200px') {
-    sidebar.stayle.left = '0px';
-  }
-});
+// closeBtn.addEventListener('click', () => {
+//   if (sidebar.style.left = '-200px') {
+//     sidebar.stayle.left = '0px';
+//   }
+// });
 
 $(function () {
 
@@ -42,6 +42,13 @@ $(function () {
     $('.start_at_month').val(month);
     $('.start_at_day').val(day);
   });
+
+  // $('.create-my-event-btn').on('click', function(event) {
+  //   event.preventDefault();
+  //   let $this = $(this);
+  //   const dataAttributes = $this.data();
+    
+  // })
 
 
 

@@ -10,10 +10,12 @@
   <div class="wrapper">
 
       <div class="contents-left">
-          {{-- キャラクターインデックス --}}
-          @component('components.characterIndex',[
-              'characters' => $characters])
-          @endcomponent
+
+        {{-- キャラクターインデックス --}}
+        {{-- @component('components.characterIndex',[
+            'characters' => $characters])
+        @endcomponent --}}
+        
       </div>
       <div class="contents-right">
 
@@ -25,29 +27,28 @@
            @endcomponent
 
            <div class="character-info">
-            <div clsss="d-flex">
-
-              <h4>           
-                  
+            <div clsss="d-flex search-result-txt">
+              <h4>               
                   「{{ $title }}」で検索した結果
               </h4>
               <p>{{ $characters->total()}} 件中{{ (($characters->currentPage() -1)* 30)+1  }}〜{{ (($characters->currentPage() -1)* 30) + $characters->count() }}件を表示中</p>
             </div>
           </div>
 
-          {{-- キャラクターの情報 --}}
-          @component('components.information',[
-              'characters' => $characters,
-              'now' => $now,
-              'month' => $month,
-              'day' => $day,
-              'title' => $title,
-              ])
-          @endcomponent
-  
-         
+          
+          
+        </div>
+        
       </div>
-  </div>
+      {{-- キャラクター一覧 --}}
+      @component('components.information',[
+          'characters' => $characters,
+          'now' => $now,
+          'month' => $month,
+          'day' => $day,
+          'title' => $title,
+          ])
+      @endcomponent
 
 </div>
 
