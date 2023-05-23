@@ -53,13 +53,14 @@ i {
 }
 
 .information-txt {
-  padding: 2em;
+  padding: 1em;
   font-size: 1.25em;
 }
 .birth-month {
   width: 2em;
   border: none;
   background-color: #ddeef9;
+  margin: .2em;
 }
 .birth-month-form {
   margin-bottom: 1em;
@@ -67,7 +68,7 @@ i {
 .birth-day {
   width: 2em;
   border: none;
-  margin-bottom: 0.5em;
+  margin: 0.2em;
   background-color: #ddeef9;
 }
 .birth-day-form {

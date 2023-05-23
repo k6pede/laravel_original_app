@@ -161,7 +161,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo">
                         {{-- {{ config('app.name', 'Laravel') }} --}}
                     </a>
-                    <p class="mb-0" style="color: black; opacity: .55;">推しの日を、知る　知らせる</p>
+                    <p class="mb-0 text-center" style="color: black; opacity: .55; font-size: .6em">推しの誕生日,カレンダー REmemo</p>
 
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

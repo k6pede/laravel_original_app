@@ -18,7 +18,7 @@
       <p>こちらはキャラクターの新規登録の依頼用メールフォームです。</p>
       <p>以下のフォームに情報を入力し、送信して下さい。</p>
       <p>登録されたキャラクターについてはトップページにてお知らせいたします。</p>
-      <p>キャラクターの情報修正は<a href="/contact" style="color:red">こちら</a>から。</p>
+      <p>キャラクターの情報修正は<a href="/modify" style="color:red">こちら</a>から。</p>
     </div>
 
   </div>
@@ -33,8 +33,8 @@
       @endif
       
       <tr>
-        <th>出典作品名<span>必須</span></th>
-        <td><input size="30" type="text" class="wide"  name="title" placeholder="銀河英雄伝説" value="{{old('title')}}">
+        <th>作品名<span>必須</span></th>
+        <td><input size="30" type="text" class="wide"  name="title" placeholder="キャラクターが登場する作品名を入力してください" value="{{old('title')}}">
           @if ($errors->has('title'))
             <p class="error-message">{{ $errors->first('title') }}</p>
           @endif
@@ -42,7 +42,7 @@
       </tr>
       <tr>
         <th>キャラ名<span>必須</span></th>
-        <td><input size="20" type="text" class="wide" name="name" placeholder="山田☆ジーク・太郎"  value="{{old('name')}}"/>
+        <td><input size="20" type="text" class="wide" name="name" placeholder="キャラクターの名前を入力してください"  value="{{old('name')}}"/>
           @if ($errors->has('name'))
           <p class="error-message">{{ $errors->first('name') }}</p>
         @endif</td>
@@ -50,7 +50,7 @@
       </tr>
       <tr>
         <th>ふりがな</th>
-        <td><input size="20" type="text" class="wide" name="ruby" placeholder="やまだじーくたろう"  value="{{old('ruby')}}"/>
+        <td><input size="20" type="text" class="wide" name="ruby" placeholder="ひらがなで入力してください"  value="{{old('ruby')}}"/>
           @if ($errors->has('ruby'))
           <p class="error-message">{{ $errors->first('ruby') }}</p>
         @endif</td>
@@ -59,13 +59,13 @@
         <th>誕生日（月・日）<span>必須</span></th>
         <td>
           <div style="margin-bottom: 1em;">
-            <input type="number" class="short" name="birth" value='1'/>
+            <input type="number" class="short" name="birth" value='1' min='1' max='12'/>
             <label for="">月</label>
             
           </div>
           <div class="birth-month-form">
             @foreach($months as $month)
-              <button href="#" class="birth-month" data-value="{{$month}}">{{ $month }}</button>
+              <button href="#" class="birth-month" data-value="{{$month}}" >{{ $month }}</button>
             @endforeach
 
           </div>
@@ -84,7 +84,7 @@
       </tr>
       <tr>
         <th>年齢</th>
-        <td><input size="10" type="number" class="short" name="age" placeholder="17"/></td>
+        <td><input size="10" type="number" class="short" name="age" placeholder="年齢を入力してください" min='0'/></td>
       </tr>
       <tr>
         <th>血液型</th>
