@@ -665,7 +665,12 @@ character-card
   right: 1.2em;
 
 }
-.addEventBtn {
+
+.event-date {
+  color:rgb(220, 154, 113);
+}
+.event-title {
+  font-size: .8em;
 }
 
 

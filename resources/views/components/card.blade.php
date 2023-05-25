@@ -27,10 +27,11 @@
                                         <i class="fa-regular fa-calendar-plus"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item addEventBtn" href="#" data-chara-month={{$value->month}} 
-                                            data-chara-month={{$value->month}} 
-                                            data-chara-day={{$value->day}} 
-                                            data-chara-name={{ $value->name }}
+                                        <li><a class="dropdown-item addEventBtn" href="#"
+                                           
+                                            data-chara-month= {{ $value->month }} 
+                                            data-chara-day= {{ $value->day }} 
+                                            data-chara-name= {{ $value->name }}
                                             data-chara-title={{ $value->title }}
                                             data-user-id={{ $auths->id }}
                                             data-character-id={{ $value->id }}                      
@@ -60,6 +61,7 @@
                             @else
                                 <div class="addevent">
                                     <a class="addEventBtn" data-bs-toggle="modal" data-bs-target="#addCharacterEventModal" href="#" 
+                                        data-year = {{ $year }}
                                         data-chara-month={{$value->month}} 
                                         data-chara-day={{$value->day}} 
                                         data-chara-name={{ $value->name }}

@@ -121,6 +121,7 @@
                 @component('components.card',[
                     'characters' => $characters,
                     'now' => $now,
+                    'year' => $year,
                     'month' => $month,
                     'day' => $day,
                     'eto' => $eto,

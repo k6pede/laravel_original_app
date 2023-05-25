@@ -6,71 +6,6 @@ $(function(){
     $('.toast').show();
   })
 
-  let addE = $('.addEventBtn');
-  // addE.on('click', function() {
-
-    
-  //   let $this = $(this);
-  //   let user_id = $this.data('user-id');
-  //   let character_id = $this.data('character-id');
-  //   let month = $this.data('chara-month');
-  //   let day = $this.data('chara-day');
-  //   let title = $this.data('chara-title');
-  //   let name = $this.data('chara-name');
-  //   let eventName = name + '(' + title  +')';
-    
-  //   Swal.fire({
-  //     title: '確認',
-  //     text: 'キャラクターの誕生日をスケジュールに追加しますか？',
-  //     input: 'text',
-  //     icon: 'question',
-  //     showCancelButton: true,
-  //     showLoaderOnConfirm: true,
-  //     confirmButtonText: '追加',
-  //     cancelButtonText: 'キャンセル',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       $.ajax({
-  //         headers: {
-  //           'X-CSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
-  //         },
-  //         url: '/addEventFromCharactersInfo',
-  //         method: 'get',
-  //         data: {
-  //           'month': month,
-  //           'day': day,
-  //           'eventName' : eventName,
-  //           'user_id' : user_id,
-  //           'character_id' : character_id,
-  //         },
-  //       })
-      
-  //       .done(function (data) {
-  //         Swal.fire({
-  //           icon: 'success',
-  //           position: 'top-end',
-  //           toast: true,
-  //           title: 'Event added successfully!',
-  //           text: 'Success!',
-  //         })
-  //         console.log('done');
-  //       })
-  //       .fail(function () {
-  //         Swal.fire({
-
-  //           icon: 'error',
-  //           position: 'top-end',
-  //           toast: true,
-  //           title: 'Oops...',
-  //           text: 'Something went wrong!',
-  //         })
-  //         console.log('fail');
-  //       });
-        
-  //     }
-  //   });
-    
-  // })
 
 
   // イベント作成用モーダルopen
@@ -210,6 +145,7 @@ $(function(){
     $('#exampleModal').hide();
     $("body").removeClass("modal-open");
     $(".modal-backdrop").remove();
+    window.location.href = "/";
     
   })
 
@@ -240,7 +176,7 @@ $(function(){
     $("body").removeClass("modal-open");
     $(".modal-backdrop").remove();
     
-    
+    window.location.href = "/";
   })
 
 })

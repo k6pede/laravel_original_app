@@ -1,5 +1,5 @@
 
-{{-- CreateCharacterEvent --}}
+{{-- キャラクターの誕生日イベントを作成 --}}
 <div class="modal fade" id="addCharacterEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <form method="POST" action="{{ route('addevent') }}">
@@ -16,19 +16,16 @@
       </div>
       <div class="modal-body">
           <div class="box_con03">
-  
-
-              
+            
                 <table class="formTable">
                    
                   <tr>
-                      <th class="short">日時</th>
-                      <td><input type="number" class="start_at_year event-date" name = "year" min="{{ $now->year }}" style="width: 7ch;" value="{{ $year }}"><span class="event-date"></span></td>
-                      <input type="hidden" class="start_at_month" name = "month" >                                             
-                      <input type="hidden" class="start_at_day" name = "day" >
+                      <span class="event-date"></span>
+                      <input type="hidden" class="start_at_year event-date" name = "year">
+                      <input type="hidden" class="start_at_month" name = "month">                                             
+                      <input type="hidden" class="start_at_day" name = "day">
                   </tr>
                   <tr>
-                    <th class="short">タイトル</th>
                     <td class="event-title"></td>
                     <input type="hidden" class="event-title-form" name="event_title">
                   </tr>
