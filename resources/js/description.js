@@ -18,7 +18,7 @@ const sidebar = document.querySelector('.sidebar');
 
 
 //キャラクターの誕生日イベントの作成
-$(function () {
+$(function () {CD
 
   $('.addEventBtn').on('click', function(event) {
   

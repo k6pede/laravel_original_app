@@ -94,6 +94,7 @@ body {
   border: none;
   margin: auto;
   padding: auto;
+  color: black;
 }
 
 a {
@@ -424,8 +425,7 @@ calendar
 
 #calendar {
   border-radius: 0.25rem;
-  padding: 1em;
-  /* border: solid 1px black; */
+  padding: .5em;
   margin-bottom: 2rem;
   min-width: 100%;
   box-shadow: 2px 5px 7px 1px #ebe1cd;
@@ -882,6 +882,16 @@ responsive -480px
   .card-info {
     width: 50%;
   }
+
+  #calendar {
+    padding: .2em;
+  }
+
+  .holidays,
+  .events {
+    padding: .5em;
+  }
+
 
   #calendar_table > :not(caption) >*>* {
     padding: 0;
