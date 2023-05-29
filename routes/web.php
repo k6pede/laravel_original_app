@@ -33,11 +33,9 @@ Route::view('/admin', 'admin')->middleware('auth:admin')->name('admin-home');
 
 
 Route::get('/', [App\Http\Controllers\TopController::class, 'top'])->name('top');
-Route::view('/ft', 'components.modals.modalForEdit');
 
 
 Route::post('/calcCalendar', [App\Http\Controllers\CalendarController::class, 'calcCalendar'])->name('calcCalendar');
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -63,9 +61,9 @@ Route::post('/applyModify', [App\Http\Controllers\ContactController::class ,'sen
 Route::get('/thanks', [App\Http\Controllers\ContactController::class ,'thanks']);
 
 //開発用
-// Route::group(['middleware' => ['auth', 'admin']], function () {
-//   // 管理者用のルート
-// });
+Route::group(['middleware' => ['auth', 'admin']], function () {
+  // 管理者用のルート
+});
 Route::get('/create/character', [App\Http\Controllers\CharacterController::class ,'create'])->name('create');
 Route::post('/store/character', [App\Http\Controllers\CharacterController::class ,'store'])->name('store');
 Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 'show']);

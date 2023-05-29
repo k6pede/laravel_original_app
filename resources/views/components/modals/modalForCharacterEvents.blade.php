@@ -1,4 +1,3 @@
-
 {{-- キャラクターの誕生日イベントを作成 --}}
 <div class="modal fade" id="addCharacterEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -17,7 +16,7 @@
       <div class="modal-body">
           <div class="box_con03">
             
-                <table class="formTable">
+                <table class="formTable">                 
                    
                   <tr>
                       <span class="event-date"></span>

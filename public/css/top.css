@@ -670,7 +670,7 @@ character-card
   color:rgb(220, 154, 113);
 }
 .event-title {
-  font-size: .8em;
+  font-size: 1.1em;
 }
 
 
@@ -897,6 +897,12 @@ responsive -480px
     padding: 0;
     padding-top: .5em;
     padding-bottom: .5em;
+  }
+
+  
+  .esh,
+  .eeh {
+    display: none;
   }
 
   

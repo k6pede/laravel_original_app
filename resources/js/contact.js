@@ -17,11 +17,7 @@ $(function(){
   $('select[name="blood"]').on('change',function(){
     let val = $('select[name="blood"]').val();
     console.log(val);
-    console.log('yes');
   })
-
-  
-
 
 
 })

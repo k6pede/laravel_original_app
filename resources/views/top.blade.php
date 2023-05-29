@@ -29,11 +29,11 @@
     </div>
 
     {{-- アラート --}}
-    {{--@if (session('success'))
+    @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-    @endif --}}
+    @endif
 {{-- <div class="main-visual">
     <img src="{{ asset('images/mainvisual_08.png') }}" alt="Main Visual">
     <div class="description">
@@ -43,7 +43,9 @@
 
 <div id="contents">
     {{-- モーダル --}}
-    @component('components.modals.modal')
+    @component('components.modals.modalForCreate')
+    @endcomponent
+    @component('components.modals.modalForEdit')
     @endcomponent
     @component('components.modals.modalForCharacterEvents', ['now' => $now, 'year' => $year])
     @endcomponent
@@ -96,8 +98,8 @@
             <div class="top text-align-center">
                 <div class="top-month text-center">
                     <h2>{{ $year }}</h2>                  
-                    <h2>{{ $eto }}</h2>
                     <h2>{{ date('F',strtotime($dateStr))}}</h2>
+                    <h2>{{ $eto }}</h2>
                 </div>
                 <div class="top-day align-items-center">
                     <div class="day">

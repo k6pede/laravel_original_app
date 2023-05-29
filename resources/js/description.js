@@ -34,7 +34,8 @@ $(function () {
     let user_id = $this.data('user-id');
     let chara_id = $this.data('character-id');
 
-    let start_at = month + '/' + day ;
+    let start_at = month 
+    + '/' + day ;
     let event_title = name + '(' + title + ')の誕生日';
 
       

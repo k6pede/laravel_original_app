@@ -125,7 +125,7 @@
                                 <button class="triangle-button modal-edit-btn eventbtn"
                                 data-bs-toggle="modal" 
                                 data-event="{{ $value }}" 
-                                data-bs-target="#exampleModal">
+                                data-bs-target="#editModal">
                                 </button>                                
                             @endif
                         @endforeach
@@ -165,6 +165,7 @@
       <td>{{ $holiday->getName() }}</td><br>
       @endforeach
   </div>
+  {{-- イベント --}}
   @auth
     <div class="events">
         <h4>今月のスケジュール</h4>
@@ -175,8 +176,8 @@
                     <a href="#" class = "modal-edit-btn eventbtn"
                         data-bs-toggle="modal" 
                         data-event="{{ $value }}" 
-                        data-bs-target="#exampleModal"
-                        >{{$value->title}}
+                        data-bs-target="#editModal"
+                        ><span style="color: rgb(0, 0, 0); margin-right: .3em;">{{ $value->month}}/{{ $value->day }}</span> {{$value->title}}
                     </a>
                 </li>
                 @endforeach
