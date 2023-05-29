@@ -86,8 +86,8 @@ $(function(){
       url: '/createUsersEvent',
       type: 'post',
       data: {
-        'title': title,
         '_token': $('meta[name="csrf-token"]').attr('content'),
+        'title': title,
         'start_at_ymd' : start_at_ymd,
         'start_at_hm' : start_at_hm,
         'end_at_ymd' : end_at_ymd,
@@ -97,7 +97,7 @@ $(function(){
       
     })
   
-    .done(function (data) {
+    .done(function () {
       window.location.href = "/"; 
       alert('新しいイベントを作成しました');
     })
@@ -144,6 +144,7 @@ $(function(){
       url: '/editEvent',
       type: 'post',
       data: {
+        '_token': $('meta[name="csrf-token"]').attr('content'),
         'title': title,
         'event_id': event_id,
         'start_at_ymd' : start_at_ymd,
