@@ -10,12 +10,10 @@ use App\Mail\FormUserMail;
 
 class ContactController extends Controller
 {
-    //contactページを返す
-    public function contact(Request $request) {
+    //キャラクター作成依頼
+    public function contact() {
         return view('contacts.contact');
     }
-
-
 
     //contactで入力した内容をrequestで受け取り、confirm.bladeに渡す
     public function confirm(Request $request) {

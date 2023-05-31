@@ -51,7 +51,7 @@ Route::get('/deleteEvent', [App\Http\Controllers\EventController::class ,'delete
 
 //contactフォームから新規登録メールを送信
 Route::get('/contact', [App\Http\Controllers\ContactController::class ,'contact'])->name('contact');
-Route::post('/contact/confirm', [App\Http\Controllers\ContactController::class ,'confirm'])->name('contact.confirm');
+Route::post('/contact/confirm', [App\Http\Controllers\ContactController::class ,'confirm'])->name('confirm');
 Route::post('/apply', [App\Http\Controllers\ContactController::class ,'sendEmail'])->name('sendEmail');
 
 //modifyフォームから修正依頼メールを送信

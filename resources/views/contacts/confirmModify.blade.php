@@ -19,7 +19,7 @@
   
     
   
-    <form method="POST" action="/applyModify">
+    <form method="POST" action="/applyModify" id="confirmModifyForm">
       @csrf
       <table class="formTable">
         
@@ -41,7 +41,7 @@
           <th>修正内容</th>
           <td>
             {{$inputs['details']}}
-            <input type="hidden" value="{{$inputs['name']}}" name="details">
+            <input type="hidden" value="{{$inputs['details']}}" name="details">
           </td>
         </tr>
         <tr>
@@ -57,12 +57,9 @@
       </table>
   
      
-      
-      <div>
-        <button type="submit" name="action" value="back">入力内容修正</button>
-      </div>
-      <div>
-        <button type="submit" name="action" value="submit">送信する</button>
+      <div class="d-flex align-content-center confirm">
+          <button type="submit" name="action" value="back" class="">入力内容修正</button>
+          <button id="submitConfirmModifyBtn" type="submit" name="action" value="submit">送信する</button>
       </div>
     </form>
   </div>

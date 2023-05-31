@@ -23,7 +23,7 @@
 
   </div>
 
-  <form method="POST" action="{{ route('create') }}" id="myForm">
+  <form method="POST" action="{{ route('confirm') }}" id="myForm">
     @csrf
     <table class="formTable">
       @if($errors->any())
@@ -50,7 +50,7 @@
       </tr>
       <tr>
         <th>ふりがな</th>
-        <td><input size="20" type="text" class="wide" name="ruby" placeholder="ひらがなで入力してください"  value="{{old('ruby')}}"/>
+        <td><input size="20" type="text" class="wide" name="ruby" placeholder="名前の読み方をひらがな・記号なしで入力してください"  value="{{old('ruby')}}"/>
           @if ($errors->has('ruby'))
           <p class="error-message">{{ $errors->first('ruby') }}</p>
         @endif</td>

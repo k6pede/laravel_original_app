@@ -779,12 +779,23 @@ footer
 contact messages
 --------------------------*/
 
-.message {
+.message-thanks {
+  text-align: center;
   border: 2px solid black;
 }
 .message-links {
-  display: flex;
+  text-align: center;
   justify-content: space-around;
+  margin: auto;
+  padding: 1.5rem;
+}
+.message-links-item  {
+  margin: auto;
+  padding-bottom: .5em;
+}
+.message-links-item a {
+  margin-bottom: 0;
+  font-size: .8em;
 }
 
 .error-message {

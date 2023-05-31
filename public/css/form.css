@@ -44,14 +44,35 @@ img {
 i {
   font-style: normal;
 }
+
+.confirm {
+  justify-content: space-around;
+}
+.confirm button {
+    display: inline-block;
+    background: #eee;
+    padding: .5em 4em;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.information {
+  padding: 1em;
+}
 /*----リセットcss*----/
 
 /*デザインcss↓*/
 .box_con03 {
   max-width: 1000px;
   margin: 0  auto;
-  margin-left: .5em;
-}
+  /* margin-left: .5em; */
+} 
 
 .information-txt {
   padding: 1em;
@@ -72,9 +93,8 @@ i {
   margin: 0.2em;
   background-color: #ddeef9;
 }
-.birth-day-form {
-  
-}
+
+
 
 @media only screen and (max-width: 768px) {
   .box_con03 {
@@ -100,6 +120,25 @@ i {
   box-sizing: border-box;
 }
 @media only screen and (min-width: 769px) {
+  .box_con03 form table tr th {
+  width: 30%;
+  font-weight: normal;
+  padding: 1em .5em;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* .box_con03 form table tr th {
+  border: 1px dashed #000;
+  border-right: none;
+  border-left: none;
+  text-align: center;
+  width: 100%;
+  display: block;
+  background: rgba(0, 0, 0, 0.2);
+  padding: .8em .2em;
+} */
   .box_con03 form table tr th:before {
     content: "";
     width: 2px;

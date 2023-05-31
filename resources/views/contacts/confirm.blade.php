@@ -101,10 +101,9 @@
   
      
       
-      <div>
+      <div class="d-flex align-content-center confirm">
         <button type="submit" name="action" value="back">入力内容修正</button>
-      </div>
-      <div>
+   
         <button type="submit" name="action" value="submit">送信する</button>
       </div>
     </form>
