@@ -34,4 +34,11 @@ class CharacterRepository
 
     return $characters;
   }
+  public static function getCharactersByName($searchWord)
+  {
+    $characters = Character::where('name','LIKE','%'. $searchWord .'%')
+                            ->paginate(30);
+
+    return $characters;
+  }
 }

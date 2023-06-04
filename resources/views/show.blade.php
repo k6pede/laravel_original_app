@@ -20,10 +20,7 @@
 
       <div class="contents-left">
 
-        {{-- キャラクターインデックス --}}
-        {{-- @component('components.characterIndex',[
-            'characters' => $characters])
-        @endcomponent --}}
+  
         
       </div>
       <div class="contents-right">
@@ -49,6 +46,12 @@
         </div>
         
       </div>
+       {{-- ページネーション --}}
+      @if(!empty($title))
+        @component('components.pagination',['characters' => $characters, 'title' => $title ])
+        @endcomponent
+      @endif
+
       {{-- キャラクター一覧 --}}
       @component('components.information',[
           'characters' => $characters,
