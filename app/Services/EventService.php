@@ -26,9 +26,11 @@ class EventService
         foreach ($unprocessedEvents as $event) {
             $startAt = $event['start_at'];
             $dateTime = Carbon::parse($startAt);
+            $dateTimeWithoutSeconds = $dateTime->format('Y-m-d H:i');
             $event['year'] = $dateTime->year;
             $event['month'] = $dateTime->month;
             $event['day'] = $dateTime->day;
+            $event['start_at'] = $dateTimeWithoutSeconds;
             $events[] = $event;
         }
         return $events;
@@ -111,18 +113,18 @@ class EventService
         if(!empty($inputs['start_at_hm'])) {
             $start_hm = $inputs['start_at_hm'];           
         }else{
-            $start_hm = '00:00:00';
+            $start_hm = '00:00';
         }
-        $start_at = Carbon::createFromFormat('Y-m-d H:i:s', $start_ymd.' '.$start_hm);
+        $start_at = Carbon::createFromFormat('Y-m-d H:i', $start_ymd.' '.$start_hm);
         
         if(!empty($inputs['end_at_ymd'])){
             $end_ymd = $inputs['end_at_ymd'];
             if(!empty($inputs['end_at_hm'])){
                 $end_hm = $inputs['end_at_hm'];
             }else{
-                $end_hm = '00:00:00';
+                $end_hm = '00:00';
             }
-            $end_at = Carbon::createFromFormat('Y-m-d H:i:s', $end_ymd.' '.$end_hm);
+            $end_at = Carbon::createFromFormat('Y-m-d H:i', $end_ymd.' '.$end_hm);
         }else{
             $end_at = null;
         }

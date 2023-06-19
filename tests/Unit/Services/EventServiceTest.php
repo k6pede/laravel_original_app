@@ -100,8 +100,42 @@ class EventServiceTest extends TestCase
     }
   }
 
-  // public function testEditEvent()
-  // {
+  public function testCreateEvent()
+  {
+     // テスト用データ
+    // 有効なユーザーIDを取得するか、ユーザーを作成する
+    $user = User::factory()->create();
+    $user_id = $user->id;
+    $start_at = '2023-06-20 18:00';
+    $end_at = '2023-06-20 19:00';
+    $title = 'test';
+    $description = 'test';
 
-  // }
+    DB::beginTransaction();
+
+    try {
+      // メソッドを呼び出してデータを追加
+      EventRepository::createEvent($user_id, $start_at, $end_at, $title, $description);
+
+      // 追加されたデータを取得してアサーションを行う
+      $event = Event::where('user_id', $user_id)
+          ->where('start_at', $start_at)
+          ->where('end_at', $end_at)
+          ->where('title', $title)
+          ->where('description', $description)
+          ->first();
+
+      $this->assertNotNull($event);
+
+      // テスト後にデータを削除
+      $event->delete();
+
+      // トランザクションをコミット
+      DB::commit();
+    } catch (\Exception $e) {
+        // トランザクションをロールバック
+        DB::rollBack();
+        throw $e;
+    }
+  }
 }
