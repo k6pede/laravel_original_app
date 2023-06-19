@@ -77,6 +77,8 @@ $(function(){
     let end_at_ymd = $('#createModal .event-end-ymd').val();
     let end_at_hm = $('#createModal .event-end-hm').val();
     let description = $('#createModal .event-description').val();
+
+    console.log(start_at_hm);
     
     
     $.ajax({

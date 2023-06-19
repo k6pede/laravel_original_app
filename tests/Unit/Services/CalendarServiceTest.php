@@ -15,20 +15,26 @@ class CalendarServiceTest extends TestCase
      */
     public function testCalcCalendar()
     {
-        // Set a fixed date for testing
-        $year = 2023;
-        $month = 5;
+        // Generate random year and month values within the valid range
+        $year = random_int(2000, 2025);
+        $month = random_int(1, 12);
 
         // Call the method
         list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto) = CalendarService::calcCalendar($year, $month);
 
+        // Display the test input values
+        var_dump($year, $month);
+        
         // Assert the date string
-        $this->assertEquals('2023-05-01', $dateStr);
+        $expectedDateString = sprintf('%04d-%02d-01', $year, $month);
+        $this->assertEquals($expectedDateString, $dateStr);
+
 
         // Assert the next month and last month
-        $this->assertEquals(6, $nextMonth->month);
-        $this->assertEquals(4, $lastMonth->month);
-
+        $expectedNextMonth = ($month === 12) ? 1 : ($month + 1);
+        $expectedLastMonth = ($month === 1) ? 12 : ($month - 1);
+        $this->assertEquals($expectedNextMonth, $nextMonth->month);
+        $this->assertEquals($expectedLastMonth, $lastMonth->month);
 
         // Add more assertions as needed...
     }

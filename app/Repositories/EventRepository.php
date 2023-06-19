@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class EventRepository
 {
   //ユーザ別のイベントの取得
-  public static function getSpecifiedEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth)
+  public static function getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth)
   {
     //当月の登録されたイベントコレクション
     $events = Event::where('user_id' , $user_id)

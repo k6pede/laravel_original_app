@@ -14,7 +14,6 @@ class EventService
 {
     public static function getEvents($year, $month)
     {
-      
         $user_id = Auth::id();
         $setYear = $year;
         $setMonth = $month;
@@ -22,7 +21,7 @@ class EventService
         $LastDayOfMonth  = Carbon::create($setYear, $setMonth, 1)->lastOfMonth();
 
 
-        $unprocessedEvents = EventRepository::getSpecifiedEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
+        $unprocessedEvents = EventRepository::getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
         $events = [];
         foreach ($unprocessedEvents as $event) {
             $startAt = $event['start_at'];
@@ -74,9 +73,9 @@ class EventService
         $start_ymd = $request->start_at_ymd;
         $start_hm = $request->start_at_hm;
         if($start_hm == null){
-            $start_hm = '00:00:00';
+            $start_hm = '00:00';
         }
-        $start_at = Carbon::createFromFormat('Y-m-d H:i:s', $start_ymd.' '.$start_hm);
+        $start_at = Carbon::createFromFormat('Y-m-d H:i', $start_ymd.' '.$start_hm);
 
         //終了時間　nullable
         if(!empty($request->end_at_ymd)){
@@ -84,9 +83,9 @@ class EventService
             if(!empty($request->end_at_hm)){
                 $end_hm = $$request->end_at_hm;
             }else{
-                $end_hm = '00:00:00';
+                $end_hm = '00:00';
             }
-            $end_at = Carbon::createFromFormat('Y-m-d H:i:s', $end_ymd.' '.$end_hm);
+            $end_at = Carbon::createFromFormat('Y-m-d H:i', $end_ymd.' '.$end_hm);
         }else{
             $end_at = null;
         }
