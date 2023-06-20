@@ -36,6 +36,7 @@
         <div class="contents-right">
              {{-- 検索欄 --}}
              @component('components.searchForm',[
+                'year' => $year,
                 'month' => $month,
                 'day' => $day,
              ])
@@ -52,6 +53,7 @@
             @component('components.card',[
                 'characters' => $characters,
                 'now' => $now,
+                'year' => $year,
                 'month' => $month,
                 'day' => $day,
                 'result' => $result,
