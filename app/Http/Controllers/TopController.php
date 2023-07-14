@@ -25,8 +25,10 @@ class TopController extends Controller
         
         //カレンダーの計算
         list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
+        
         //祝日判定
         $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
+        
         //当月の登録されたイベントコレクション
         $events = EventService::getEvents($year, $month);
 
