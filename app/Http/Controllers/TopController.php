@@ -12,17 +12,19 @@ use App\Services\DatesService;
 class TopController extends Controller
 {
     private $characterService;
+    private $datesService;
 
-    public function __construct(CharacterService $characterService)
+    public function __construct(CharacterService $characterService, DatesService $datesService)
     {
         $this->characterService = $characterService;
+        $this->datesService = $datesService;
     }
     
     public function top(Request $request) {
         
 
         //日付を取得　指定された日付がなければ現在の日時
-        list($now, $month, $year, $day) = DatesService::getDate($request);
+        list($now, $month, $year, $day) = $this->datesService->getDate($request);
 
         $auths = Auth::user();
                     
