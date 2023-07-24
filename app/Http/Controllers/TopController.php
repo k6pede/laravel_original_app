@@ -12,12 +12,14 @@ use App\Services\DatesService;
 class TopController extends Controller
 {
     private $characterService;
+    private $eventService;
     private $datesService;
 
-    public function __construct(CharacterService $characterService, DatesService $datesService)
+    public function __construct(CharacterService $characterService, DatesService $datesService, EventService $eventService)
     {
         $this->characterService = $characterService;
         $this->datesService = $datesService;
+        $this->eventService = $eventService;
     }
     
     public function top(Request $request) {
@@ -38,7 +40,7 @@ class TopController extends Controller
         $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
         
         //当月の登録されたイベントコレクション
-        $events = EventService::getEvents($year, $month);
+        $events = $this->eventService->getEvents($year, $month);
 
         return view('top')->with([
             "characters" => $characters,
