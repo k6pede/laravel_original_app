@@ -5,7 +5,6 @@ namespace Tests\Unit\Services;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Event;
-use App\Services\EventService;
 use App\Repositories\EventRepository;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
@@ -18,6 +17,14 @@ use function PHPUnit\Framework\assertEquals;
 
 class EventServiceTest extends TestCase
 {
+
+  protected $eventRepository;
+
+  public function setUp(): void
+  {
+    parent::setUp();
+    $this->eventRepository = $this->app->make(EventRepository::class);
+  }
 
   public function testGetEvents()
   {
@@ -40,7 +47,7 @@ class EventServiceTest extends TestCase
 
 
 
-    $results = EventRepository::getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
+    $results = $this->eventRepository->getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
     $resultsArray = $results->map(function ($event) {
       return [
           'user_id' => $event->user_id,
@@ -75,7 +82,7 @@ class EventServiceTest extends TestCase
 
     try {
       // メソッドを呼び出してデータを追加
-      EventRepository::addCharactersEvent($user_id, $character_id, $start_at, $end_at, $title, $description);
+      $this->eventRepository->addCharactersEvent($user_id, $character_id, $start_at, $end_at, $title, $description);
 
       // 追加されたデータを取得してアサーションを行う
       $event = Event::where('user_id', $user_id)
@@ -115,7 +122,7 @@ class EventServiceTest extends TestCase
 
     try {
       // メソッドを呼び出してデータを追加
-      EventRepository::createEvent($user_id, $start_at, $end_at, $title, $description);
+      $this->eventRepository->createEvent($user_id, $start_at, $end_at, $title, $description);
 
       // 追加されたデータを取得してアサーションを行う
       $event = Event::where('user_id', $user_id)

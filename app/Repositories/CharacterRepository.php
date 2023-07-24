@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CharacterRepository
 {
 
-  public static function getCharactersByDate($month, $day)
+  public function getCharactersByDate($month, $day)
   {
 
     $characters = Character::where('month', $month)
@@ -20,21 +20,21 @@ class CharacterRepository
 
   }
 
-  public static function getCharactersFromTitle($title)
+  public function getCharactersFromTitle($title)
   {
     $characters = Character::where('title',$title)
                             ->paginate(50);
     return $characters;
   }
   
-  public static function getCharactersBySearchWord($searchWord)
+  public function getCharactersBySearchWord($searchWord)
   {
     $characters = Character::where('title','LIKE','%'. $searchWord .'%')
                             ->paginate(30);
 
     return $characters;
   }
-  public static function getCharactersByName($searchWord)
+  public function getCharactersByName($searchWord)
   {
     $characters = Character::where('name','LIKE','%'. $searchWord .'%')
                             ->paginate(30);

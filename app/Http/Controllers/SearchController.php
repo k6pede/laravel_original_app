@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
+    private $characterService;
+
+    public function __construct(CharacterService $characterService)
+    {
+        $this->characterService = $characterService;
+    }
+
     public function search(Request $request) {
 
         //日付を取得　指定された日付がなければ現在の日時
         list($now, $month, $year, $day) = DatesService::getDate($request);
 
-        list($characters, $searchWord) = CharacterService::getCharactersBySearchWord($request);
+        list($characters, $searchWord) = $this->characterService->getCharactersBySearchWord($request);
         $result = $searchWord;
 
         $auths = Auth::user();

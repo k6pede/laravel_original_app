@@ -7,8 +7,9 @@ use DateTime;use Illuminate\Http\Request;
 
 class DatesService
 {
-    public static function getDate(Request $request)
-    {
+
+  public function getDate(Request $request)
+  {
       $now = Carbon::now();
       $year = $request->year;
       $month = $request->month;
@@ -17,7 +18,6 @@ class DatesService
         if(empty($request->year)) {
           $year = $now->year;
         }
-
         if(empty($request->month)) {
             $month = $now->month;
         }
@@ -26,7 +26,7 @@ class DatesService
         }
 
       return [$now, $month, $year, $day];
-    }
+  }
 
     
 

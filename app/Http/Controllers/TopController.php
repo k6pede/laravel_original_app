@@ -11,24 +11,36 @@ use App\Services\DatesService;
 
 class TopController extends Controller
 {
+    private $characterService;
+    private $eventService;
+    private $datesService;
+
+    public function __construct(CharacterService $characterService, DatesService $datesService, EventService $eventService)
+    {
+        $this->characterService = $characterService;
+        $this->datesService = $datesService;
+        $this->eventService = $eventService;
+    }
     
     public function top(Request $request) {
         
 
         //日付を取得　指定された日付がなければ現在の日時
-        list($now, $month, $year, $day) = DatesService::getDate($request);
+        list($now, $month, $year, $day) = $this->datesService->getDate($request);
 
         $auths = Auth::user();
                     
         //キャラクター情報の取得
-        $characters = CharacterService::getCharactersByDate($request);
+        $characters = $this->characterService->getCharactersByDate($request);
         
         //カレンダーの計算
         list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
+        
         //祝日判定
         $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
+        
         //当月の登録されたイベントコレクション
-        $events = EventService::getEvents($year, $month);
+        $events = $this->eventService->getEvents($year, $month);
 
         return view('top')->with([
             "characters" => $characters,
