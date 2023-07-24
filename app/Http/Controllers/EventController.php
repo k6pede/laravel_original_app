@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+    private $eventService;
     
+    public function __construct(EventService $eventService)
+    {
+        $this->eventService = $eventService;
+    }
 
     //ユーザオリジナルのイベント作成
     public function createUsersEvent(Request $request){
@@ -22,14 +27,14 @@ class EventController extends Controller
             'title' => 'required|max:100',
         ]);
 
-        EventService::createEvent($request);
+        $this->eventService->createEvent($request);
         return redirect('/')->with('success','登録しました。');
     }
 
     //キャラクターの誕生日から追加
     public function addEventFromCharactersInfo(Request $request){
 
-        EventService::addEventFromCharactersInfo($request);
+        $this->eventService->addEventFromCharactersInfo($request);
         return redirect('/')->with('success','登録しました。');
 
     }
@@ -41,7 +46,7 @@ class EventController extends Controller
             'title' => 'required|max:50',
             'start_at_ymd' =>'required',
         ]);
-        EventService::editEvent($request);
+        $this->eventService->editEvent($request);
         return redirect('/')->with('success','変更を保存しました。');
 
         
@@ -49,7 +54,7 @@ class EventController extends Controller
 
     //既存イベントの削除
     public function deleteEvent(Request $request){
-        EventService::deleteEvent($request);
+        $this->eventService->deleteEvent($request);
     }
 
 

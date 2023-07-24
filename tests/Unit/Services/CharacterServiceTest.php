@@ -10,11 +10,23 @@ use Mockery;
 
 class CharacterServiceTest extends TestCase
 {
+
+    private $characterService;
+    private $characterRepository;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Create a mock for the CharacterRepository
+        $this->characterRepository = Mockery::mock(CharacterRepository::class);
+
+        $this->characterService = new CharacterService($this->characterRepository);
+    }
+
     public function testGetCharactersByDate()
     {
-        // Create a mock for the CharacterRepository::getCharactersByDate method
-        $mock = Mockery::mock('overload:' . CharacterRepository::class);
-        $mock->shouldReceive('getCharactersByDate')
+        $this->characterRepository->shouldReceive('getCharactersByDate')
             ->with(5, 14)
             ->once()
             ->andReturn('characters');
@@ -23,7 +35,7 @@ class CharacterServiceTest extends TestCase
         $request->merge(['month' => 5, 'day' => 14]);
 
         // Call the method under test
-        $result = CharacterService::getCharactersByDate($request);
+        $result = $this->characterService->getCharactersByDate($request);
 
         // Assert the result
         $this->assertEquals('characters', $result);
@@ -31,9 +43,8 @@ class CharacterServiceTest extends TestCase
 
     public function testGetCharactersFromTitle()
     {
-        // Create a mock for the CharacterRepository::getCharactersFromTitle method
-        $mock = Mockery::mock('overload:' . CharacterRepository::class);
-        $mock->shouldReceive('getCharactersFromTitle')
+  
+        $this->characterRepository->shouldReceive('getCharactersFromTitle')
             ->with('title')
             ->once()
             ->andReturn('characters');
@@ -42,7 +53,7 @@ class CharacterServiceTest extends TestCase
         $request->merge(['title' => 'title']);
 
         // Call the method under test
-        $result = CharacterService::getCharactersFromTitle($request);
+        $result = $this->characterService->getCharactersFromTitle($request);
 
         // Assert the result
         $this->assertEquals('characters', $result);

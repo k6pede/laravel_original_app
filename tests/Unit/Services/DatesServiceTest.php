@@ -9,6 +9,15 @@ use Carbon\Carbon;
 
 class DatesServiceTest extends TestCase
 {
+
+    private $datesService;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->datesService = new DatesService();
+    }
+
     /**
      * Test getDate method with no date in request.
      *
@@ -18,7 +27,7 @@ class DatesServiceTest extends TestCase
     {
         $request = new Request();
 
-        [$now, $month, $year, $day] = DatesService::getDate($request);
+        [$now, $month, $year, $day] = $this->datesService->getDate($request);
 
         $this->assertEquals(Carbon::now()->year, $year);
         $this->assertEquals(Carbon::now()->month, $month);
@@ -38,7 +47,7 @@ class DatesServiceTest extends TestCase
             'day' => 13,
         ]);
 
-        [$now, $month, $year, $day] = DatesService::getDate($request);
+        [$now, $month, $year, $day] = $this->datesService->getDate($request);
 
         $this->assertEquals(2023, $year);
         $this->assertEquals(5, $month);

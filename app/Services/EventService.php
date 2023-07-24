@@ -12,7 +12,15 @@ use DateTime;
 
 class EventService
 {
-    public static function getEvents($year, $month)
+
+    private $eventRepository;
+
+    public function __construct(EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
+
+    public function getEvents($year, $month)
     {
         $user_id = Auth::id();
         $setYear = $year;
@@ -21,7 +29,7 @@ class EventService
         $LastDayOfMonth  = Carbon::create($setYear, $setMonth, 1)->lastOfMonth();
 
 
-        $unprocessedEvents = EventRepository::getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
+        $unprocessedEvents = $this->eventRepository->getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
         $events = [];
         foreach ($unprocessedEvents as $event) {
             $startAt = $event['start_at'];
@@ -36,7 +44,7 @@ class EventService
         return $events;
     }
 
-    public static function addEventFromCharactersInfo(Request $request) {
+    public function addEventFromCharactersInfo(Request $request) {
 
         $now = Carbon::now();
 
@@ -64,9 +72,10 @@ class EventService
             $description = null;
         }
         
-        EventRepository::addCharactersEvent($user_id, $character_id, $start_at, $end_at, $title, $description);
+        $this->eventRepository->addCharactersEvent($user_id, $character_id, $start_at, $end_at, $title, $description);
     }
-    public static function createEvent(Request $request) {
+
+    public function createEvent(Request $request) {
 
         $user_id = Auth::id();
         $title = $request->title;
@@ -94,10 +103,10 @@ class EventService
 
         //イベント詳細 nullable
         $description = $request->description;
-        EventRepository::createEvent($user_id, $start_at, $end_at, $title, $description);
+        $this->eventRepository->createEvent($user_id, $start_at, $end_at, $title, $description);
     }
 
-    public static function editEvent(Request $request) {
+    public function editEvent(Request $request) {
 
         $inputs = $request->all();
         $event_id = $inputs['event_id'];
@@ -130,14 +139,14 @@ class EventService
         }
   
         $description = $inputs['description'];
-        EventRepository::editEvent($event_id, $user_id, $character_id, $start_at, $end_at, $title, $description);
+        $this->eventRepository->editEvent($event_id, $user_id, $character_id, $start_at, $end_at, $title, $description);
     }
     
-    public static function deleteEvent(Request $request) {
+    public function deleteEvent(Request $request) {
         $event_id = $request->input('event_id');
         $user_id = Auth::id();      
         $event = Event::where('id',$event_id)->where('user_id',$user_id);
-        EventRepository::deleteEvent($event);
+        $this->eventRepository->deleteEvent($event);
     }
     
 }

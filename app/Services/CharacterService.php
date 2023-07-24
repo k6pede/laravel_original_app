@@ -11,8 +11,17 @@ use DateTime;use Illuminate\Http\Request;
 
 class CharacterService
 {
-    public static function getCharactersByDate(Request $request)
-    {
+
+  private $characterRepository;
+
+  public function __construct(CharacterRepository $characterRepository)
+  {
+    $this->characterRepository = $characterRepository;
+  }
+
+
+  public function getCharactersByDate(Request $request)
+  {
       $now = Carbon::now();
       $month = $request->month;
       $day = $request->day;
@@ -21,34 +30,30 @@ class CharacterService
         $month = $now->month;
         $day = $now->day;
       }
-      $characters = CharacterRepository::getCharactersByDate($month, $day);
+      $characters = $this->characterRepository->getCharactersByDate($month, $day);
       return $characters;
-    }
+  }
 
-    public static function getCharactersFromTitle(Request $request)
-    {
+  public function getCharactersFromTitle(Request $request)
+  {
       $title = $request->title;
-      $characters = CharacterRepository::getCharactersFromTitle($title);
+      $characters = $this->characterRepository->getCharactersFromTitle($title);
       return $characters;
-    }
+  }
 
-    public static function getCharactersBySearchWord(Request $request)
-    {
+  public function getCharactersBySearchWord(Request $request)
+  {
       if($request->has('t')){
         $searchWord = $_REQUEST['t'];
-        $characters = CharacterRepository::getCharactersBySearchWord($searchWord);
+        $characters = $this->characterRepository->getCharactersBySearchWord($searchWord);
       }
       if($request->has('c')){
         $searchWord = $_REQUEST['c'];
-        $characters = CharacterRepository::getCharactersByName($searchWord);
+        $characters = $this->characterRepository->getCharactersByName($searchWord);
       }
-      // if(!empty($request->search)){
-      //     $searchWord  = $request->search;
-      // }
 
-      //$characters = CharacterRepository::getCharactersBySearchWord($searchWord);
       return [$characters, $searchWord];
-    }
+  }
 
     
 }
