@@ -11,6 +11,13 @@ use App\Services\DatesService;
 
 class ShowController extends Controller
 {
+
+    private $characterService;
+
+    public function __construct(CharacterService $characterService)
+    {
+        $this->characterService = $characterService;
+    }
     //
     public function show(Request $request){
 
@@ -18,7 +25,7 @@ class ShowController extends Controller
         list($now, $month, $year, $day) = DatesService::getDate($request);
         
         $title = $request->title;
-        $characters = CharacterService::getCharactersFromTitle($request);
+        $characters = $this->characterService->getCharactersFromTitle($request);
 
         $auths = Auth::user();
 

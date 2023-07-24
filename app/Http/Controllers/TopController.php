@@ -11,6 +11,12 @@ use App\Services\DatesService;
 
 class TopController extends Controller
 {
+    private $characterService;
+
+    public function __construct(CharacterService $characterService)
+    {
+        $this->characterService = $characterService;
+    }
     
     public function top(Request $request) {
         
@@ -21,7 +27,7 @@ class TopController extends Controller
         $auths = Auth::user();
                     
         //キャラクター情報の取得
-        $characters = CharacterService::getCharactersByDate($request);
+        $characters = $this->characterService->getCharactersByDate($request);
         
         //カレンダーの計算
         list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);

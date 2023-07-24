@@ -17,7 +17,6 @@ class DatesService
         if(empty($request->year)) {
           $year = $now->year;
         }
-
         if(empty($request->month)) {
             $month = $now->month;
         }
