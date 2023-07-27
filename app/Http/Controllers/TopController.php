@@ -14,12 +14,14 @@ class TopController extends Controller
     private $characterService;
     private $eventService;
     private $datesService;
+    private $calendarService;
 
-    public function __construct(CharacterService $characterService, DatesService $datesService, EventService $eventService)
+    public function __construct(CharacterService $characterService, DatesService $datesService, EventService $eventService, CalendarService $calendarService)
     {
         $this->characterService = $characterService;
         $this->datesService = $datesService;
         $this->eventService = $eventService;
+        $this->calendarService = $calendarService;
     }
     
     public function top(Request $request) {
@@ -34,10 +36,10 @@ class TopController extends Controller
         $characters = $this->characterService->getCharactersByDate($request);
         
         //カレンダーの計算
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
+        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
         
         //祝日判定
-        $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
+        $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
         
         //当月の登録されたイベントコレクション
         $events = $this->eventService->getEvents($year, $month);

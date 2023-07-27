@@ -12,7 +12,7 @@ use JpCarbon\JpCarbon;
 
 class CalendarService{
 
-    public static function calcCalendar($year,$month)
+    public function calcCalendar($year,$month)
     {
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
             
@@ -32,7 +32,8 @@ class CalendarService{
 
 
         //日数の計算
-        $count = 31 + $addDay + $date->dayOfWeek;
+        $max_day_in_month = 31;
+        $count = $max_day_in_month + $addDay + $date->dayOfWeek;
         $count = ceil($count /7) * 7;
         $dates = [];
         for($i=0;$i<$count;$i++, $date->addDay()) {
@@ -46,7 +47,7 @@ class CalendarService{
     }
 
 
-    public static function getHolidays($year,$month)
+    public function getHolidays($year,$month)
     {
         //祝日の取得
         $setYear = $year;
