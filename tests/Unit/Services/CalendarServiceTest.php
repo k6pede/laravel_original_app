@@ -8,6 +8,16 @@ use Carbon\Carbon;
 
 class CalendarServiceTest extends TestCase
 {
+
+
+    private $calendarService;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->calendarService = new CalendarService($this->calendarService);
+    }
     /**
      * Test calcCalendar method.
      *
@@ -20,7 +30,7 @@ class CalendarServiceTest extends TestCase
         $month = random_int(1, 12);
 
         // Call the method
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto) = CalendarService::calcCalendar($year, $month);
+        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto) = $this->calendarService->calcCalendar($year, $month);
 
         // Display the test input values
         var_dump($year, $month);
@@ -51,7 +61,7 @@ class CalendarServiceTest extends TestCase
         $month = 1;
 
         // Call the method
-        $holidays = CalendarService::getHolidays($year, $month);
+        $holidays = $this->calendarService->getHolidays($year, $month);
 
         // Assert the number of holidays in January 2023
         // You might need to adjust this value based on the actual holidays in that month

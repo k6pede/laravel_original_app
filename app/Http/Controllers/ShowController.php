@@ -13,16 +13,22 @@ class ShowController extends Controller
 {
 
     private $characterService;
+    private $eventService;
+    private $datesService;
+    private $calendarService;
 
-    public function __construct(CharacterService $characterService)
+    public function __construct(CharacterService $characterService, DatesService $datesService, EventService $eventService, CalendarService $calendarService)
     {
         $this->characterService = $characterService;
+        $this->datesService = $datesService;
+        $this->eventService = $eventService;
+        $this->calendarService = $calendarService;
     }
     //
     public function show(Request $request){
 
         //日付を取得　指定された日付がなければ現在の日時
-        list($now, $month, $year, $day) = DatesService::getDate($request);
+        list($now, $month, $year, $day) = $this->datesService->getDate($request);
         
         $title = $request->title;
         $characters = $this->characterService->getCharactersFromTitle($request);
@@ -32,9 +38,8 @@ class ShowController extends Controller
         //カレンダーの計算
         list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
         //祝日判定
-        $holidaysInCurrentMonth = CalendarService::getHolidays($year, $month);
-        //当月の登録されたイベントコレクション
-        $events = EventService::getEvents($year, $month);
+        $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
+        $events = $this->eventService->getEvents($year, $month);
         
         
         return view('show')->with([

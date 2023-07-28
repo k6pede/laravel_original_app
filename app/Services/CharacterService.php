@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Character;
 use App\Repositories\CharacterRepository;
+use App\Repositories\CharacterRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Yasumi\Yasumi;
@@ -14,7 +15,7 @@ class CharacterService
 
   private $characterRepository;
 
-  public function __construct(CharacterRepository $characterRepository)
+  public function __construct(CharacterRepositoryInterface $characterRepository)
   {
     $this->characterRepository = $characterRepository;
   }

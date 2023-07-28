@@ -5,7 +5,15 @@ namespace App\Repositories;
 use App\Models\Character;
 use Illuminate\Http\Request;
 
-class CharacterRepository
+interface CharacterRepositoryInterface
+{
+  public function getCharactersByDate($month, $day);
+  public function getCharactersFromTitle($title);
+  public function getCharactersBySearchWord($searchWord);
+  public function getCharactersByName($searchWord);
+}
+
+class CharacterRepository implements CharacterRepositoryInterface
 {
 
   public function getCharactersByDate($month, $day)
