@@ -38,6 +38,8 @@ class CalendarServiceTest extends TestCase
         // Assert the date string
         $expectedDateString = sprintf('%04d-%02d-01', $year, $month);
         $this->assertEquals($expectedDateString, $dateStr);
+        var_dump($expectedDateString);
+        var_dump($dateStr);
 
 
         // Assert the next month and last month

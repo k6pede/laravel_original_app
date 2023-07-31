@@ -36,7 +36,7 @@ class ShowController extends Controller
         $auths = Auth::user();
 
         //カレンダーの計算
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = CalendarService::calcCalendar($year,$month);
+        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
         //祝日判定
         $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
         $events = $this->eventService->getEvents($year, $month);
