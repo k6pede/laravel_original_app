@@ -25,7 +25,10 @@ class CalendarService{
             
         $date = new Carbon($dateStr);
 
-        $addDay = ($date->copy()->endOfMonth()->isSunday()) ? 7 : 0;
+        //$addDay = ($date->copy()->endOfMonth()->isSunday()) ? 7 : 0;
+        $endOfMonthDayOfWeek = $date->copy()->endOfMonth()->dayOfWeek;
+        $addDay = ($endOfMonthDayOfWeek == 6) ? 0 : (6 - $endOfMonthDayOfWeek);
+
         $date->subDay($date->dayOfWeek);
             
         
