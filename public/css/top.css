@@ -9,7 +9,15 @@ body {
   padding: 0;
 }
 
-
+main {
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    z-index: -100;
+    background-image: radial-gradient(rgba(106,197,208,0.2) 2px, #ffffff 2px);
+    background-size: 20px 20px;
+  
+}
 
 
 
@@ -117,7 +125,7 @@ td {
 
 .container {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 1050px;
   
 }
 /* --------------------------
@@ -147,10 +155,17 @@ header
   margin-left: 65%;
 }
 
-
-
 .navbar {
-  background-color: 	rgba(233,209,150,0.6) !important;
+  //background-color: 	rgba(106,197,208,0.6) !important;
+  //background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='80' height='80' patternTransform='scale(2) rotate(175)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(0,0%,100%,1)'/><path d='M-20.133 4.568C-13.178 4.932-6.452 7.376 0 10c6.452 2.624 13.036 5.072 20 5 6.967-.072 13.56-2.341 20-5 6.44-2.659 13.033-4.928 20-5 6.964-.072 13.548 2.376 20 5s13.178 5.068 20.133 5.432'  stroke-width='0.5' stroke='hsla(54, 100%, 62%, 1)' fill='none'/><path d='M-20.133 24.568C-13.178 24.932-6.452 27.376 0 30c6.452 2.624 13.036 5.072 20 5 6.967-.072 13.56-2.341 20-5 6.44-2.659 13.033-4.928 20-5 6.964-.072 13.548 2.376 20 5s13.178 5.068 20.133 5.432'  stroke-width='0.5' stroke='hsla(340, 79%, 65%, 1)' fill='none'/><path d='M-20.133 44.568C-13.178 44.932-6.452 47.376 0 50c6.452 2.624 13.036 5.072 20 5 6.967-.072 13.56-2.341 20-5 6.44-2.659 13.033-4.928 20-5 6.964-.072 13.548 2.376 20 5s13.178 5.068 20.133 5.432'  stroke-width='0.5' stroke='hsla(199, 87%, 71%, 1)' fill='none'/><path d='M-20.133 64.568C-13.178 64.932-6.452 67.376 0 70c6.452 2.624 13.036 5.072 20 5 6.967-.072 13.56-2.341 20-5 6.44-2.659 13.033-4.928 20-5 6.964-.072 13.548 2.376 20 5s13.178 5.068 20.133 5.432'  stroke-width='0.5' stroke='hsla(0, 0%, 0%, 0.42)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+}
+
+.navbar-right,
+.nav-link {
+  font-size: .9em;
+  margin-left: .5em;
+  width: 6em;
+  text-align: center;
 }
 /* --------------------------
 sidebar
@@ -213,6 +228,7 @@ top
 
 .top {
   margin-bottom: 2em;
+  background-color: #fff;
 }
 .top-month {
   border: solid 2px rgb(0, 0, 0);
@@ -244,10 +260,13 @@ search-box
 --------------------------*/
 #search-box {
   position: relative;
-  border: solid 2px rgb(237, 109, 31);
+  border: solid 2px rgb(194, 80, 126);
   border-top: none;
-  border-radius: 0 0 10px 10px;
+  //border-radius: 0 0 10px 10px;
   margin-bottom: 2rem;
+}
+#searchForm {
+  background-color: #fff;
 }
 
 #wrap-tab {
@@ -268,15 +287,15 @@ search-box
 
 #wrap-tab span:hover {
   cursor: pointer;
-  color: white;
-  background-color: rgb(79, 79, 79);
+  color: black;
+  background-color: rgba(196, 80, 126, .7);
   letter-spacing: 0.2em;
   transition: .5s;
 }
 
 
 .input-text-box {
-  width: 86% ;
+  width: 91%;
   margin-left: 45px;
   border: none;
   border-radius: 10px;
@@ -295,15 +314,15 @@ search-box
   border-top: none;
   border-right: none;
   border-left: none;
-  border-bottom: solid 2px rgb(237, 109, 31);
+  border-bottom: solid 2px rgb(194, 80, 126);
 }
 .selected {
-  border-top: solid 2px rgb(237, 109, 31);
-  border-right: solid 2px rgb(237, 109, 31);
-  border-left: solid 2px rgb(237, 109, 31);
-  background-color: antiquewhite;
+  border-top: solid 2px rgb(194, 80, 126);
+  border-right: solid 2px rgb(194, 80, 126);
+  border-left: solid 2px rgb(194, 80, 126);
+  background-color: rgb(196, 80, 126);
   border-bottom:transparent;
-  color: rgb(0, 0, 0);
+  color: #fff;
 }
 
 #gbox {
@@ -399,6 +418,10 @@ calendar
   width: 20px;
 }
 
+.table-row {
+  border-color: transparent;
+}
+
 .year-form {
   justify-content: space-around;
   width: 100%;
@@ -428,7 +451,8 @@ calendar
   padding: .5em;
   margin-bottom: 2rem;
   min-width: 100%;
-  box-shadow: 2px 5px 7px 1px #ebe1cd;
+  box-shadow: 2px 5px 7px 1px #eeeeee;
+  background-color: #fff;
 }
 
 #calendar_table button {
@@ -449,14 +473,13 @@ td form{
 #pagination {
   margin-bottom: 2em;
 }
-
 .holidays , .events{
   padding-bottom: 1em;
 }
 
 .holidays > h4,
 .events > h4 { 
-  background-color: rgba(242, 218, 156, 0.6);
+  background-color: rgba(255, 230, 0, 0.5);
   padding-left: 1em;
 }
 .holidays > td,
@@ -550,7 +573,7 @@ td.has-event {
 character-index
 --------------------------*/
 #character-index  {
-  box-shadow: 2px 5px 7px 1px #ebe1cd;
+  box-shadow: 2px 5px 7px 1px #eeeeee;
 }
 #character-index .card-header {
   font-size: 0.75em;
@@ -613,7 +636,7 @@ character-card
   margin-bottom: 1rem;
 }
 .card-header {
-  background-color: rgba(242, 218, 156, 0.4);
+  background-color: rgba(106,197,208,0.6);
 }
 .card-title {
   padding: 0;
@@ -638,7 +661,7 @@ character-card
 .card-body-name {
   min-height: 4rem;
   margin-bottom: 1rem;
-  border-bottom: 3px dotted rgba(242, 218, 156, 0.7);
+  border-bottom: 3px dotted black;
 }
 
 .card-body-name > .ruby {
@@ -676,7 +699,7 @@ character-card
 
 .card-footer {
   
-  background-color: rgba(242, 218, 156, 0.6) !important;
+  background-color: rgba(106,197,208,0.6) !important;
   padding: 0;
 }
 .card-footer a{
@@ -709,8 +732,9 @@ character-card
 
 .todays-character {
   padding: 0.5em;
-  box-shadow: 2px 5px 7px 1px #ebe1cd;
+  box-shadow: 2px 5px 7px 1px #eeeeee;
   border-radius: 0.25rem;
+  background-color: #fff;
 }
 .todays-character > p{
   margin-bottom: 0.5em !important;
@@ -719,7 +743,7 @@ character-card
   padding: 1em;
 }
 .todays-character-head > p{
-  border-bottom: 3px dotted rgba(242, 218, 156, 0.7);
+  border-bottom: 3px dotted black;
   padding-bottom: 1em;
 }
 
@@ -728,9 +752,8 @@ footer
 --------------------------*/
 #footer {
 
-  background-color: rgba(233,209,150,0.6) !important;
+  background-color: rgba(106,197,208,0.6) !important;
   margin-bottom: 0;
-  
   color: rgb(237, 109, 31);
 }
 #pageTop {
@@ -750,20 +773,20 @@ footer
 }
 
 .footer-item {
-  background-color: aliceblue;
+  //background-color: aliceblue;
   width: 150px;
+  font-size: .9em;
   font-family: 'YuGothic';
   text-align: center;
   align-content: center;
   padding: 0;
   margin: 0;
-  border:2px solid rgb(237, 109, 31);
+  //border:2px solid rgb(237, 109, 31);
   border-radius: 0.25rem;
 }
 .footer-item a {
   margin-bottom: 0;
   display: block;
-  opacity: .8;
 }
 .fa-angle-up {
   width: 45px;
@@ -835,6 +858,15 @@ responsive -800px
     justify-content: center;
     display: flex;
   }
+
+  .navbar-collapse {
+    margin-top: 1em;
+  }
+
+  .navbar-nav,
+  .nav-link {
+    text-align: start;
+  }
  
 }
 /* --------------------------
@@ -883,6 +915,9 @@ responsive -480px
   .logo {
     max-width: 90px;
     max-height: 30px;
+  }
+  .logo:hover {
+    opacity: .7;
   }
   
   .navbar-brand-div > p {

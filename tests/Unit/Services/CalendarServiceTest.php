@@ -30,7 +30,7 @@ class CalendarServiceTest extends TestCase
         $month = random_int(1, 12);
 
         // Call the method
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $eto) = $this->calendarService->calcCalendar($year, $month);
+        list($dates, $date, $dateStr, $nextMonth, $lastMonth, $eto) = $this->calendarService->calcCalendar($year, $month);
 
         // Display the test input values
         var_dump($year, $month);

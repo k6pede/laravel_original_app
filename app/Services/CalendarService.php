@@ -27,26 +27,23 @@ class CalendarService{
 
         //$addDay = ($date->copy()->endOfMonth()->isSunday()) ? 7 : 0;
         $endOfMonthDayOfWeek = $date->copy()->endOfMonth()->dayOfWeek;
-        $addDay = ($endOfMonthDayOfWeek == 6) ? 0 : (6 - $endOfMonthDayOfWeek);
+        $additionalDay = ($endOfMonthDayOfWeek == 6) ? 0 : (6 - $endOfMonthDayOfWeek);
 
         $date->subDay($date->dayOfWeek);
             
-        
-
-
-        //日数の計算
+        //カレンダーに表示する日数の計算
         $max_day_in_month = 31;
-        $count = $max_day_in_month + $addDay + $date->dayOfWeek;
-        $count = ceil($count /7) * 7;
+        $numOfCellInCalendar = $max_day_in_month + $additionalDay + $date->dayOfWeek;
+        $numOfCalendarLines = ceil($numOfCellInCalendar /7) * 7;
         $dates = [];
-        for($i=0;$i<$count;$i++, $date->addDay()) {
+        for($i=0;$i<$numOfCalendarLines;$i++, $date->addDay()) {
             $dates[] = $date->copy();
         }
 
         //干支判定
         $eto = JpCarbon::createFromDate($year)->eto;         
 
-        return [$dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $lastYear, $nextYear, $eto];
+        return [$dates, $date, $dateStr, $nextMonth, $lastMonth, $lastYear, $nextYear, $eto];
     }
 
 

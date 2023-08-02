@@ -35,13 +35,13 @@ class TopController extends Controller
         //キャラクター情報の取得
         $characters = $this->characterService->getCharactersByDate($request);
         
-        //カレンダーの計算
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
+        //カレンダーの表示に必要な情報を取得
+        list($dates, $date, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
         
-        //祝日判定
+        //祝日情報を取得
         $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
         
-        //当月の登録されたイベントコレクション
+        //ユーザ別当月のスケジュールを取得
         $events = $this->eventService->getEvents($year, $month);
 
         return view('top')->with([

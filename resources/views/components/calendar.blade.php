@@ -54,7 +54,7 @@
       </div>
 
       <thead class="dayOfWeek">
-          <tr class="dayOfWeekCell">
+          <tr class="dayOfWeekCell table-row">
               
               @foreach(['日', '月', '火', '水', '木', '金', '土'] as $dayOfWeek)
               <th class="text-center cellOfDay">
@@ -92,7 +92,7 @@
       <tbody>
             @foreach ($dates as $date)
               @if($date->dayOfWeek == 0)
-              <tr>
+              <tr class="table-row">
               @endif
                 <td
                     @if ($date->month != $month)                      
@@ -105,7 +105,7 @@
                         {{-- class ="currentMonth text-center" --}}
                         @if($date->day == $day)
                         {{-- 選択中 --}}
-                            style ="background-color: rgba(248, 182, 53, 0.5);"
+                            style ="background-color: rgba(255, 230, 0, 0.5);"
                         @endif
                         @if(!empty($events))
                             @foreach($events as $key => $value)

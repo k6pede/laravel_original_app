@@ -1,8 +1,11 @@
 $(function(){
 
 
-  //選択したタブによって検索先を変更
+  //選択したタブによって検索対象を変更する
+  //tab_tが選択された場合は作品名で検索する
+  //tab_cが選択された場合はキャラクター名で検索する。
   $('#tab_t').on({
+    //
     'click': function() {
       if(!$(this).hasClass('selected')){
         $(this).removeClass('not-selected');

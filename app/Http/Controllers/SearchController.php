@@ -38,7 +38,7 @@ class SearchController extends Controller
         $auths = Auth::user();
 
         //カレンダーの計算
-        list($dates, $date, $count, $addDay, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
+        list($dates, $date, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
         //祝日判定
         $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
         //当月の登録されたイベントコレクション
