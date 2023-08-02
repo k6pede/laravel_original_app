@@ -5,13 +5,12 @@ setTimeout(function() {
   $('.alert-success').hide(300);
 }, 3000); 
 
+
+//ログイン済みユーザのスケジュールに関する処理
 $(function(){
-
-
   $('#liveToastBtn').on('click', function(){
     $('.toast').show();
   })
-
 
 
   // イベント作成用モーダルopen
@@ -33,7 +32,7 @@ $(function(){
   })
 
 
-  //登録済みイベントの編集モーダルに値を渡す
+  //編集モーダルへ値を渡す。
   $('.eventbtn').on('click', function (event) {
 
     let $this = $(this);
@@ -67,7 +66,7 @@ $(function(){
     
   })
 
-  //ユーザー作成のイベントを作成する
+  //新規スケジュールの作成
   $('#eventCreateBtn').on('click', function(e){
     e.preventDefault();
     
@@ -123,7 +122,7 @@ $(function(){
 
   })
 
-  //モーダル内　編集確定・削除
+  //スケジュールの編集
   $('#eventEditBtn').on('click', function(e){
     e.preventDefault();
 
@@ -184,7 +183,7 @@ $(function(){
 
   })
 
-  //イベント削除
+  //スケジュールの削除
   $('#eventDeleteBtn').on('click', function(){
     let event_id = $('.event-id').val();
     $.ajax({
@@ -212,14 +211,14 @@ $(function(){
     alert('削除しました');
   })
 
-  //日時入力用フォームopen
+  //日時選択フォームを開く
   $('.row-btn').on('click', function(e) {
     e.preventDefault();
     $('.start-row').toggle();
     $('.end-row').toggle();
   });
 
-  //日時入力用フォームに入力された値を表示
+  //日時入力フォームに日時の値を同期する。
   $('.event-start-ymd').on('input', function() {
     let startYmd = $(this).val();
     $('span.esy').text('').text(startYmd); 

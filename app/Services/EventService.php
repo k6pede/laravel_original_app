@@ -25,9 +25,9 @@ class EventService
         $user_id = Auth::id();
         $setYear = $year;
         $setMonth = $month;
+
         $FirstDayOfMonth = Carbon::create($setYear, $setMonth, 1)->firstOfMonth();
         $LastDayOfMonth  = Carbon::create($setYear, $setMonth, 1)->lastOfMonth();
-
 
         $unprocessedEvents = $this->eventRepository->getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth);
         $events = [];
@@ -48,29 +48,24 @@ class EventService
 
         $now = Carbon::now();
 
-        if(!empty($request->year)) {
-            $year = $request->year;  
-            $year = $now->year;
-        }else {
-            $year = $now->year;
-        }
-        $month = $request->month;
-        $day = $request->day;
-        
+        //クエリパラメータから日付を生成する
+        //デフォルトでは現在の日時になる
+        $year = $request->input('year', $now->year);
+        $month = $request->input('month', $now->month);
+        $day = $request->input('day', $now->day);
+   
         $user_id = Auth::id();
-        if(!empty($request->character_id)){
-            $character_id = $request->character_id;
-        }else{
-            $character_id = null;
-        }
+        $character_id = $request->input('character_id', null);
         $start_at = Carbon::create($year, $month, $day, 0, 0, 0);
         $end_at = null;
         $title = $request->event_title;
-        if($character_id !== null){
-            $description = $title . 'の誕生日です。';
-        }else{
-            $description = null;
-        }
+        $description = $character_id !== null? $title . 'の誕生日です。' : null;
+        
+        // if($character_id !== null){
+        //     $description = $title . 'の誕生日です。';
+        // }else{
+        //     $description = null;
+        // }
         
         $this->eventRepository->addCharactersEvent($user_id, $character_id, $start_at, $end_at, $title, $description);
     }
@@ -78,75 +73,86 @@ class EventService
     public function createEvent(Request $request) {
 
         $user_id = Auth::id();
-        $title = $request->title;
         
         //開始時間 required
-        $start_ymd = $request->start_at_ymd;
-        $start_hm = $request->start_at_hm;
-        if($start_hm == null){
-            $start_hm = '00:00';
-        }
-        $start_at = Carbon::createFromFormat('Y-m-d H:i', $start_ymd.' '.$start_hm);
+        $start_at_time = $request->start_at_hm ? $request->start_at_hm : '00:00';
+        $start_at = Carbon::createFromFormat('Y-m-d H:i', "{$request->start_at_ymd} {$start_at_time}");
 
         //終了時間　nullable
-        if(!empty($request->end_at_ymd)){
-            $end_ymd = $request->end_at_ymd;
-            if(!empty($request->end_at_hm)){
-                $end_hm = $$request->end_at_hm;
-            }else{
-                $end_hm = '00:00';
-            }
-            $end_at = Carbon::createFromFormat('Y-m-d H:i', $end_ymd.' '.$end_hm);
-        }else{
-            $end_at = null;
+        $end_at = null;
+        if(!empty($request->end_at_ymd)) {
+            $end_at_time = !empty($request->end_at_hm) ? $request->end_at_hm : '00:00';
+            $end_at = Carbon::createFromFormat('Y-m-d H:i', "{$request->end_at_ymd} {$end_at_time}");
         }
+        // $end_at = null;
+        // if(!empty($request->end_at_ymd)){
+        //     $end_ymd = $request->end_at_ymd;
+        //     if(!empty($request->end_at_hm)){
+        //         $end_hm = $$request->end_at_hm;
+        //     }else{
+        //         $end_hm = '00:00';
+        //     }
+        //     $end_at = Carbon::createFromFormat('Y-m-d H:i', $end_ymd.' '.$end_hm);
+        // }
+
+
+        $title = $request->title;
 
         //イベント詳細 nullable
         $description = $request->description;
+
         $this->eventRepository->createEvent($user_id, $start_at, $end_at, $title, $description);
     }
 
     public function editEvent(Request $request) {
 
         $inputs = $request->all();
-        $event_id = $inputs['event_id'];
+        $event_id = $request->inputs('event_id');
         $user_id = Auth::id();
-        $title = $inputs['title'];
-        if(!empty($request->character_id)){
-            $character_id = $request->character_id;
-        }else{
-            $character_id = null;
-        }
+        $title = $request->inputs('title');
+        $character_id = $request->input('character_id', null);
 
-        $start_ymd = $inputs['start_at_ymd'];
-        if(!empty($inputs['start_at_hm'])) {
-            $start_hm = $inputs['start_at_hm'];           
-        }else{
-            $start_hm = '00:00';
+
+        //$start_ymd = $inputs['start_at_ymd'];
+        // if(!empty($inputs['start_at_hm'])) {
+        //     $start_hm = $inputs['start_at_hm'];           
+        // }else{
+        //     $start_hm = '00:00';
+        // }
+        //$start_at = Carbon::createFromFormat('Y-m-d H:i', $start_ymd.' '.$start_hm);
+        $start_at_time = $request->start_at_hm ? $request->start_at_hm : '00:00';
+        $start_at = Carbon::createFromFormat('Y-m-d H:i', "{$request->start_at_ymd} {$start_at_time}");
+
+        //終了時間　nullable
+        $end_at = null;
+        if(!empty($request->end_at_ymd)) {
+            $end_at_time = !empty($request->end_at_hm) ? $request->end_at_hm : '00:00';
+            $end_at = Carbon::createFromFormat('Y-m-d H:i', "{$request->end_at_ymd} {$end_at_time}");
         }
-        $start_at = Carbon::createFromFormat('Y-m-d H:i', $start_ymd.' '.$start_hm);
         
-        if(!empty($inputs['end_at_ymd'])){
-            $end_ymd = $inputs['end_at_ymd'];
-            if(!empty($inputs['end_at_hm'])){
-                $end_hm = $inputs['end_at_hm'];
-            }else{
-                $end_hm = '00:00';
-            }
-            $end_at = Carbon::createFromFormat('Y-m-d H:i', $end_ymd.' '.$end_hm);
-        }else{
-            $end_at = null;
-        }
+        // if(!empty($inputs['end_at_ymd'])){
+        //     $end_ymd = $inputs['end_at_ymd'];
+        //     if(!empty($inputs['end_at_hm'])){
+        //         $end_hm = $inputs['end_at_hm'];
+        //     }else{
+        //         $end_hm = '00:00';
+        //     }
+        //     $end_at = Carbon::createFromFormat('Y-m-d H:i', $end_ymd.' '.$end_hm);
+        // }else{
+        //     $end_at = null;
+        // }
   
         $description = $inputs['description'];
         $this->eventRepository->editEvent($event_id, $user_id, $character_id, $start_at, $end_at, $title, $description);
     }
     
     public function deleteEvent(Request $request) {
+
         $event_id = $request->input('event_id');
         $user_id = Auth::id();      
         $event = Event::where('id',$event_id)->where('user_id',$user_id);
         $this->eventRepository->deleteEvent($event);
+
     }
     
 }

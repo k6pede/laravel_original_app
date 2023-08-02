@@ -24,13 +24,9 @@ class CharacterService
   public function getCharactersByDate(Request $request)
   {
       $now = Carbon::now();
-      $month = $request->month;
-      $day = $request->day;
+      $month = $request->input('month', $now->month);
+      $day = $request->input('day', $now->day);
 
-      if (empty($month) || empty($day)) {
-        $month = $now->month;
-        $day = $now->day;
-      }
       $characters = $this->characterRepository->getCharactersByDate($month, $day);
       return $characters;
   }
@@ -45,11 +41,11 @@ class CharacterService
   public function getCharactersBySearchWord(Request $request)
   {
       if($request->has('t')){
-        $searchWord = $_REQUEST['t'];
+        $searchWord = $request->input('t');
         $characters = $this->characterRepository->getCharactersBySearchWord($searchWord);
       }
       if($request->has('c')){
-        $searchWord = $_REQUEST['c'];
+        $searchWord = $request->input('c');
         $characters = $this->characterRepository->getCharactersByName($searchWord);
       }
 

@@ -11,19 +11,10 @@ class DatesService
   public function getDate(Request $request)
   {
       $now = Carbon::now();
-      $year = $request->year;
-      $month = $request->month;
-      $day = $request->day;
-
-        if(empty($request->year)) {
-          $year = $now->year;
-        }
-        if(empty($request->month)) {
-            $month = $now->month;
-        }
-        if(empty($request->day)){
-            $day = $now->day;
-        }
+      //月、日時が指定されていなければ現在の日時を返す。
+      $year = $request->input('year', $now->year);
+      $month = $request->input('month', $now->month);
+      $day = $request->input('day', $now->day);
 
       return [$now, $month, $year, $day];
   }
