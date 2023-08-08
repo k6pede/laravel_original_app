@@ -40,7 +40,6 @@ Route::post('/calcCalendar', [App\Http\Controllers\CalendarController::class, 'c
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/show', [App\Http\Controllers\ShowController::class, 'show'])->name('show');
-
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
 Route::post('/createUsersEvent', [App\Http\Controllers\EventController::class ,'createUsersEvent'])->name('createusersevent');
@@ -63,10 +62,10 @@ Route::get('/thanks', [App\Http\Controllers\ContactController::class ,'thanks'])
 //開発用
 Route::group(['middleware' => ['auth', 'admin']], function () {
   // 管理者用のルート
+  Route::get('/create/character', [App\Http\Controllers\CharacterController::class ,'create'])->name('create');
+  Route::post('/store/character', [App\Http\Controllers\CharacterController::class ,'store'])->name('store');
+  Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 'show']);
+  Route::post('/edit/character', [App\Http\Controllers\CharacterController::class, 'edit']);
+  Route::post('/update/character', [App\Http\Controllers\CharacterController::class, 'update']);
+  Route::post('/destroy/character', [App\Http\Controllers\CharacterController::class, 'destroy']);
 });
-Route::get('/create/character', [App\Http\Controllers\CharacterController::class ,'create'])->name('create');
-Route::post('/store/character', [App\Http\Controllers\CharacterController::class ,'store'])->name('store');
-Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 'show']);
-Route::post('/edit/character', [App\Http\Controllers\CharacterController::class, 'edit']);
-Route::post('/update/character', [App\Http\Controllers\CharacterController::class, 'update']);
-Route::post('/destroy/character', [App\Http\Controllers\CharacterController::class, 'destroy']);

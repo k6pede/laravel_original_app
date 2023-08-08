@@ -29,12 +29,12 @@ class TopTest extends TestCase
    */
   public function testTop()
   {
-    $user = user::factory()->create();
-    $this->actingAs($user);
-    $requstData = [
+    //$user = User::find(1);
+    //$this->actingAs($user);
+    $requst = [
     ];
 
-      $response = $this->get('/', $requstData);
+      $response = $this->get('/', $requst);
 
       $response->assertStatus(200);
       $response->assertViewIs('top');
