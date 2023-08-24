@@ -10,14 +10,14 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class FormUserMail extends Mailable
+class ModifyUserMail extends Mailable
 {
     use Queueable, SerializesModels;
    
     public $inputs;
     
     // 新規キャラクター登録依頼を送信したユーザー様に、
-    // 依頼内容を確認するメール
+    // 依頼内容を確認するメールです。
 
 
     /**
@@ -59,7 +59,7 @@ class FormUserMail extends Mailable
         return new Content(
             //views.email.applycharacterに記述されたコードをメールのコンテンツ（text）として送信している
             // html: 'email.applycharacter',
-            text: 'email.formusermail',
+            text: 'email.modifymail_to_user',
             // with: [
             //     'name' => $name,
             //     'title' => $title,

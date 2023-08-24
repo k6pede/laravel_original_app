@@ -25,12 +25,13 @@ $(function () {
     event.preventDefault();
     let $this = $(this);
     const dataAttributes = $this.data();
+
     let name = $this.data('chara-name');
     let title = $this.data('chara-title');
     let year = $this.data('year');
     let month = $this.data('chara-month');
-    
     let day = $this.data('chara-day');
+    
     let user_id = $this.data('user-id');
     let chara_id = $this.data('character-id');
 

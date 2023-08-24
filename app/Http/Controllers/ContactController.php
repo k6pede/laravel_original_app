@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ApplyMail;
 use App\Mail\ApplyMailforModify;
 use App\Mail\FormUserMail;
+use App\Mail\ModifyUserMail;
+use App\Jobs\ApplyMailJob;
+use App\Jobs\ModifyMailJob;
 
 class ContactController extends Controller
 {
@@ -15,10 +18,10 @@ class ContactController extends Controller
         return view('contacts.contact');
     }
 
-    //contactで入力した内容をrequestで受け取り、confirm.bladeに渡す
+    //バリデーションして確認画面へ
     public function confirm(Request $request) {
         $request->validate([
-            'email' => 'email:strict,dns,spoof|max:255',
+            'email' => 'email:strict,dns,spoof|max:255|nullable',
             'title' => 'required',
             'name' => 'required|max:100',
             'ruby' => 'regex:/^[ぁ-ん]*$/u',
@@ -50,7 +53,7 @@ class ContactController extends Controller
     }
     public function confirmModify(Request $request){
         $request->validate([
-            'email' => 'email:strict,dns,spoof|max:255',
+            'email' => 'email:strict,dns,spoof|max:255|nullable',
             'details' => 'required',
             
         ],[
@@ -90,10 +93,13 @@ class ContactController extends Controller
 
         }else{
             if(!empty($inputs['email'])){
-                Mail::to($inputs['email'])->send( new FormUserMail($inputs) );
+                if($inputs['email'] != '入力なし') {
+                    Mail::to($inputs['email'])->send( new FormUserMail($inputs) );
+                } 
             }
 
-            Mail::to('runa720.bump@icloud.com')->send( new ApplyMail($inputs) );
+            dispatch(new ApplyMailJob($inputs, ApplyMail::class, 'runa720.bump@icloud.com'));
+            //Mail::to('runa720.bump@icloud.com')->send( new ApplyMail($inputs) );
             $request->session()->regenerateToken();
         }
         return view('contacts.thanks');
@@ -117,11 +123,14 @@ class ContactController extends Controller
             ->withInput($inputs);
 
         }else{
-            // if(!empty($inputs['email'])){
-            //     Mail::to($inputs['email'])->send( new FormUserMail($inputs) );
-            // }
+            if(!empty($inputs['email'])){
+                if($inputs['email'] != '入力なし') {
+                    Mail::to($inputs['email'])->send( new ModifyUserMail($inputs) );
+                } 
+            }
+            dispatch(new ModifyMailJob($inputs, ApplyMailforModify::class, 'runa720.bump@icloud.com'));
 
-            Mail::to('runa720.bump@icloud.com')->send( new ApplyMailforModify($inputs) );
+            //Mail::to('runa720.bump@icloud.com')->send( new ApplyMailforModify($inputs) );
             $request->session()->regenerateToken();
         }
         return view('contacts.thanks');

@@ -34,11 +34,6 @@
         {{ session('success') }}
     </div>
     @endif
-{{-- <div class="main-visual">
-    <img src="{{ asset('images/mainvisual_08.png') }}" alt="Main Visual">
-    <div class="description">
-    </div>
-</div> --}}
 
 
 <div id="contents">

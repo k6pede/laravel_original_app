@@ -38,7 +38,7 @@ You can test the app's features using the following test account:
 * Register for a simple account to add character birthdays to your personal calendar
 * Responsive design using Bootstrap 5.0
 
-## Getting Started
+<!-- ## Getting Started
 
 1. Ensure that your system meets the requirements of the application, such as Laravel 9.43.0, PHP 8.2.0, and MySQL 5.7.28.
 2. Clone the repository to your local machine.
@@ -53,4 +53,4 @@ You can test the app's features using the following test account:
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). -->
