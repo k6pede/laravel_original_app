@@ -37,8 +37,11 @@ class ShowController extends Controller
 
         //カレンダーの計算
         list($dates, $date, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
+
         //祝日判定
         $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
+
+        //
         $events = $this->eventService->getEvents($year, $month);
         
         

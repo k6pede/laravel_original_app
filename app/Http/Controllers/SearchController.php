@@ -35,12 +35,15 @@ class SearchController extends Controller
         list($characters, $searchWord) = $this->characterService->getCharactersBySearchWord($request);
         $result = $searchWord;
 
-        $auths = Auth::user();
-
+        
         //カレンダーの計算
         list($dates, $date, $dateStr, $nextMonth, $lastMonth, $nextYear, $lastYear, $eto) = $this->calendarService->calcCalendar($year,$month);
+        
         //祝日判定
         $holidaysInCurrentMonth = $this->calendarService->getHolidays($year, $month);
+        
+        $auths = Auth::user();
+
         //当月の登録されたイベントコレクション
         $events = $this->eventService->getEvents($year, $month);
      
