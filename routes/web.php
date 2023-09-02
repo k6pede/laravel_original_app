@@ -70,3 +70,8 @@ Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 
 Route::post('/edit/character', [App\Http\Controllers\CharacterController::class, 'edit']);
 Route::post('/update/character', [App\Http\Controllers\CharacterController::class, 'update']);
 Route::post('/destroy/character', [App\Http\Controllers\CharacterController::class, 'destroy']);
+
+
+//S3アップロードテスト
+Route::view('upload', 'uploadpics');
+Route::post('s3', [\App\Http\Controllers\S3Controller::class, 'uploadS3'])->name('s3');
