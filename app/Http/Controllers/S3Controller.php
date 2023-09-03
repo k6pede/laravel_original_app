@@ -18,15 +18,27 @@ class S3Controller extends Controller
             ]
         );
 
+        $user = auth()->user();
+
+        //現在のプロフィール画像へのUrlを取得
+        $oldProfileImageUrl = $user->profile_image_url;
+
         // S3へファイルをアップロード
         $result = Storage::disk('s3')->put('/', $request->file('file'));
         if ($result) {
+
             //s3のurl取得
             $url = Storage::disk('s3')->url($result);
 
             //DBにurl保存
-            $user = auth()->user();
             $user->update(['profile_image_url' => $url]);
+
+            //古いプロフィール画像を削除する
+            if ($oldProfileImageUrl) {
+                $oldProfileImageName = basename($oldProfileImageUrl);
+                Storage::disk('s3')->delete($oldProfileImageName);
+            }
+
             return 'アップロード成功';
         } else {
             return 'アップロード失敗';

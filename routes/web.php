@@ -75,3 +75,6 @@ Route::post('/destroy/character', [App\Http\Controllers\CharacterController::cla
 //S3アップロードテスト
 Route::view('upload', 'uploadpics');
 Route::post('s3', [\App\Http\Controllers\S3Controller::class, 'uploadS3'])->name('s3');
+
+//profile.bladeテスト用
+Route::view('profile','components.modals.profile');

@@ -177,9 +177,10 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+            
                         <!-- Authentication Links -->
-                        {{-- ログアウト時 --}}
-                       
+
+                        {{-- ログアウト時 --}}                       
                         @if(!Auth::guard('admin')->check() && !Auth::check())
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -208,7 +209,7 @@
                             @endif
                         @else
                         {{-- ログイン時 --}}
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if(Auth::guard('admin')->check())
                                         {{ Auth::guard('admin')->user()->name }}
@@ -218,7 +219,7 @@
                                 
                                     @endif
                                 </a>
-                                {{-- <div class="" aria-labelledby="navbarDropdown"> --}}
+                                <div class="" aria-labelledby="navbarDropdown">
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -229,9 +230,30 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                </div>              
+                            </li> --}}
+
+
+
+                            {{-- 検証用 --}}
+                            <li class="nav-item dropdown-trigger">
+                                <a href="#" role="button" aria-haspopup="true">
+                                    @if(Auth::guard('admin')->check())
+                                        {{ Auth::guard('admin')->user()->name }}
+                                    @else
+                                        <img src="{{  auth()->user()->profile_image ?? asset('images/icon_user.png') }}" width="45" height="45">
+                                    @endif
+                                </a>
+                                <div class="dropdown-content">
+                                    @component('components.modals.profile')
+                                    @endcomponent           
                                 </div>
-                                
-                                
+                                <style>
+                                    .dropdown-content {
+                                        display: none; /* 初期状態は非表示に */
+                                        
+                                    }
+                                </style>
                             </li>
                         
                         @endif
@@ -245,3 +267,25 @@
 
     </div>
 </div>
+
+<script>
+    // トリガーボタンにイベントリスナを追加
+document.querySelector('.dropdown-trigger').addEventListener('click', function(e) {
+    // ドロップダウンコンテンツの表示/非表示をトグル
+    const dropdownContent = document.querySelector('.dropdown-content');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    e.stopPropagation(); // このイベントを親要素に伝播させない
+});
+
+// ページのどこかをクリックしたときのイベント
+document.addEventListener('click', function() {
+    // ドロップダウンコンテンツを非表示にする
+    document.querySelector('.dropdown-content').style.display = 'none';
+});
+
+// ドロップダウンメニューをクリックしたときのイベント
+document.querySelector('.dropdown-content').addEventListener('click', function(e) {
+    e.stopPropagation(); // このイベントを親要素に伝播させない
+});
+
+</script>
