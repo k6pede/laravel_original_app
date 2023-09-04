@@ -39,7 +39,8 @@ class S3Controller extends Controller
                 Storage::disk('s3')->delete($oldProfileImageName);
             }
 
-            return 'アップロード成功';
+            return redirect()
+            ->route('top');
         } else {
             return 'アップロード失敗';
         }

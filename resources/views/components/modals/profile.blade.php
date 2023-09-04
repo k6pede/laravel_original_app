@@ -31,10 +31,35 @@
   <div class="profile-top-div">
       <a class="generic-profile-a profile-img-name" href="#">
           <div class="profile-user-img-div">
-              <div class="iHuAOm">
-                  <img src="{{  auth()->user()->profile_image ?? asset('images/icon_user.png') }}" class="profile-user-image">
-              </div>
+
+            {{-- ユーザ設定のアイコン --}}
+            <img src="{{ auth()->user()->profile_image_url ?? asset('images/icon_user.png') }}" class="profile-user-image" onclick="document.getElementById('fileInput').click();">
+            <i class="fa-solid fa-wrench"></i>
+
           </div>
+          <form action="{{ route('s3') }}" method="post" enctype="multipart/form-data" style="display: none;" id="uploadForm">
+            @csrf
+            <input type="file" name="file" id="fileInput" accept="image/jpeg,image/png" style="display: none;">
+            <input type="submit" value="アップロード">
+          </form>
+          <script>
+            const fileInput = document.getElementById('fileInput');
+            fileInput.addEventListener('change', function (e) {
+                const fileSize = e.target.files[0].size;
+                const maxSize = 2 * 1024 * 1024; // 2MBの画像まで
+        
+                if (fileSize > maxSize) {
+                    alert('ファイルサイズは2MB以下である必要があります。');
+                    e.target.value = '';  // ファイル選択をクリア
+                } else {
+                  if (confirm('選択した画像をプロフィールに設定しますか？')) {
+                  // ユーザーがOKをクリックした場合のみ、フォームをサブミット
+                  document.getElementById('uploadForm').submit();
+                  }
+                }
+            });
+          </script>
+
           <div class="profile-user-name-div">
               <p class="profile-user-name">
                 {{ auth()->user()->name ?? 'ゲストユーザー' }}
@@ -42,21 +67,24 @@
           </div>
       </a>
       {{-- プロフィールを編集button --}}
-      @if(auth()->check())
-        <div class="kHkxMW">
+      
+        {{-- <div class="kHkxMW">
             <a class="generic-profile-a hyaIFO" href="#">
                 <div class="useTouchArea__TouchArea-sc-101jzj6-0 jUmWuS">
-                  <button height="36" font-size="14" elevation="0" shape="R100" class="Button__StyledButton-sc-627uvk-0 Button__StyledSolidButton-sc-627uvk-1 wcQLJ bSGazq profile-edit-button">
-                    プロフィールを編集
-                  </button>
+                  <form action="/upload" method="get">
+                    @csrf
+                    <button type="submit" height="36" font-size="14" elevation="0" shape="R100" class="Button__StyledButton-sc-627uvk-0 Button__StyledSolidButton-sc-627uvk-1 wcQLJ bSGazq profile-edit-button">
+                      プロフィールを編集
+                    </button>
+                  </form>
                 </div>
             </a>
-        </div>
-      @endif
+        </div> --}}
+      
   </div>
 
   {{-- 中段　リスト項目 --}}
-  <div class="profile-mid-div">
+  {{-- <div class="profile-mid-div">
       <ul class="profile-ul">
         <li class="profile-li">
           <a class="generic-profile-a profile-li-a profile-li-a-mid" href="#">
@@ -69,7 +97,7 @@
               </p>
             </div>
             <div class="profile-list-a-middiv2">
-              <p class="count">{{ $events->count ?? '1'}}</p>
+              <p class="count">{{ $counts ?? '1'}}</p>
             </div>
           </a>
         </li>
@@ -90,7 +118,7 @@
           </a>
         </li>
       </ul>
-  </div>
+  </div> --}}
 
   {{-- 最下段 --}}
   <ul class="gLDpht fguJZQ">
@@ -196,6 +224,27 @@
   height: 72px;
   border-radius: 50%;
 }
+.profile-user-img-div {
+  position: relative;
+  display: inline-block;
+}
+.profile-user-img-div:hover {
+  opacity: .6;
+  transition: opacity 0.3s ease; /* スムーズな遷移 */
+}
+.profile-user-img-div:hover .fa-wrench {
+  display: block; /* hover時にアイコンを表示する */
+}
+.fa-wrench {
+  display: none; /* 最初は非表示にしておく */
+  position: absolute; /* 絶対位置で要素を配置する */
+  top: 50%;  /* 上から50%の位置に配置 */
+  left: 50%; /* 左から50%の位置に配置 */
+  transform: translate(-50%, -50%); /* 50%ずらして中央に持ってくる */
+  font-size: 24px; /* あなたの設定に合わせて調整してください */
+  z-index: 2; /* 必要に応じてz-indexを設定 */
+}
+
 
 .profile-user-name-div {
     margin-left: 16px;

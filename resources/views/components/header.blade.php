@@ -165,11 +165,12 @@
 
                 </div>
                 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> --}}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> --}}
+                <div>
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
@@ -235,13 +236,13 @@
 
 
 
-                            {{-- 検証用 --}}
+                            {{-- プロフィール　ウィンドウ --}}
                             <li class="nav-item dropdown-trigger">
                                 <a href="#" role="button" aria-haspopup="true">
                                     @if(Auth::guard('admin')->check())
                                         {{ Auth::guard('admin')->user()->name }}
                                     @else
-                                        <img src="{{  auth()->user()->profile_image ?? asset('images/icon_user.png') }}" width="45" height="45">
+                                        <img src="{{  auth()->user()->profile_image_url ?? asset('images/icon_user.png') }}" width="45" height="45" style="border-radius: 50%;">
                                     @endif
                                 </a>
                                 <div class="dropdown-content">
@@ -250,8 +251,7 @@
                                 </div>
                                 <style>
                                     .dropdown-content {
-                                        display: none; /* 初期状態は非表示に */
-                                        
+                                        display: none;                                         
                                     }
                                 </style>
                             </li>

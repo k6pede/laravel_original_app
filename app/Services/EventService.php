@@ -20,6 +20,12 @@ class EventService
         $this->eventRepository = $eventRepository;
     }
 
+    // public function countEvents() {
+    //     $user_id = Auth::id();
+    //     $count = $this->eventRepository->countEvents($user_id);
+    //     return $count;
+    // }
+
     public function getEvents($year, $month)
     {
         $user_id = Auth::id();
