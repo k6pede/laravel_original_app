@@ -63,13 +63,13 @@ Route::get('/thanks', [App\Http\Controllers\ContactController::class ,'thanks'])
 //開発用
 Route::group(['middleware' => ['auth', 'admin']], function () {
   // 管理者用のルート
+  Route::get('/create/character', [App\Http\Controllers\CharacterController::class ,'create'])->name('create');
+  Route::post('/store/character', [App\Http\Controllers\CharacterController::class ,'store'])->name('store');
+  Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 'show']);
+  Route::post('/edit/character', [App\Http\Controllers\CharacterController::class, 'edit']);
+  Route::post('/update/character', [App\Http\Controllers\CharacterController::class, 'update']);
+  Route::post('/destroy/character', [App\Http\Controllers\CharacterController::class, 'destroy']);
 });
-Route::get('/create/character', [App\Http\Controllers\CharacterController::class ,'create'])->name('create');
-Route::post('/store/character', [App\Http\Controllers\CharacterController::class ,'store'])->name('store');
-Route::get('/show/character', [App\Http\Controllers\CharacterController::class, 'show']);
-Route::post('/edit/character', [App\Http\Controllers\CharacterController::class, 'edit']);
-Route::post('/update/character', [App\Http\Controllers\CharacterController::class, 'update']);
-Route::post('/destroy/character', [App\Http\Controllers\CharacterController::class, 'destroy']);
 
 
 //S3アップロードテスト
