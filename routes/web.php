@@ -40,7 +40,6 @@ Route::post('/calcCalendar', [App\Http\Controllers\CalendarController::class, 'c
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/show', [App\Http\Controllers\ShowController::class, 'show'])->name('show');
-
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
 Route::post('/createUsersEvent', [App\Http\Controllers\EventController::class ,'createUsersEvent'])->name('createusersevent');
