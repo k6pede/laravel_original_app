@@ -44,6 +44,8 @@ class TopController extends Controller
         //ユーザ別当月のスケジュールを取得
         $events = $this->eventService->getEvents($year, $month);
 
+        
+
         return view('top')->with([
             "characters" => $characters,
             "now" => $now,

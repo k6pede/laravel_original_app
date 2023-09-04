@@ -164,11 +164,13 @@
                     <p class="mb-0 text-center" style="color: black; opacity: .55; font-size: .6em">推しの誕生日,カレンダー REmemo</p>
 
                 </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                
+                {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> --}}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> --}}
+                <div>
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
@@ -176,9 +178,10 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+            
                         <!-- Authentication Links -->
-                        {{-- ログアウト時 --}}
-                       
+
+                        {{-- ログアウト時 --}}                       
                         @if(!Auth::guard('admin')->check() && !Auth::check())
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -207,7 +210,7 @@
                             @endif
                         @else
                         {{-- ログイン時 --}}
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if(Auth::guard('admin')->check())
                                         {{ Auth::guard('admin')->user()->name }}
@@ -217,7 +220,7 @@
                                 
                                     @endif
                                 </a>
-                                {{-- <div class="" aria-labelledby="navbarDropdown"> --}}
+                                <div class="" aria-labelledby="navbarDropdown">
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -228,9 +231,29 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                </div>              
+                            </li> --}}
+
+
+
+                            {{-- プロフィール　ウィンドウ --}}
+                            <li class="nav-item dropdown-trigger">
+                                <a href="#" role="button" aria-haspopup="true">
+                                    @if(Auth::guard('admin')->check())
+                                        {{ Auth::guard('admin')->user()->name }}
+                                    @else
+                                        <img src="{{  auth()->user()->profile_image_url ?? asset('images/icon_user.png') }}" width="45" height="45" style="border-radius: 50%;">
+                                    @endif
+                                </a>
+                                <div class="dropdown-content">
+                                    @component('components.modals.profile')
+                                    @endcomponent           
                                 </div>
-                                
-                                
+                                <style>
+                                    .dropdown-content {
+                                        display: none;                                         
+                                    }
+                                </style>
                             </li>
                         
                         @endif
@@ -244,3 +267,25 @@
 
     </div>
 </div>
+
+<script>
+    // トリガーボタンにイベントリスナを追加
+document.querySelector('.dropdown-trigger').addEventListener('click', function(e) {
+    // ドロップダウンコンテンツの表示/非表示をトグル
+    const dropdownContent = document.querySelector('.dropdown-content');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    e.stopPropagation(); // このイベントを親要素に伝播させない
+});
+
+// ページのどこかをクリックしたときのイベント
+document.addEventListener('click', function() {
+    // ドロップダウンコンテンツを非表示にする
+    document.querySelector('.dropdown-content').style.display = 'none';
+});
+
+// ドロップダウンメニューをクリックしたときのイベント
+document.querySelector('.dropdown-content').addEventListener('click', function(e) {
+    e.stopPropagation(); // このイベントを親要素に伝播させない
+});
+
+</script>

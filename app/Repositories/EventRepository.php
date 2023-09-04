@@ -9,6 +9,12 @@ use Carbon\Carbon;
 
 class EventRepository
 {
+  // public function countEvents($user_id) 
+  // {
+  //   $counts = Event::where('user_id', $user_id)->count();
+  //   return $counts;
+  // }
+
   //ユーザ別のイベントの取得
   public function getEvents($user_id, $FirstDayOfMonth, $LastDayOfMonth)
   {
