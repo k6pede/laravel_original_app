@@ -238,7 +238,7 @@
 
                             {{-- プロフィール　ウィンドウ --}}
                             <li class="nav-item dropdown-trigger">
-                                <a href="#" role="button" aria-haspopup="true">
+                                <a href="#" role="button" aria-haspopup="true" id="profileImageLink">
                                     @if(Auth::guard('admin')->check())
                                         {{ Auth::guard('admin')->user()->name }}
                                     @else
@@ -287,5 +287,10 @@ document.addEventListener('click', function() {
 document.querySelector('.dropdown-content').addEventListener('click', function(e) {
     e.stopPropagation(); // このイベントを親要素に伝播させない
 });
+
+// プロフィール画像クリック時のページトップへの移動をキャンセル
+document.getElementById("profileImageLink").addEventListener("click", function(event) {
+    event.preventDefault();
+})
 
 </script>

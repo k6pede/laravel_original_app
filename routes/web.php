@@ -35,7 +35,7 @@ Route::view('/admin', 'admin')->middleware('auth:admin')->name('admin-home');
 Route::get('/', [App\Http\Controllers\TopController::class, 'top'])->name('top');
 
 
-Route::post('/calcCalendar', [App\Http\Controllers\CalendarController::class, 'calcCalendar'])->name('calcCalendar');
+//Route::post('/calcCalendar', [App\Http\Controllers\CalendarController::class, 'calcCalendar'])->name('calcCalendar');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

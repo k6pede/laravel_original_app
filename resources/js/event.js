@@ -239,5 +239,9 @@ $(function(){
     $('span.eeh').text('').text(endHm);
   });
 
+  document.getElementsByClassName('profile-img-name').addEventListener("click", function(event) {
+    event.preventDefault();
+  })
+
 
 })
