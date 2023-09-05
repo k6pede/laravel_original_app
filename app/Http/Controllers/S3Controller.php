@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Aws\S3\Exception\S3Exception;
 
 
 class S3Controller extends Controller
@@ -47,6 +48,19 @@ class S3Controller extends Controller
 
             return redirect()->route('top');
 
+        } catch (S3Exception $e) {
+            Log::error('AWS S3エラー:', [
+                'user_id' => $user->id,
+                'file_name' => $request->file('file')->getClientOriginalName(),
+                'aws_error_message' => $e->getMessage(),
+                'aws_error_code' => $e->getAwsErrorCode(),
+                'aws_request_id' => $e->getAwsRequestId(),
+                'error_file' => $e->getFile(),
+                'error_line' => $e->getLine(),
+                'stack_trace' => $e->getTraceAsString()
+            ]);
+            return 'アップロード失敗';
+        
         } catch (\Exception $e) {
             Log::error('ファイルのアップロードに失敗しました。', [
                 'user_id' => $user->id,
