@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 
 class S3Controller extends Controller
 {
@@ -24,8 +26,12 @@ class S3Controller extends Controller
         $oldProfileImageUrl = $user->profile_image_url;
 
         // S3へファイルをアップロード
-        $result = Storage::disk('s3')->put('/', $request->file('file'));
-        if ($result) {
+        try {
+            $result = Storage::disk('s3')->put('/', $request->file('file'));
+            if (!$result) {
+                throw new \Exception('S3へのアップロードに失敗しました。');
+            }
+        
 
             //s3のurl取得
             $url = Storage::disk('s3')->url($result);
@@ -39,10 +45,16 @@ class S3Controller extends Controller
                 Storage::disk('s3')->delete($oldProfileImageName);
             }
 
-            return redirect()
-            ->route('top');
-        } else {
+            return redirect()->route('top');
+
+        } catch (\Exception $e) {
+            Log::error('ファイルのアップロードに失敗しました。', [
+                'user_id' => $user->id,
+                'file_name' => $request->file('file')->getClientOriginalName(),
+                'error_message' => $e->getMessage()
+            ]);
             return 'アップロード失敗';
         }
+        
     }
 }
