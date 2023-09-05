@@ -51,7 +51,10 @@ class S3Controller extends Controller
             Log::error('ファイルのアップロードに失敗しました。', [
                 'user_id' => $user->id,
                 'file_name' => $request->file('file')->getClientOriginalName(),
-                'error_message' => $e->getMessage()
+                'error_message' => $e->getMessage(),
+                'error_file' => $e->getFile(),
+                'error_line' => $e->getLine(),
+                'stack_trace' => $e->getTraceAsString()
             ]);
             return 'アップロード失敗';
         }
