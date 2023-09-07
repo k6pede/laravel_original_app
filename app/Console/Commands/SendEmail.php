@@ -53,7 +53,6 @@ class SendEmail extends Command
             
             // ローカル環境
             // 対象ユーザがいない場合、ログにその旨を記述して終了する
-            //if($email_subscribers->isEmpty()) var_dump('no subscribers');
             if($email_subscribers->isEmpty()) Log::info('no subscribers');;
 
             return;
@@ -61,8 +60,21 @@ class SendEmail extends Command
         } elseif (config('app.env') === 'production') {
 
             // 本番環境
-            if($email_subscribers->isEmpty()) Log::info('no subscribers');
-            return;
+            if($email_subscribers->isEmpty()) {
+                Log::info('no subscribers');
+                return;
+            };
+            
+            // メール送信処理　
+            // テストemailアドレス
+            $user_email = 'runa720.bump@icloud.com';
+    
+            $events = collect([
+                (object) ['title' => 'Event 1'],
+                (object) ['title' => 'Event 2'],
+                (object) ['title' => 'Event 3'],
+            ]);
+            Mail::to($user_email)->send( new sendEventRemindersMail($events));
 
         }
 
@@ -84,14 +96,14 @@ class SendEmail extends Command
             // メール送信処理　
 
             // テストemailアドレス
-            // $user_email = 'runa720.bump@icloud.com';
+            $user_email = 'runa720.bump@icloud.com';
     
-            // $events = collect([
-            //     (object) ['title' => 'Event 1'],
-            //     (object) ['title' => 'Event 2'],
-            //     (object) ['title' => 'Event 3'],
-            // ]);
-            // Mail::to($user_email)->send( new sendEventRemindersMail($events));
+            $events = collect([
+                (object) ['title' => 'Event 1'],
+                (object) ['title' => 'Event 2'],
+                (object) ['title' => 'Event 3'],
+            ]);
+            Mail::to($user_email)->send( new sendEventRemindersMail($events));
         //}
         
     
