@@ -35,7 +35,7 @@ class sendEventRemindersMail extends Mailable
     public function envelope()
     {
         $from    = new Address('admin@example.com', 'REmemo');
-        $subject = '30日後に登録されている予定をお送りします';
+        $subject = '来月に登録されている予定をお送りします';
         return new Envelope(
             from: $from,
             subject: $subject,
