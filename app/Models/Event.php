@@ -13,6 +13,11 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    // start_atをCarbonインスタンスとして取得できるように設定
+    protected $dates = [
+        'start_at',
+    ];
+
     protected $fillable = [
         'user_id',
         'character_id',

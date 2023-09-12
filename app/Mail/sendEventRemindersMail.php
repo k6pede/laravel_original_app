@@ -15,16 +15,20 @@ class sendEventRemindersMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $events;
+    public $user_info;
+    public $nextmonth_and_year;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($events)
+    public function __construct($events, $user_info, $nextmonth_and_year)
     {
         //コンストラクタ　イベントの情報をまとめて渡す
         $this->events = $events;
+        $this->user_info = $user_info;
+        $this->nextmonth_and_year = $nextmonth_and_year;
     }
 
     /**
@@ -34,8 +38,11 @@ class sendEventRemindersMail extends Mailable
      */
     public function envelope()
     {
+        // 発信元アドレス
         $from    = new Address('admin@example.com', 'REmemo');
-        $subject = '来月に登録されている予定をお送りします';
+
+        // 件名
+        $subject = '【REmemo】来月のご予定をお知らせいたします!';
         return new Envelope(
             from: $from,
             subject: $subject,
