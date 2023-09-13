@@ -110,20 +110,6 @@ class SendEmail extends Command
     
      
             }
-            // テスト用
-            // $user_name = 'testname';
-            // $user_email = 'runa720.bump@icloud.com';
-    
-            // $events = collect([
-            //     (object) ['title' => 'Event 1'],
-            //     (object) ['title' => 'Event 2'],
-            //     (object) ['title' => 'Event 3'],
-            // ]);
-            // $user_info = [
-            //     'user_name' => $user_name,
-            //     'user_email' => $user_email,
-            // ];
-            // Mail::to($user_email)->send( new sendEventRemindersMail($events, $user_info));
 
             
 
@@ -134,6 +120,51 @@ class SendEmail extends Command
                 Log::info('no subscribers');
                 return;
             };
+
+            // メール送信処理　
+            
+            foreach ($email_subscribers as $email_subscriber) {
+
+                $subscriber_id = $email_subscriber->user_id;
+                $user = User::find($subscriber_id);
+                $user_name = $user->name;
+                //$user_email =$user->email;
+
+                //テスト用
+                $user_email = 'runa720.bump@icloud.com';
+    
+                $subscribers_events = Event::where('user_id', $subscriber_id)
+                                ->whereBetween('start_at',[$startOfNextMonth, $endOfNextMonth])
+                                ->orderBy('start_at')
+                                ->get();
+
+                $events = collect();
+
+                foreach ($subscribers_events as $subscriber_event) {
+                    $event_data = [
+                        'title' => $subscriber_event->title,
+                        'start_at' => $subscriber_event->start_at,
+                    ];
+                    
+
+
+                    $events->push((object)$event_data);
+                }
+
+                $user_info = [
+                    'user_name' => $user_name,
+                    'user_email' => $user_email,
+                ];
+
+                
+
+                
+
+
+                Mail::to($user_email)->send( new sendEventRemindersMail($events, $user_info, $nextmonth_and_year));
+    
+     
+            }
             
             
 

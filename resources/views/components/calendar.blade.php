@@ -79,15 +79,7 @@
               @endforeach
 
             </tr>
-            {{-- <tr class="dayOfWeekCellEn" style="border-top:none;">
-                
-                @foreach(['Sun', 'Mon', 'Tue', 'Wed', 'Thi', 'Fri', 'Sat'] as $dayOfWeek)
-                <th class="text-center">
-                    {{ $dayOfWeek }}   
-                </th>
-                @endforeach
-    
-            </tr> --}}
+
         </thead>
       <tbody>
             @foreach ($dates as $date)
@@ -137,18 +129,6 @@
                       <button type="submit" class="dayButton">{{ $date->day }}</button>
                     </form>
                     
-                    {{-- 当月のイベントがある場合表示 --}}
-                    {{-- @if(!empty($events))
-                        @foreach($events as $key => $value)
-                            @if(substr(date('Y/m/d', strtotime($value->start_at)), 8) == $date->day && $date->month == $month)
-                                <div>                                                         
-                                    <button type="button" class="eventbtn btn btn-primary" data-bs-toggle="modal" data-event="{{$value}}" data-bs-target="#exampleModal" >
-                                        {{ Str::limit($value->title, 5, '...') }}
-                                    </button>                                    
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif --}}
                 </td>
               @if ($date->dayOfWeek == 6)
               </tr>
@@ -169,6 +149,15 @@
   @auth
     <div class="events">
         <h4>今月のスケジュール</h4>
+        {{-- @auth
+        <div>
+            <div class="create-my-event">
+                <a class="create-my-event-btn" data-bs-toggle="modal" data-bs-target="#createModal" href="#">
+                    <i class="fa-regular fa-calendar-plus"></i>
+                </a>
+            </div>
+        </div>
+        @endauth --}}
         <ul class="event-list">
             @if(!empty($events))
                 @foreach ($events as $key => $value)

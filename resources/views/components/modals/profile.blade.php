@@ -68,57 +68,187 @@
       </a>
       {{-- プロフィールを編集button --}}
       
-        {{-- <div class="kHkxMW">
-            <a class="generic-profile-a hyaIFO" href="#">
+        <div class="kHkxMW">
+            <a class="generic-profile-a hyaIFO" href="#" id="profileEditToggle">
                 <div class="useTouchArea__TouchArea-sc-101jzj6-0 jUmWuS">
-                  <form action="/upload" method="get">
                     @csrf
                     <button type="submit" height="36" font-size="14" elevation="0" shape="R100" class="Button__StyledButton-sc-627uvk-0 Button__StyledSolidButton-sc-627uvk-1 wcQLJ bSGazq profile-edit-button">
                       プロフィールを編集
                     </button>
-                  </form>
                 </div>
             </a>
-        </div> --}}
+        </div>
       
   </div>
 
   {{-- 中段　リスト項目 --}}
-  {{-- <div class="profile-mid-div">
-      <ul class="profile-ul">
-        <li class="profile-li">
+  <div class="profile-mid-div">
+    <div class="group">
+      <form action="{{ route('editprofile')}}" method="post">
+        @csrf
+        <div>
+          <label for="text4">name</label>
+          <span id="username_error" class="text-danger" style="font-size:.8em;"></span>
+          <div class="password_box">
+             <div class="password_inner">
+                <input id="text4" type="string" name="profile-username" class="input-profilename">
+                <div class="password_string">新しいユーザー名</div>
+             </div>
+          </div>
+        </div>
+        <div>
+          <label for="text4">email</label>
+          <span id="email_error" class="text-danger" style="font-size:.8em;"></span>
+          <div class="password_box">
+             <div class="password_inner">
+                <input id="text4" type="email" name="profile-email" class="input-profileemail">
+                <div class="password_string">新しいアドレス</div>
+             </div>
+          </div>
+        </div>
+        <div class="profile-li">
           <a class="generic-profile-a profile-li-a profile-li-a-mid" href="#">
-            <div class="profile-list-a-middiv1">
-              <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="profile-li-a-svg">
-                <path d="M11 18h2v-7h-2v7z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M8 4V2H6v2H5c-1.105 0-2 .895-2 2v16h18V6c0-1.105-.895-2-2-2h-1V2h-2v2H8zm11 5v11H5V9h14z" fill="currentColor"></path>
-              </svg>
-              <p class="heSaID">
-                登録している予定
-              </p>
-            </div>
-            <div class="profile-list-a-middiv2">
-              <p class="count">{{ $counts ?? '1'}}</p>
+            <div class="profile-li-a-middiv subscribe-check-div">
+              <label for=".subscriber-check" class="label-for-profileEdit">メールの配信を希望する</label>
+              <input type="checkbox" class="subscriber-check" name="subscribe-check" checked>
             </div>
           </a>
-        </li>
+        </div>
+        <div class="profile-edit-footer">
+          <button type="submit" class="btn btn-primary" id="editProfileBtn">変更を保存</button>        
+        </div>
+      </form>
+      <style>
+        .group {
+          padding: 0 16px;
+        }
+        .password_box{
+            display: flex; /*アイコン、テキストボックスを調整する*/
+            align-items: center; /*アイコン、テキストボックスを縦方向の中心に*/
+            justify-content: center; /*アイコン、テキストボックスを横方向の中心に*/
+            width: 100%;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+        }
 
+        .password_inner{
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /*.password_boxの枠線お角一部被るため透明に*/
+            position: relative;
+        }
+
+        #text4{
+            position: absolute;
+            z-index: 1; /*.password_stringよりも上に配置*/
+            height: 100%;
+            width: 100%;
+            top: 0; left: 0; bottom: 0; right: 0;
+            border: none; /*枠線非表示*/
+            outline: none; /*フォーカス時の枠線非表示*/
+            padding: 0 10px;
+            font-size: 16px;
+            background-color: transparent; /*後ろの.password_stringを見せるため*/
+            box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+        }
+
+        .password_string{
+            position: absolute;
+            height: 100%;
+            width: 140px; /*文字列分の長さ*/
+            top: 0; left: 0; bottom: 0; right: 0;
+            padding-left: 10px; /*position: absolute;でのmarginは親要素はみ出す*/
+            font-size: 16px;
+            line-height: 50px; /*文字列を縦方向にmiddleに見せるため*/
+            background-color: transparent;
+            color: #80868b;
+            box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+            transition: all 0.2s;
+            -webkit-transition: all 0.2s;
+        }
+
+        .fa-eye-slash{ /*アイコンに一定のスペースを設ける*/
+            height: 20px;
+            width: 20px;
+            padding: 5px 5px;
+        }
+
+        /*アニメーション*/
+        #text4:focus + .password_string{
+            color: #3be5ae;
+            font-size: 10px;
+            line-height: 10px;
+            width: 85px;
+            height: 10px;
+            padding: 0 2px;
+            background-color: white;
+            transform:translate3d(5px, -6px, 0);
+        }
+        .profile-edit-footer {
+            display: flex;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: flex-end;
+            padding: .75rem;
+            border-top: 1px solid #dee2e6;
+            border-bottom-right-radius: calc(.3rem - 1px);
+            border-bottom-left-radius: calc(.3rem - 1px);
+        }
+
+      </style>
+   </div>
+      {{-- <ul class="profile-ul">
+        
+       
+        
         <li class="profile-li">
           <a class="generic-profile-a profile-li-a profile-li-a-mid" href="#">
-            <div class="profile-list-a-middiv1">
-              <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="profile-li-a-svg">
-                <polygon points="12,2 14.3,8.6 21,9.2 15.5,14 17.8,20.8 12,16.5 6.2,20.8 8.5,14 3,9.2 9.7,8.6" fill="currentColor" />
-              </svg>
-              <p class="heSaID">
-                お気に入りキャラクター
-              </p>
-            </div>
-            <div class="profile-list-a-middiv2">
-              <p class="count">{{ $events->count ?? '1'}}</p>
+            <div class="profile-li-a-middiv">
+              <label for=".profile-name-edit" class="lavel-for-profileEdit">ユーザー名</label>
+              <input type="text" class="profile-name-edit profile-input">
+              <div class="text_underline"></div>
             </div>
           </a>
         </li>
-      </ul>
-  </div> --}}
+        <li class="profile-li">
+          <a class="generic-profile-a profile-li-a profile-li-a-mid" href="#">
+            <div class="profile-li-a-middiv">
+              <label for=".profile-email-edit" class="label-for-profileEdit">メールアドレス</label>
+              <input type="text" class="profile-email-edit profile-input">
+              <div class="text_underline"></div>
+            </div>
+          </a>
+        </li>
+        <li class="profile-li">
+          <a class="generic-profile-a profile-li-a profile-li-a-mid" href="#">
+            <div class="profile-li-a-middiv subscribe-check-div">
+              <label for=".subscriber-check" class="label-for-profileEdit">メールの配信を希望する</label>
+              <input type="checkbox" class="subscriber-check">
+            </div>
+          </a>
+        </li>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+          <button type="submit" class="btn btn-primary" id="eventCreateBtn">変更を保存</button>        
+        </div>
+      </ul> --}}
+  </div>
+  <script>
+    // "profileEditToggle" idを持つ要素に対するクリックイベントリスナーを設定
+    document.getElementById("profileEditToggle").addEventListener("click", function(e) {
+    e.preventDefault(); // デフォルトのクリック動作を停止
+    // ".profile-mid-div" クラスを持つ要素を取得
+    var element = document.querySelector(".profile-mid-div");
+    // 要素の現在の表示状態をチェックし、切り替える
+    if (element.style.display === "none" || element.style.display === "") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
+  </script>
 
   {{-- 最下段 --}}
   <ul class="gLDpht fguJZQ">
@@ -126,7 +256,7 @@
         <a class="generic-profile-a profile-li-a cRrRcS" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-              <p class="profile-li-a-p">{{ __('Logout') }}</p>
+              <p class="profile-li-a-p">{{ __('messages.Logout') }}</p>
         </a>
           
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -251,7 +381,8 @@
 }
 
 .profile-mid-div {
-    margin: 16px 0px;
+    margin: 16px 4px;
+    display: none;
 }
 .profile-ul {
     list-style: none;
@@ -260,22 +391,31 @@
 }
 .profile-li {
     display: flex;
+    justify-content: space-between;
+    color: rgba(0, 0, 0, 0.56);
     width: 100%;
+    font-size: 14px;
+    line-height: 14px;
+    width: 100%;
+    display: block;
+    padding: 6px 0px;
+    margin: 2px auto;
+    float: none;
+    font-family: Poppins, "Helvetica Neue", Helvetica, Arial, "Hiragino Sans", ヒラギノ角ゴシック, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Roboto, メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+
 }
 .profile-li-a-mid {
-    display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: justify;
-    justify-content: space-between;
     height: 40px;
     width: 100%;
     padding: 0px 16px;
 }
-.profile-list-a-middiv1 {
-    display: flex;
+.profile-li-a-middiv {
     -webkit-box-align: center;
     align-items: center;
+    padding: 0px 16px;
 }
 .profile-li-a-svg {
     color: rgba(0, 0, 0, 0.56);
@@ -291,11 +431,7 @@
     line-height: 40px;
     color: rgba(0, 0, 0, 0.84);
 }
-.profile-list-a-middiv2 {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-}
+
 .count {
     margin-left: auto;
     margin-bottom: 0 !important;
@@ -315,10 +451,10 @@ a:visited {
     transform: translateY(-1px); /* ボタンを少し上に移動 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* より強調された影 */
 }
-.profile-li:hover {
+/* .profile-li:hover {
     background-color: #f5f5f5; /* グレーの背景色 */
     transition: background-color 0.3s ease; /* スムーズな遷移 */
-}
+} */
 
 
 /* 最下段 */
@@ -339,13 +475,37 @@ a:visited {
     font-family: Lato, "Helvetica Neue", Helvetica, "Hiragino Sans", "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 .profile-li-a-p {
-    padding: 0px 16px;
+    //padding: 0px 16px;
     margin: 0 !important;
     font-size: 14px;
     font-weight: normal;
     line-height: 32px;
     color: rgba(0, 0, 0, 0.84);
     font-family: Poppins, "Helvetica Neue", Helvetica, Arial, "Hiragino Sans", ヒラギノ角ゴシック, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Roboto, メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+}
+
+.label-for-profileEdit {
+  display: block;
+  margin: 2px 0;
+}
+.profile-input {
+  font-size: 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding-bottom: 8px;
+    box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+}
+
+.text_underline{
+    position: relative; /*.text_underline::beforeの親要素*/
+    border-top: 1px solid #c2c2c2; /*text3の下線*/
+}
+
+.subscribe-check-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 </style>

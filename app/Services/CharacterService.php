@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Yasumi\Yasumi;
-use DateTime;use Illuminate\Http\Request;
+use DateTime;
+use Illuminate\Http\Request;
 
 class CharacterService
 {

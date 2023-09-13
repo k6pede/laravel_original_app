@@ -77,3 +77,8 @@ Route::post('s3', [\App\Http\Controllers\S3Controller::class, 'uploadS3'])->name
 
 //profile.bladeテスト用
 Route::view('profile','components.modals.profile');
+
+//ユーザ登録情報の変更
+Route::group(['middleware' => 'auth'], function() {
+  Route::post('/editProfile', [\App\Services\UserService::class, 'update'])->name('editprofile');
+});
